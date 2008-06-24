@@ -1,11 +1,11 @@
-## 在字符串中应用格式化标题
+## 在字串中應用格式化標題
 
-以前当你在一个包含了 's 的字符串中使用 **String#titleize** 方法时有一个 bug. 这个 bug 返回大写的 'S, 看一个示例：
+以前當你在一個包含了 's 的字串中使用**String#titleize**方法時有個bug，這個bug返回大寫的'S，看看：
 
 	>> "brando’s blog".titleize
 	=> "Brando’S Blog"
 	
-看相当的示例，但已经修复了这个bug：
+相同的範例，但是此Bug已經修復了：
 
 	>> "brando’s blog".titleize
 	=> "Brando’s Blog"

@@ -1,15 +1,15 @@
 ## JSON
 
-Rails 现在允许 POST's 一个 JSON 内容的请求，例如，你可以象这样发送一个 POST：
+Rails現在支援POST一個JSON內容的請求，例如你可以像這樣丟出一個POST：
 
 	POST /posts
 	{"post": {"title": "Breaking News"}}
 
-所有参数都将到 **params** 中。例如：
+所有參數都將到**params**中。例如：
 
 	def create
 	  @post = Post.create params[:post]
 	  # …
 	end
 
-为了那些不知道JSON是一个XML竞争者的人，它在JavaScript数据交换中使用相当广泛，因为它呈现为这种语言。它的名字来源于： **JavaScript Object Notation**.
+為了那些不知道JSON是一個XML競爭者的人，它在JavaScript資料交換中相當廣泛，因為它呈現為這種語言。它的名字是來自於：**JavaScript Object Notation**。
