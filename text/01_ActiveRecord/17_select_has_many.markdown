@@ -1,9 +1,9 @@
-## has\_one和belongs\_to中的:select选项
+## has\_one和belongs\_to中的:select選項
 
-已经为人熟知的**has\_one**和**belongs\_to**方法现在接收一个新属性**:select**。 
+已經為人熟知的**has\_one**和**belongs\_to**方法現在接收一個新屬性：**:select**。
 
-它的默认值是“*”(正如"SELECT * FROM table")，不过你可以更改默认值来获得任何你希望的列。
+他的預設值是"*"(正如同"SELECT * FROM table")，不過你可以更改預設值來獲得任何你希望取得的欄位。
 
-别忘了包括进主键和外键，否则你会得到一个错误。
+也別忘了把主鍵(Primary key)與外鍵(Foreign key)一併包入，不然會錯誤。
 
-**belongs_to**方法不再支持**:order**选项了，不过不要担心，因为那基本上没什么用处。
+**belongs_to**方法不再支援**:order**了，不過不要擔心，因為基本上也沒什麼用處。

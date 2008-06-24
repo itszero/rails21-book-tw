@@ -1,8 +1,8 @@
 ## change\_table
         
-在Rails 2.0当中，创建的**migrations**要比之前版本更为性感，不过要想用**migrations**修改一个表可就不那么性感了。
+在Rails 2.0中建立的**migrations**要比之前的版本更為性感，不過要想用**migrations**修改一個表可就不那麼性感了。
 
-在Rails 2.1中，修改表也由于新方法**change\_table**而变得同样性感了。我们来看个例子：
+在Rails 2.1中修改表也由於新方法**change\_table**而變得同樣性感了。來看看性感的例子：
 
 	change_table :videos do |t|
 	  t.timestamps # this adds columns created_at and updated_at
@@ -11,7 +11,7 @@
 	  t.remove :name, :email # this removes columns name and email
 	end
               
-新方法**change\_table**的使用就和他的表兄**create\_table**一样，只不过不是创建一个新表，而是通过添加或者删除列或索引来更改现有的表。
+新方法**change\_table**的使用就如同他的表兄**create\_table**，不過不是建立新的表，而是透過添加或者刪除列或索引來更改現有的表。
 
 	change_table :table do |t|
 	  t.column # adds an ordinary column. Ex: t.column(:name, :string)

@@ -1,20 +1,20 @@
-## 基于时间戳的Migrations (Timestamped Migrations)
+## 根據時間戳記的Migrations (Timestamped Migrations)
               
-当你一个人使用Rails开发的时候，**migrations**似乎是所有问题的最好解决方案。不过，当和团队的其他成员共同开发一个项目的时候，你就会发现(如果你尚未发现)处理**migrations**同步的问题非常棘手。Rails 2.1中基于时间戳的**migrations**解决方案很好的解决了这个问题。 
+當你一個人使用Rails開發時，**migrations**似乎是所有問題的最好解決方案。不過當和團隊的其他成員共同開發一個專案時，你會發現(如果你還沒發現)處理**migrations**的同步是非常棘手的。Rails 2.1中根據時間戳記的**migrations**解決方案則是漂亮的解決了這個問題。
 
-在基于时间戳的**migrations**引入之前，创建每一个migration都会在其名字之前生成一个数字，如果两个**migrations**分别由两个开发者生成，并且都没有即时的提交到版本库中，那么最后就有可能存在相同前缀数字，但是不同内容的**migrations**，这时你的schema_info表就会过期，同时在版本控制系统中出现冲突。
+在根據時間戳記的**migrations**引入之前，建立每個migration都會在其名字之前產生一個數字，如果兩個**migrations**分別由兩個開發者產生，並且都沒有即時的提交到版本庫中，那麼最後就有可能存在相同的前綴數字，但是不同內容的**migrations**，這時你的schema_info表就會過期，同時在版本控制系統中出現衝突。
 
-试图解决这个问题的尝试有很多，人们创建了很多plugins以不同的方式解决这个问题。尽管有一些plugins可用，不过一点是非常清楚的，旧的方式不能满足我们的要求了。
+嘗試解決這個問題的方式有很多，人們建立了很多plugins以不同的方式解決這個問題。儘管有些plugins可用，不過有一點是非常清楚的，舊的方式已經無法滿足我們的要求了。
 
-如果你使用Git，那么你可能在给自己挖一个更大的陷阱，因为你的团队可能同时有几个working branches，过期了的migrations则在每一个branch中都存在。这样当合并这些branches的时候就会有严重的冲突问题。
+如果你使用Git，那麼你可能再給自己挖一個更大的陷阱，因為你的團隊可能同時有幾個working branches，過期的migrations則在每個branch中都存在。這樣當合併這些branches時就會有嚴重的衝突問題。
 
-为了解决这个大问题，Rails核心团队已经改变了**migrations**的工作方式。他们废弃了原有的以当前schema_info中version列的值作为migration前缀的依据的方法，取而代之的是基于**UTC**时间，按照YYYYMMDDHHMMSS格式的字符串表达方式作为前缀。 
+為了解決這個大問題，Rails核心團隊已經改變了**migrations**的運作方式。他們捨棄了原有以當前schema_info中version列的值作為migration前綴的依據方式，取而代之的是根據**UTC**時間按照YYYYMMDDHHMMSS格式的字串表達方式作為前綴。
 
-同时创建了一个新的叫**schema_migrations**的表，表中存着哪些**migrations**已经被执行了，这样如果发现有人创建了一个有较小值的**migration**，rails会回滚**migrations**到之前的那个版本，然后重新执行所有的**migration**直到当前的版本。 
+同時建立了一個新的叫做**schema_migrations**的表，表中存著哪些**migrations**已經執行了，這樣如果發現有人建立了一個有較小值的**migration**，Rails會回滾(rollback)**migrations**到之前的版本，然後重新執行所有的**migration**直到當前的版本。
 
-显然，这样做解决了migrations带来的冲突问题。 
+顯然這樣的做法解決了**migrations**所帶來的衝突問題。
 
-有两个新的和**migrations**相关的rake命令：
+有兩個新的和**migrations**相關的rake指令：
 
 	rake db:migrate:up
 	rake db:migrate:down

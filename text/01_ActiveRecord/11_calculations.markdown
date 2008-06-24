@@ -1,6 +1,6 @@
 ## Calculations 
                          
-**ActiveRecord::Calculations**做了一些更改以支持数据库表名。这个功能在几个不同表之间存在关联且相关列名相同时会非常有用。我们有两个选项可选：
+**ActiveRecord::Calculations**做了些更改已支援資料庫表名。這個功能在幾個不同表之間存在關聯且相關列名相同時會非常有用。我們有兩個選項可用：
 
 	authors.categories.maximum(:id)
 	authors.categories.maximum("categories.id")
