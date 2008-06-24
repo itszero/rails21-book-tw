@@ -1,6 +1,5 @@
-## 详细信息 （Details）
+## 詳細資訊 (Details)
 
-Rails 的修改还集中体现在对 Ruby 1.9 的支持，对新版 Ruby 中的细微改变都做了相应的调整以更好地适合要求，例如把 **File.exists?** 修改为 **File.exist?**。 
+Rails的修改還是集中在對Ruby 1.9的支援程度，對於新版Ruby中的細微改變都做了相對應的調整以求更好的整合，例如把**File.exists?**改為**File.exist?**。
 
-另外，在 Ruby 1.9 中，去掉了 **Base64** 模块(base64.rb)，因此，在 Rails 中，所有使用这个模板的都相应的修 
-改为 **ActiveSupport::Base64**。
+另外，在Ruby 1.9中去掉了**Base64**模組(base64.rb)，因此在Rails中所有使用這個模組的都得修改為**ActiveSupport::Base64**。
