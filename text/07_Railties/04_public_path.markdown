@@ -1,5 +1,5 @@
-## Rails 公开访问目录的路径 (Rails.public\_path)
+## Rails 公開存取目錄的路徑 (Rails.public\_path)
 
-添加了快捷方式 **Rails.public\_path** ，用于获取项目 **public** 目录的路径。
+比較快的方式：**Rails.public\_path**，用於取得專案**public**目錄的路徑。
 
 	Rails.public_path
