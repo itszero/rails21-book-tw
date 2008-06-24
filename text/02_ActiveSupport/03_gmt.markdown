@@ -1,7 +1,7 @@
 ## UTC or GMT?
 
-这是一个修正，但是很有趣。迄今为止，Rails 使用 UTC 缩写很频繁，但是当 **TimeZone** 的 **to\_s** 方法被调用的时候，它打印 GMT，而不是 UTC。这是因为 GMT 缩写 在对于最终用户最熟悉。
-
-如果你观察Windows 控制面板，其中你可以选择时区，你会注意到缩写是 GMT。Google 和 Yahoo 也在他们的产品中使用 GMT。
+這是一個很有趣的修正。:P 到目前為止，Rails 通常使用 UTC 這個縮寫。但是在 **TimeZone.to_s** 裡頭，它卻回傳 GMT，而不是熟系的 UTC。這是因為使用 GMT 對您的產品使用者來說是最為熟悉的縮寫。
+  
+如果您注意觀察 Windows 的時間設定視窗，時區它也使用 GMT 作為縮寫。同樣的，Google 和 Yahoo 也在他們旗下的產品中使用 GMT。
 
 	TimeZone['Moscow'].to_s #=> "(GMT+03:00) Moscow"

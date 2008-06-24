@@ -1,9 +1,9 @@
 ## Fragment\_exist?
 
-两个新方法被加入到 **cache\_store** 中: **fragment\_exist?** 和 **exist?**。
+在 **cache\_store** 中新增加了兩個方法： **fragment\_exist?** 和 **exist?** 。
 
-方法 **fragment\_exist?** 顾名思义, 它检验一个 key 所指定的缓存片段是否存在。基本上代替了著名的：
+**fragment\_exist?** 顧名思義，它將檢查一個由 key 指定的緩衝區片段存不存在。這個方法將可以用來替代常用的：
+  
+    read_fragment(path).nil?
 
-	read_fragment(path).nil?
-
-**exist?** 方法被加入到 **cache\_store**, 而 **fragment\_exist?** 是一个你能够在 Controller 中使用的 helper。
+**exist?** 方法被實際的加入到 **cache\_store**，而 **fragement\_exist?** 則是一個您能夠在 Controller 中使用的 helper。

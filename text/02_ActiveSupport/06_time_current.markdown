@@ -1,12 +1,12 @@
 ## Time.current
 
-**Time** 类中的新方法。 **current** 方法返回值依赖 **config.time\_zone**, 如果之前指定过，方法返回 **Time.zone.now**，否则返回 **Time.now**。
+**Time** 類別中的新方法。 **current** 的回傳值將視 **config.time\_zone** 而定。如果之前有指定時區，則傳為 **Time.zone.now**，否則回傳 **Time.now** 。
 
 	# return value depends on config.time_zone
 	Time.current
 
-**since** 和 **ago** 方法也改变了他们的返回值, 如果 **config.time\_zone** 已经指定，它返回一个 **TimeWithZone**。
+**since** 和 **ago** 方法同樣的也受到影響, 如果 **config.time\_zone** 已經指定了，它就會回傳一個 *TimeWithZone**。
  
-它让 **Time.current** 方法作为新的默认方法来获取当前时间。代替了 **Time.now** (这个方法仍然存在，但是它不考虑指定的时区)。
+這個修正使得 **Time.current** 方法作為取得目前時區的預設方法，替換了原有的 **Time.now** （這個方法依然可以使用，只是他不會考慮時區差異）。
 
-**datetime\_select**方法， **select\_datetime** 和 **select\_time** 也已被更新以默认返回 **Time.current**。
+**datetime\_select**方法， **select\_datetime** 和 **select\_time** 也已經改用  **Time.current** 了。
