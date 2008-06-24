@@ -1,4 +1,3 @@
 # ActiveSupport
 
-Active Support 是一个非常有用的类集合，以及对 Ruby on Rails 应用非常有用的核心库扩展集合。
-(wikipedia)
+ActiveSupport之中提供了許多非常實用的類別，而且對預設的函式庫提供了一些對Ruby on Rails程式非常有用的外掛。（翻譯自 wikipedia）
