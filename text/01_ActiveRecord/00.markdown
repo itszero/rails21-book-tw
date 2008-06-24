@@ -1,0 +1,3 @@
+# ActiveRecord
+
+ActiveRecord是一個物件-關聯映射層，主要負責應用層與資料層之間的相互操作性(解耦)與資料抽象‧(wikipedia)

@@ -1,0 +1,3 @@
+# ActiveResource
+
+ActiveResource是RESTful系统中的客户端实现。使用类似代理或远程服务的对象，可以调用RESTful服务。
