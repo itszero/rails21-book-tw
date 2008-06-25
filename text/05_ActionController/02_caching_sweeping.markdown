@@ -1,14 +1,14 @@
 ## ActionController::Caching::Sweeping
 
-在早期的 Rails 版本里，当我们在声明 **sweeper** 的时候，我们必须在类里边用 symbols：
+在之前的 Rails 版本裡，當我們正在宣告 **sweeper** 的時候，我們必須使用 symbols：
 
 	class ListsController < ApplicationController
 	  caches_action :index, :show, :public, :feed
 	  cache_sweeper :list_sweeper,
 	                :only => [ :edit, :destroy, :share ]
 	end
-	
-现在我们可以清楚的申明一个类而不是用 symbol.比如你的 **sweeper** 藏在一个 model 里，这么做是必须的。虽然你可以仍然在其他情况当中使用 symbol,但是从今天开始，你可以这么做：
+
+現在我們可以使用一個類別型態來宣告，而不需要使用 symbol。這個改變讓藏在 model 中的 **sweeper** 也可以被使用了。雖然平時您依然可以使用 symbol 宣告，但是在 Rails 2.1 中，您可以這麼做：
 
 	class ListsController < ApplicationController
 	  caches_action :index, :show, :public, :feed

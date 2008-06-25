@@ -1,10 +1,10 @@
 ## ActionView::Helpers::FormHelper
 
-### fields\_for form\_for with index option.
+### fields\_for form\_for 和 index 選項
 
-**#fields\_for** 和 **form\_for** 方法接受 **:index** 选项，在 form 对象中，如果需要去掉就必须使用 **:index => nil**。
+原本的 **#fields\_for** 和 **form\_for** 方法接受 **:index** 選項。在 form 物件中，如果想要取消就必须使用 **:index => nil**。
 
-下面是示例代码：
+以前的作法可能是：
 
 	<% fields_for "project[task_attributes][]", task do |f| %>
 	  <%= f.text_field :name, :index => nil %>
@@ -12,7 +12,7 @@
 	  <%= f.hidden_field :should_destroy, :index => nil %>
 	<% end %>
 
-紧随的是新的方法：
+現在的作法則是：
 
 	<% fields_for "project[task_attributes][]", task,
 	              :index => nil do |f| %>

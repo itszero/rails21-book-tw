@@ -2,7 +2,7 @@
 
 ### register\_javascript\_expansion
 
-当一个被程序员定义的符号作为一个参数，赋值给 **javascript\_include\_tag** 这个方法。 register_javascript_expansion 方法用来注册一个或者多个 javascript 文件被引用。这个是在 **init.rb** 中调用你的方法，将位于文件夹 **public/javascript** 下面的 javascript 文件注册进来。让我们看看它是如何进行工作的：
+這個方法可用來定義一個符號作為稍後在 **javascript\_include\_tag** 方法中可識別的參數，使用這個方法註冊一個或是多個 JavaScript 文件可以隨著該符號被引入。這個方法是在 **init.rb** 中呼叫的，將位於 **public/javascript** 下面的 JavaScript 文件註冊進來。讓我們看看它是怎麼運作的：
 
 	# In the init.rb file
 	ActionView::Helpers::AssetTagHelper.register_javascript_expansion 
@@ -19,7 +19,7 @@
 
 ### register\_stylesheet\_expansion
 
-这个方法实际上类似于 **ActionView::Helpers::AssetTagHelper#register\_javascript\_expansion** 方法。不同的是它针对的是 CSS 而不是 Javascript。 看下面的例子：
+這個方法跟剛剛提到的 **ActionView::Helpers::AssetTagHelper#register\_javascript\_expansion** 很類似，不同點只在於它針對的是 CSS 文件而不是 JavaScript 文件。如下面的例子：
 
 	# In the init.rb file
 	ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion 
