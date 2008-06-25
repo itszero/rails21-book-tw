@@ -1,8 +1,9 @@
-## 简单的 Testing Helpers
+## 簡單的 Testing Helpers
 
 Rails 早期版本的确 **helpers** 是一个非常烦人的事。我早已经非常痛苦的保证 100% 覆盖，创建 tests 为一些 **helpers**. 
 
 由于 **ActionView::TestCase** 类，在 Rails 2.1中这变得简单得多了。看个示例：
+Rails早期版本的確**helpers**是一個非常煩人的事。我早已經非常痛苦的保證100%覆蓋，建立tests
 
 	module PeopleHelper
 	  def title(text)
