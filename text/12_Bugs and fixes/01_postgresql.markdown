@@ -1,8 +1,8 @@
-## �bPostgreSQL���s�W���
+## 在PostgreSQL中新增欄位
 
-�b�ϥ�**PostgreSQL**����bug�A�z�Lmigration�s�W�@�Ӥw�g�s�b���������ɷ|�X���A�Ӭݬݽd�ҡG
+在使用**PostgreSQL**有個bug，透過migration新增一個已經存在的表的欄位時會出錯，來看看範例：
 
-�ɮסG *db/migrate/002\_add\_cost.rb*
+檔案： *db/migrate/002\_add\_cost.rb*
 
 	class AddCost < ActiveRecord::Migration
 	  def self.up
@@ -15,7 +15,7 @@
 	  end
 	end
 
-�ݤ@�U�A�ڭ̫إߤ@�����åB**:precision => 6**�B**:scale => 2**�A�{�b����**rake db:migration**�M��ݬݧڭ̪��������G�G
+看一下，我們建立一個欄位並且**:precision => 6**、**:scale => 2**，現在執行**rake db:migration**然後看看我們的表的結果：
 
 <table border="1" cellspacing="0" cellpadding="5">
 	<tr>
@@ -45,4 +45,4 @@
 	</tr>
 </table>
 
-�ݬݧڭ̭�إߪ�"cost"���C���O�@�ӱ`�����ƭȡA���O��ӹ��O�W�������p"price"�A���T���ӬO**numeric(6, 2)**�C�bRails 2.1���o�Ӱ��D�N�w�g�ѨM�o�C
+看看我們剛建立的"cost"欄位。它是一個常見的數值，但是更該像是上面的欄位如"price"，正確應該是**numeric(6, 2)**。在Rails 2.1中這個問題就已經解決囉。

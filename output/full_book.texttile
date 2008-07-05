@@ -1,0 +1,1888 @@
+#簡介(Introduction)
+
+2004年7月，DHH(David Heinemeiser hansson) 從他旗下的一個計畫 Basecamp 中取出並發佈了 Ruby on Rails 框架。三年後的2007年12月7日，具有劃時代意義的 Ruby on Rails 2.0 版本也發表了，其中包含了一系列的新內容。
+
+接下來的六個月，全世界有**1400**多位開發者為 Rails 貢獻了 **1600** 多種不同的 patch。 今天， 2008年6月1日，Ruby on Rails 2.1發表了！
+
+這次的版本更新包含但不限於下面的特色：
+
+* 時區
+* 修改追蹤 (Dirty tracking)
+* RubyGems 相依性
+* 命名空間(Named scope)
+* 以UTC時間為基礎的 migrations
+* 更好的快取機制
+
+當然，就像以前一樣，更新 Rails 是很簡單的：
+
+	gem install rails
+
+##致謝
+
+感謝Marcos Tapajós，如果沒有他，我們到現在肯定看不到這本書。感謝Daniel Lopes幫本書製作了漂亮的封面。
+
+還有Ruby on Rails Brazilian中那些給本書直接或是間接幫助的朋友們，您們的評論和建議都彌足珍貴，正像我以往說的一樣，Rails中最精華的是其充滿激情、創造力和分享精神的社區。
+
+還有chinaonrails.com社區中的朋友們，正是大家的辛勤工作，才使得我們能這麼短的時間內即可完成翻譯，謝謝你們。
+
+##中文譯者
+
+本書正是由China on Rails社區中一些朋友翻譯成中文的,我們是：
+
+**IceskYsl**
+[http://iceskysl.1sters.com/](http://iceskysl.1sters.com/)
+
+第1章(Introduction)，第9章(Rake Tasks, Plugins and Scripts) 
+第11章(Ruby 1.9)，第14章(Additional Information). 
+
+**jesse.cai**
+[http://www.caiwangqin.com/](http://www.caiwangqin.com)
+
+第5章(ActionPack)，第12章(Debug)
+
+**suave.su**
+[http://chinaonrails.com/u/suave](http://chinaonrails.com/u/suave)
+
+第1章(Introduction) 
+
+**dongbin**
+[http://dongbin.org/](http://dongbin.org/)
+
+第3章(ActiveSupport)
+
+**海陽**
+[http://rubyjin.cn/](http://rubyjin.cn/)
+
+第6章(ActionController) 
+
+**404**
+[http://chinaonrails.com/u/404](http://chinaonrails.com/u/404)
+
+第8章(Railties) 
+
+**ashchan**
+[http://blog.ashchan.com/](http://blog.ashchan.com/)
+
+第4章(ActiveResource),第10章(Prototype and script.aculo.us) 
+
+**cash.zhao**
+[http://www.cashplk.com/](http://www.cashplk.com/)
+
+第7章(ActionView),第13章(Bugs and Fixes) 
+
+**snow zhang**
+[http://blog.snowonrails.com](http://blog.snowonrails.com)
+
+第2章(ActiveRecord)
+
+**Libin Pan**
+[http://blog.libinpan.com](http://blog.libinpan.com)
+
+Markdown Editor
+
+## 正體中文翻譯
+
+這本書的正體中文翻譯由 Zero, CFC 完成。
+
+**CFC**
+MSN: zusocfc@gmail.com, Blog: [http://blog.pixnet.net/zusocfc](http://blog.pixnet.net/zusocfc)
+
+第1章 ActiveRecord, 第3章 ActiveResource, 第4章 ActionPack, 第7章 Railties, 第8章 Rake Tasks, 第9章 Prototype & script.aculo.us, 第10章 Ruby 1.9, 第11章 Debug, 第12章 Bugs & Fixes, 第13章 Additional Information 
+
+**Zero**
+Chien-An Cho, [http://orez.us/](http://orez.us/) or [itszero+railsbook@gmail.com](mailto:itszero+railsbook@gmail.com)
+
+第0章 簡介, 第2章 ActiveSupport, 第5章 ActionController, 第6章 ActionView
+
+# ActiveRecord
+
+ActiveRecord是一個物件-關聯映射層，主要負責應用層與資料層之間的相互操作性(解耦)與資料抽象‧(wikipedia)
+## **sum**方法
+
+### **sum**方法中的表達式
+
+現在我們可以在**ActiveRecord**方法當中使用表達式來處理諸如**sum**等各種計算，如:
+
+	Person.sum("2 * age")
+
+### **sum**方法預設返回值的改變
+
+在之前的版本中，當我們使用**ActiveRecord**的**sum**方法來計算表中所有記錄的和的時候，如果沒有跟所需條件匹配的記錄時，則預設的返回值是**nil**‧在Rails 2.1中，預設返回值(當沒有匹配的記錄的時候)是0，如：
+
+	Account.sum(:balance, :conditions => '1 = 2') #=> 0
+
+## Has\_one
+   
+### 支援 through 選項
+
+**has\_one**方法現在支援**through**選項。他的用法與**has_many :through**相同，不過代表的是和單一一個**ActiveRecord**物件的關連。
+
+	class Magazine < ActiveRecord::Base
+	  has_many :subscriptions
+	end
+
+	class Subscription < ActiveRecord::Base
+	  belongs_to :magazine
+	  belongs_to :user
+	end
+
+	class User < ActiveRecord::Base
+	  has_many :subscriptions
+	  has_one :magazine, :through => : subscriptions, 
+		        :conditions => ['subscriptions.active = ?', true]
+	end
+	
+### Has\_one :source\_type 選項
+
+上面提到的**has\_one :through**方法還能接收一個**:source\_type**選項，我會試著透過一些例子來解釋。我們先來看看這個類別：
+
+	class Client < ActiveRecord::Base
+	  has_many :contact_cards 
+
+	  has_many :contacts, :through => :contact_cards
+	end 
+
+上面的程式碼是一個**Client**類別，**has_many**種聯絡人(contacts)，由於**ContactCard**類別具有多型的關連。
+
+下一步將建立兩個類別來表示**ContractCard**：
+
+	class Person < ActiveRecord::Base
+	  has_many :contact_cards, :as => :contact
+	end
+
+	class Business < ActiveRecord::Base
+	  has_many :contact_cards, :as => :contact
+	end
+
+**Person**和**Business**透過**ContactCard**表與**Client**類別做關聯，換句話說，我有兩個聯絡人，私人的(personal)與工作上的(business)。然而，這樣做卻行不通，看看當我試著獲取一個contact時發生了什麼事情：
+
+	>> Client.find(:first).contacts
+	# ArgumentError: /…/active_support/core_ext/hash/keys.rb:48:
+	# in `assert_valid_keys’: Unknown key(s): polymorphic 
+
+為了讓上述程式碼成功，我們需要使用**:source_type**。我們修改一下**Client**類別：
+
+	class Client < ActiveRecord::Base
+	  has_many :people_contacts,
+	           :through => :contact_cards,
+	           :source => :contacts,
+	           :source_type => :person 
+
+	  has_many :business_contacts,
+	           :through => :contact_cards,
+	           :source => :contacts,
+	           :source_type => :business
+	end
+	                       
+注意到現在我們有兩種取得聯絡人的方式，我們可以選擇我們期待哪種**:source_type**。
+
+	Client.find(:first).people_contacts
+	Client.find(:first).business_contacts
+
+## Named_scope
+
+*has\_finder* gem已經添加到Rails當中了，有一個新名字**:named_scope**。
+
+為了全面了解一下這為Rails帶來了什麼，我們看看下面的例子：
+
+	class Article < ActiveRecord::Base
+	  named_scope :published, :conditions => {:published => true}
+	  named_scope :containing_the_letter_a, :conditions => "body LIKE '%a%’"
+	end 
+
+	Article.published.paginate(:page => 1)
+	Article.published.containing_the_letter_a.count
+	Article.containing_the_letter_a.find(:first)
+	Article.containing_the_letter_a.find(:all, :conditions => {…})
+ 
+通常我會建立一個新的叫做**published**的方法來取得所有已經發布的文章，不過在這裡我是用了**named\_scope**來做相同的事情，而且還能得到其他的效果。來看看另一個例子：
+
+	named_scope :written_before, lambda { |time|
+	  { :conditions => ['written_on < ?', time] }
+	}
+
+	named_scope :anonymous_extension do
+	  def one
+	    1
+	  end
+	end
+
+	named_scope :named_extension, :extend => NamedExtension 
+
+	named_scope :multiple_extensions, 
+		:extend => [MultipleExtensionTwo, MultipleExtensionOne]
+
+## 用proxy\_options來測試named\_scope
+                                                                                 
+**Named scopes**是Rails 2.1中很有趣的新功能，不過使用一段時間以後你就會發現想建立一些複雜的情況的測是會有點麻煩，看看例子：
+
+		class Shirt < ActiveRecord::Base
+		  named_scope :colored, lambda { |color|
+		    { :conditions => { :color => color } }
+		  }
+		end
+
+該如何建立一個可以測試scope的結果的測試呢？
+
+為了解決這個問題，**proxy\_options**被開發出來。它允許我們來檢測**named_scope**使用的選項。為了測試上面的程式碼，我們可以這樣寫測試：
+
+		class ShirtTest < Test::Unit
+		  def test_colored_scope
+		    red_scope = { :conditions => { :colored => 'red' } }
+		    blue_scope = { :conditions => { :colored => 'blue' } }
+		    assert_equal red_scope, Shirt.colored('red').scope_options
+		    assert_equal blue_scope, Shirt.colored('blue').scope_options
+		  end
+		end
+
+## Increment 和 decrement
+
+**ActiveRecord**的方法**increment**,**increment!**,**decrement**和**decrement!**現在支援一個新的可選參數。之前版本的Rails中你可以透過這些方法指定的屬性值加一或減一。在Rails 2.1中，你可以指定要增加或者減少的值，像這樣：
+
+	player1.increment!(:points, 5)
+	player2.decrement!(:points, 2)
+                                      
+上面的例子中，我向player加了5分，從player2減了2分。由於這是一個可選填的參數，所以之前的程式碼不會受到影響。
+## Find
+
+### Conditions
+            
+從現在開始，你可以向**ActiveRecord**的**find**方法中傳一個物件作為參數。看以下的例子：
+
+	class Account < ActiveRecord::Base
+	  composed_of :balance, :class_name => "Money", :mapping => %w(balance amount)
+	end
+       
+這個例子中你可以向**Account**類別的**find**方法中傳入一個**Money**實體做為參數，像這樣：
+
+	amount = 500
+	currency = "USD"
+	Account.find(:all, :conditions => { :balance => Money.new(amount, currency) })
+	
+### Last
+
+到現在為止我們只能在**ActiveRecord**的**find**方法中使用三個運算子來搜尋資料，他們是**:first**,**:all**和物件自己的id(這種情況下，我們除了id以外，不再傳入其他的參數)。
+
+在Rails 2.1中，有了第四個運算子**:last**，幾個例子：
+
+	Person.find(:last)
+	Person.find(:last, :conditions => [ "user_name = ?", user_name])
+	Person.find(:last, :order => "created_on DESC", :offset => 5)
+	                                                             
+為了能明白這個新的運算子如何操作，來看看底下的測試：
+
+	def test_find_last
+	  last  = Developer.find :last
+	  assert_equal last, Developer.find(:first, :order => 'id desc')
+	end
+	
+### All
+
+類別方法**all**是另外一個類別方法**find(:all)**的別名，如：
+	
+	Topic.all is the same as Topic.find(:all)
+
+### First
+              
+類別方法**first**是另外一個類別方法**find(:first)**的別名，如：
+
+	Topic.first is the same as Topic.find(:first)
+
+### Last
+
+類別方法**last**是另外一個類別方法**find(:last)**的別名，如：
+
+	Topic.last is the same as Topic.find(:last)
+
+             
+## 在**named\_scope**中使用**first**和**last**方法
+
+所有上述的方法同樣適用於**named\_scope**。比如我們建立一個叫**recent**的**named\_scope**，下列程式碼是有效的：
+
+		post.comments.recent.last
+
+##Eager Loading
+
+為了解釋這個新的功能，我們看看下面的代碼：
+
+	Author.find(:all, :include => [:posts, :comments])
+	
+我在查詢**authors**這個表的記錄，同時通過**author_id**包含進**posts**和**comments**表。這個查詢原本會產生這樣的SQL查詢語句：
+
+	SELECT
+	  authors."id"          AS t0_r0,
+	  authors."created_at"  AS t0_r1,
+	  authors."updated_at"  AS t0_r2,
+	  posts."id"            AS t1_r0,
+	  posts."author_id"     AS t1_r1,
+	  posts."created_at"    AS t1_r2,
+	  posts."updated_at"    AS t1_r3,
+	  comments."id"         AS t2_r0,
+	  comments."author_id"  AS t2_r1,
+	  comments."created_at" AS t2_r2,
+	  comments."updated_at" AS t2_r3
+	FROM
+	  authors
+	  LEFT OUTER JOIN posts ON posts.author_id = authors.id
+	  LEFT OUTER JOIN comments ON comments.author_id = authors.id
+
+
+這個SQL可真夠長的了，在**authors**，**posts**和**comments**三個表之間用了joins。我們叫這個為笛卡爾乘積(**cartesian product**)。
+
+
+這種查詢往往效率上不高，所以Rails 2.1做了些改進。同樣對於**Author**表的查詢，現在使用了一種不同的方式從三個表中取得資料。原來用了一條SQL語句獲得三個表的記錄，現在Rails用三條不同的查詢語句，每個表一條，這比之前生成的查詢要更短。新的結果可以在執行上述程式碼後的log中看到：
+
+	SELECT * FROM "authors"
+	SELECT posts.* FROM "posts" WHERE (posts.author_id IN (1))
+	SELECT comments.* FROM "comments" WHERE (comments.author_id IN (1))
+
+絕大多數的情況下，三個簡單的查詢要比一個複雜的場查詢語句執行得更快。
+## Belongs_to
+
+為了能在關連中使用**:dependent => :destroy**與**:delete**, **belongs\_to**方法做了些變更，比如：
+
+	belongs_to :author_address
+	belongs_to :author_address, :dependent => :destroy
+	belongs_to :author_address_extra, :dependent => :delete, 
+		:class_name => "AuthorAddress"
+
+## Polymorphic url
+
+一些多型URL的輔助方法也被引入到新的Rails中，用來提供一種更為簡潔優雅的routes操作方式。
+
+這些方法在你想生成基於**RESTful**資源的URL，同時又不必顯示指定資源的類型的時候會顯得十分有用。
+
+使用方面則是非常的簡單，來看看一些例子(注釋的部份是Rails 2.1之前的做法)：
+
+	record = Article.find(:first) 
+	polymorphic_url(record) #-> article_url(record)
+
+	record = Comment.find(:first)
+	polymorphic_url(record)  #->  comment_url(record)
+
+	# it can also identify recently created elements
+	record = Comment.new
+	polymorphic_url(record)  #->  comments_url()
+	                  
+注意到**polymorphic_url**方法是如何確認傳入參數的類型並生成正確的routes，內嵌資源(**Nested resources**)和**namespaces**也同樣支援：
+
+	polymorphic_url([:admin, @article, @comment])
+	#-> this will return:
+	admin_article_comment_url(@article, @comment)
+	           
+你同樣可使用**new**, **edit**, **formatted**等前綴，看看下面的例子：
+
+	edit_polymorphic_path(@post)
+	#=> /posts/1/edit
+
+	formatted_polymorphic_path([@post, :pdf])
+	#=> /posts/1.pdf
+
+## 唯讀關聯 (Readonly relationships)
+
+一個新的功能被添加到了models之間的關聯當中。為了避免更改關聯模型的狀態，現在你可以使用**:readonly**來描述一個關連。我們來看例子：
+
+	has_many :reports, :readonly => true
+
+	has_one :boss, :readonly => :true
+
+	belongs_to :project, :readonly => true
+
+	has_and_belongs_to_many :categories, :readonly => true
+	      
+這樣，關聯的models就能避免在model中被更改，如果試圖更改就會得到一個**ActiveRecord::ReadOnlyRecord**異常
+## add\_timestamps和remove\_timestamps方法     
+  
+現在我們有兩個新的方法**add\_timestamps**與**remove\_timestamps**，他們分別添加、刪除**timestamp**列。看個例子：
+
+	def self.up
+	  add_timestamps :feeds
+	  add_timestamps :urls
+	end
+
+	def self.down
+	  remove_timestamps :urls
+	  remove_timestamps :feeds
+	end
+
+## Calculations 
+                         
+**ActiveRecord::Calculations**做了些更改已支援資料庫表名。這個功能在幾個不同表之間存在關聯且相關列名相同時會非常有用。我們有兩個選項可用：
+
+	authors.categories.maximum(:id)
+	authors.categories.maximum("categories.id")
+
+## ActiveRecord::Base.create接受blocks
+
+我們已經習慣**ActiveRecord::Base.new**接受block作為參數了，現在**create**也同樣支援block了：
+
+	# Creating an object and passing it a block describing its attributes
+	User.create(:first_name => 'Jamie') do |u|
+	  u.is_admin = false
+	end
+
+我們也能用同樣的方法一次建立多個物件：
+
+	# Creating an array of new objects using a block.
+	# The block is executed once for each of object that is created.
+	User.create([{:first_name => 'Jamie'}, {:first_name => 'Jeremy'}]) do |u|
+	  u.is_admin = false
+	end
+
+同樣在關聯中也可以使用：
+
+	author.posts.create!(:title => "New on Edge") {|p| p.body = "More cool stuff!"}
+
+	# or
+
+	author.posts.create!(:title => "New on Edge") do |p|
+	  p.body = "More cool stuff!"
+	end
+
+## change\_table
+        
+在Rails 2.0中建立的**migrations**要比之前的版本更為性感，不過要想用**migrations**修改一個表可就不那麼性感了。
+
+在Rails 2.1中修改表也由於新方法**change\_table**而變得同樣性感了。來看看性感的例子：
+
+	change_table :videos do |t|
+	  t.timestamps # this adds columns created_at and updated_at
+	  t.belongs_to :goat # this adds column goat_id (integer)
+	  t.string :name, :email, :limit => 20 # this adds columns name and email
+	  t.remove :name, :email # this removes columns name and email
+	end
+              
+新方法**change\_table**的使用就如同他的表兄**create\_table**，不過不是建立新的表，而是透過添加或者刪除列或索引來更改現有的表。
+
+	change_table :table do |t|
+	  t.column # adds an ordinary column. Ex: t.column(:name, :string)
+	  t.index # adds a new index.
+	  t.timestamps
+	  t.change # changes the column definition. Ex: t.change(:name, :string, :limit => 80)
+	  t.change_default # changes the column default value.
+	  t.rename # changes the name of the column.
+	  t.references
+	  t.belongs_to
+	  t.string
+	  t.text
+	  t.integer
+	  t.float
+	  t.decimal
+	  t.datetime
+	  t.timestamp
+	  t.time
+	  t.date
+	  t.binary
+	  t.boolean
+	  t.remove
+	  t.remove_references
+	  t.remove_belongs_to
+	  t.remove_index
+	  t.remove_timestamps
+	end
+## Dirty Objects
+                  
+在新的Rails當中，我們同樣可以跟蹤對**ActiveRecord**所做的更改。我們能夠知道是否一個物件被進行了修改，如果有更改就能跟蹤到最新的變更。來看看例子：
+
+  article = Article.find(:first)
+	article.changed?  #=> false
+
+	article.title  #=> "Title"
+	article.title = "New Title"
+	article.title_changed? #=> true
+
+	# shows title before change
+	article.title_was  #=> "Title"
+
+	# before and after the change
+	article.title_change  #=> ["Title", "New Title"]
+
+可以看到，使用上非常的簡單，同時也能透過下列兩種方法的任意一種列出對一個物件的所有更改：
+
+	# returns a list with all of the attributes that were changed
+	article.changed  #=> ['title']
+
+	# returns a hash with attributes that were changed 
+	# along with its values before and after
+	article.changes  #=> { 'title’ => ["Title", "New Title"] }
+             
+注意到一個物件被儲存後，他的狀態也隨之改變：
+
+	article.changed?  #=> true
+	article.save  #=> true
+	article.changed?  #=> false
+   
+如果不透過**attr=**來更改一個物件的狀態，那你需要透過呼叫**attr\_name\_will\_change!**方法(用物件的實際屬性名稱替換**attr**)來通知屬性已經被更改，來看最後一個例子：
+    
+	article = Article.find(:first)
+	article.title_will_change!
+	article.title.upcase!
+	article.title_change  #=> ['Title', 'TITLE']
+
+## Partial Updates
+
+**Dirty Objects**的實現讓另一個非常有趣的功能變為可能。
+
+由於我們現在可以跟蹤一個物件的狀態是否發生改變，那麼為什麼不用它來避免那些不必要的對資料庫的更新呢？
+
+在之前版本中的Rails，當我們對一個已經存在的**ActiveRecord**物件呼叫**save**方法時，所有資料庫中的欄位都會被更新，即使那些沒有做到任何更改的欄位。
+
+這種方式在有了Dirty Objects以後會有很大的改進，而實際情況也的確如此。看看保存一個有一點更改的物件時，Rails 2.1產生的SQL查詢語句：
+
+	article = Article.find(:first)
+	article.title  #=> "Title"
+	article.subject  #=> "Edge Rails"
+
+	# Let's change the title
+	article.title = "New Title"
+
+	# it creates the following SQL
+	article.save
+	#=>  "UPDATE articles SET title = 'New Title' WHERE id = 1"
+	
+注意到，只有那些在應用中被更改的屬性才會被更新，如果沒有屬性被更改那**ActiveRecord**就不執行任何更新語句。
+
+為了開啟/關閉這個新功能，你得更改model的**partial\_updates**屬性。
+
+	# To enable it
+	MyClass.partial_updates = true
+         
+如果希望對所有的models開啟/關閉這個功能，那你得編輯*config/initializers/new\_rails\_defaults.rb*：
+
+	# Enable it to all models
+	ActiveRecord::Base.partial_updates = true
+      
+別忘了如果你不透過attr=更改欄位，同樣得通過*config/initializers/new\_rails\_defaults.rb*來通知Rails，像這樣：
+
+	# If you use **attr=**, 
+	# then it's ok not informing
+	person.name = 'bobby'
+	person.name_change    # => ['bob', 'bobby']
+	
+	
+	# But you must inform that the field will be changed
+	# if you plan not to use **attr=** 
+	person.name_will_change!
+	person.name << 'by'
+	person.name_change    # => ['bob', 'bobby']
+         
+如果你不通知Rails，那麼上述的程式碼同樣會更改物件的屬性，但是卻不能被跟蹤到，也就無法正確的更新資料庫中的對應欄位。
+## MySQL中使用Smallint, int還是bigint？
+                       
+現在建立或者更改整行列的時候，**ActiveRecord**的**MySQL**介面(Adapter)會用更聰明的方式去處理，它可根據**:limit**屬性確定一個欄位的類型應該是**smallint**、**int**還是**bigint**。我們來看個實現上述功能的例子：
+
+	case limit
+	when 0..3
+	  "smallint(#{limit})"
+	when 4..8
+	  "int(#{limit})"
+	when 9..20
+	  "bigint(#{limit})"
+	else
+	  'int(11)'
+	end
+
+現在我們在**migration**中使用它，看看每個欄位應該匹配什麼類型：
+
+	create_table :table_name, :force => true do |t|
+
+	  # 0 - 3: smallint
+	  t.integer :column_one, :limit => 2 # smallint(2)
+
+	  # 4 - 8: int
+	  t.integer :column_two, :limit => 6 # int(6)
+
+	  # 9 - 20: bigint
+	  t.integer :column_three, :limit => 15 # bigint(15)
+
+	  # if :limit is not informed: int(11)
+	  t.integer :column_four # int(11)
+	end
+
+**PostgreSQL**介面(Adapter)已經有這個功能了，現在**MySQL**也不甘落後了。
+
+譯者注：
+前些日子在Rails的Git中注意到一個新的fix，是MySQL Adapter的更新，剛好就是這個部份。
+修改的部份原始碼是：
+        case limit
+        when 1; 'tinyint'
+        when 2; 'smallint'
+        when 3; 'mediumint'
+        when 4, nil; 'int(11)'
+        else; 'bigint'
+        end
+注意到了嗎？現在只要limit是4以上就屬於bigint，所以跟原文有點出入，請注意。
+未來會怎樣變更不一定，不過我想可能會就此固定也說不定
+更改的Commit網址是：http://github.com/rails/rails/commit/290e1e2fc53d80165cc876491ec0cbe18be376cf
+今天日期：2008-06-24
+## has\_one和belongs\_to中的:select選項
+
+已經為人熟知的**has\_one**和**belongs\_to**方法現在接收一個新屬性：**:select**。
+
+他的預設值是"*"(正如同"SELECT * FROM table")，不過你可以更改預設值來獲得任何你希望取得的欄位。
+
+也別忘了把主鍵(Primary key)與外鍵(Foreign key)一併包入，不然會錯誤。
+
+**belongs_to**方法不再支援**:order**了，不過不要擔心，因為基本上也沒什麼用處。
+## 使用單表繼承(STI)的時候儲存類別的全名
+
+當我們的**models**有**namespace**，並且是單表繼承(STI)時，**ActiveRecord**僅僅將類別名稱而不是包括**namespace**(**demodulized**)在內的全名存起來。這種情況僅僅當單表繼承的所有類別在一個**namespace**的時候有效，看例子：
+
+	class CollectionItem < ActiveRecord::Base; end
+	class ComicCollection::Item < CollectionItem; end
+
+	item = ComicCollection::Item.new
+	item.type # => 'Item’
+
+	item2 = CollectionItem.find(item.id)
+	# returns an error, because it can't find
+	# the class Item
+      
+新的Rails添加了一個屬性，從而使**ActiveRecord**能儲存類別的全名。
+可以在**environment.rb**當中添加如下程式碼來啟動/關閉這個功能：
+
+	ActiveRecord::Base.store_full_sti_class = true
+                             
+預設值是true。
+##table_exists?方法
+           
+**AbstractAdapter**類別有個新方法**table\_exists**，用法非常容易：
+
+	>> ActiveRecord::Base.connection.table_exists?("users")
+	=> true
+
+## 根據時間戳記的Migrations (Timestamped Migrations)
+              
+當你一個人使用Rails開發時，**migrations**似乎是所有問題的最好解決方案。不過當和團隊的其他成員共同開發一個專案時，你會發現(如果你還沒發現)處理**migrations**的同步是非常棘手的。Rails 2.1中根據時間戳記的**migrations**解決方案則是漂亮的解決了這個問題。
+
+在根據時間戳記的**migrations**引入之前，建立每個migration都會在其名字之前產生一個數字，如果兩個**migrations**分別由兩個開發者產生，並且都沒有即時的提交到版本庫中，那麼最後就有可能存在相同的前綴數字，但是不同內容的**migrations**，這時你的schema_info表就會過期，同時在版本控制系統中出現衝突。
+
+嘗試解決這個問題的方式有很多，人們建立了很多plugins以不同的方式解決這個問題。儘管有些plugins可用，不過有一點是非常清楚的，舊的方式已經無法滿足我們的要求了。
+
+如果你使用Git，那麼你可能再給自己挖一個更大的陷阱，因為你的團隊可能同時有幾個working branches，過期的migrations則在每個branch中都存在。這樣當合併這些branches時就會有嚴重的衝突問題。
+
+為了解決這個大問題，Rails核心團隊已經改變了**migrations**的運作方式。他們捨棄了原有以當前schema_info中version列的值作為migration前綴的依據方式，取而代之的是根據**UTC**時間按照YYYYMMDDHHMMSS格式的字串表達方式作為前綴。
+
+同時建立了一個新的叫做**schema_migrations**的表，表中存著哪些**migrations**已經執行了，這樣如果發現有人建立了一個有較小值的**migration**，Rails會回滾(rollback)**migrations**到之前的版本，然後重新執行所有的**migration**直到當前的版本。
+
+顯然這樣的做法解決了**migrations**所帶來的衝突問題。
+
+有兩個新的和**migrations**相關的rake指令：
+
+	rake db:migrate:up
+	rake db:migrate:down
+
+
+# ActiveSupport
+
+ActiveSupport之中提供了許多非常實用的類別，而且對預設的函式庫提供了一些對Ruby on Rails程式非常有用的外掛。（翻譯自 wikipedia）
+## ActiveSupport::CoreExtensions::Date::Calculations
+
+### Time#end\_of\_day
+
+回傳當天的結束時間（11:59:59 PM)
+
+### Time#end\_of\_week
+
+回傳當週的週末結束時間 (Sunday 11:59:59 PM)
+
+### Time#end\_of\_quarter
+
+回傳一個 Date 物件，表示本季的最後一天。換句話說，他是根據目前日期回傳三月、六月、九月或者十二月的最後一天。
+
+### Time#end\_of\_year
+
+回傳本年度的結束時間，也就是 12/31 11:59:59 PM
+
+### Time#in\_time\_zone
+
+這個方法跟 **Time#localtime** 很類似，除了他使用 Time.zone 作為時區基準，而不是目前作業系統設定的時區。您可以傳入 **TimeZone** 或是 **String** 作為參數。如下面的例子：
+
+    Time.zone = 'Hawaii'
+    Time.utc(2000).in_time_zone
+    # => Fri, 31 Dec 1999 14:00:00 HST -10:00
+    
+    Time.utc(2000).in_time_zone('Alaska')
+	# => Fri, 31 Dec 1999 15:00:00 AKST -09:00
+
+### Time#days\_in\_month
+
+這個方法本來有個bug，當沒有指定年份的時候，對於二月他沒有辦法正確處理潤年。不過在 Rails 2.1 中這個問題已經被修正了。
+
+這個修正的作法是，如果您沒有指定年份，則使用呼叫時的當年度作為預設值。如果您處於潤年的話，參考下面的例子：
+
+	Loading development environment (Rails 2.0.2)
+	>> Time.days_in_month(2)
+	=> 28
+
+	Loading development environment (Rails 2.1.0)
+	>> Time.days_in_month(2)
+	=> 29
+
+### DateTime#to_f
+
+DateTime 類別新增了一個方法 **to_f**，它的作用是將日期以浮點數的形態回傳。這個浮點數遞逮表從 Unix 紀元 (1970, 1月1日午夜。也就是平常熟知的 UNIX Timestamp) 開始計算經過的秒數。
+
+### Date.current
+
+Date 類別則新增了一個新方法稱為 **current** 來取代原有的 **Date.today** 。這個方法將會考慮到您在 **config.time\_zone** 中設定的時區。如果您有設定，這個方法將回傳 **Time.zone.today** 。如果沒有的話，則直接回傳 **Date.today** 。
+
+## Fragment\_exist?
+
+在 **cache\_store** 中新增加了兩個方法： **fragment\_exist?** 和 **exist?** 。
+
+**fragment\_exist?** 顧名思義，它將檢查一個由 key 指定的緩衝區片段存不存在。這個方法將可以用來替代常用的：
+  
+    read_fragment(path).nil?
+
+**exist?** 方法被實際的加入到 **cache\_store**，而 **fragement\_exist?** 則是一個您能夠在 Controller 中使用的 helper。
+
+## UTC or GMT?
+
+這是一個很有趣的修正。:P 到目前為止，Rails 通常使用 UTC 這個縮寫。但是在 **TimeZone.to_s** 裡頭，它卻回傳 GMT，而不是熟系的 UTC。這是因為使用 GMT 對您的產品使用者來說是最為熟悉的縮寫。
+  
+如果您注意觀察 Windows 的時間設定視窗，時區它也使用 GMT 作為縮寫。同樣的，Google 和 Yahoo 也在他們旗下的產品中使用 GMT。
+
+	TimeZone['Moscow'].to_s #=> "(GMT+03:00) Moscow"
+
+## JSON escape
+
+**json\_escape** 方法就像是 **html\_escape** 所做的事情一樣。當我們想在 **HTML** 頁面中顯示 **JSON** 字串的時候非常有用。例如：
+  
+    json_escape("is a > 0 & a < 10?")
+    # => "is a \u003E 0 \u0026 a \003C 10?"
+
+在 ERB 樣板中，我們可以使用簡寫 **j** (就像是 **h** 一樣)：
+
+    <%= j @person.to_json %>
+    
+如果您希望所有 **JSON** 碼都自動被跳脫（esacped），您可以在 *environment.rb* 中加入下面的程式碼：
+  
+    ActiveSupport.escape_html_entities_in_json = true
+
+## Mem\_cache\_store now accepts options
+
+  自從 **Memcache-Client** 被包入 **ActiveSupport::Cache** 後就使得事情變得比以前更容易了。但是他也相對的剝奪了靈活性。它只允許您設定 **memcahced** 伺服器的 IP 位置而已。
+  
+  **Jonathan Weiss** 送給 Rails 團隊一個修正，使其能夠接受額外的選項，像是：
+
+	ActiveSupport::Cache.lookup_store :mem_cache_store, "localhost"
+
+	ActiveSupport::Cache.lookup_store :mem_cache_store, "localhost", '192.168.1.1', 
+		:namespace => 'foo'
+
+   或者
+
+	config.action_controller.fragment_cache_store = :mem_cache_store, 'localhost', {:compression => true, :debug => true, :namespace =>'foo'}
+
+## Time.current
+
+**Time** 類別中的新方法。 **current** 的回傳值將視 **config.time\_zone** 而定。如果之前有指定時區，則傳為 **Time.zone.now**，否則回傳 **Time.now** 。
+
+	# return value depends on config.time_zone
+	Time.current
+
+**since** 和 **ago** 方法同樣的也受到影響, 如果 **config.time\_zone** 已經指定了，它就會回傳一個 *TimeWithZone**。
+ 
+這個修正使得 **Time.current** 方法作為取得目前時區的預設方法，替換了原有的 **Time.now** （這個方法依然可以使用，只是他不會考慮時區差異）。
+
+**datetime\_select**方法， **select\_datetime** 和 **select\_time** 也已經改用  **Time.current** 了。
+##Removing whitespaces with squish method
+
+**String**物件中增加了兩個方法， **squish** 和 **squish!**。
+
+這兩個方法和 **strip** 一樣，它刪除了文字前後的空格，也刪除了文字中間無用的空格。像是下面這個例子：
+
+	“    A    text    full    of     spaces    “.strip
+	#=> “A    text    full    of     spaces”
+
+	“    A    text    full    of     spaces    “.squish
+	#=> “A text full of spaces”
+
+# ActiveResource
+
+ActiveResource是RESTful系統中的客戶端實作。使用類似代理或者遠端服務的物件可以呼叫RESTful服務。
+## 使用Email當作使用者名稱
+
+某些服務使用Email作為使用者名稱，這會要求使用如下形式的URL：
+
+	http://ernesto.jimenez@negonation.com:pass@tractis.com
+
+這個URL中有兩個"@"，這會帶來些問題：直譯器無法正確解析這個URL。因此對**ActiveResource**的使用方式做了擴展，以方便使用Email進行身分驗證。可以這樣使用：
+
+	class Person < ActiveResource::Base
+	  self.site = "http://tractis.com"
+	  self.user = "ernesto.jimenez@negonation.com"
+	  self.password = "pass"
+	end
+
+## clone 方法
+
+現在我們可以複製已經有的resource：
+
+	ryan = Person.find(1)
+	not_ryan = ryan.clone
+	not_ryan.new?  # => true
+
+要注意複製出來的物件並不複製任何類別屬性，僅複製resource屬性。
+
+	ryan = Person.find(1)
+	ryan.address = StreetAddress.find(1, :person_id => ryan.id)
+	ryan.hash = {:not => "an ARes instance"} 
+
+	not_ryan = ryan.clone
+	not_ryan.new?            # => true
+	not_ryan.address         # => NoMethodError
+	not_ryan.hash            # => {:not => "an ARes instance"}
+## 逾時
+
+由於ActiveResource使用**HTTP**來存取RESTful API，當伺服器回應緩慢或者伺服器罷工時會出問題。在某些情況下呼叫ActiveResource會逾時失敗。現在可以用timeout屬性來設定逾時時間了。
+
+	class Person < ActiveResource::Base
+	  self.site = "http://api.people.com:3000/"
+	  self.timeout = 5 # waits 5 seconds before expire
+	end
+
+本例子將逾時設定為5秒。推荐的做法是將該值設得小一點使系統能快速偵測到失敗，以避免相關錯誤引發伺服器錯誤。
+
+ActiveResource內部使用Net::HTTP來發起HTTP請求。當timeout屬性設定時，該值同時被設定到Net::HTTP物件實體的**read\_timeout**屬性上。
+
+該屬性的預設值是60秒。
+# ActionPack
+
+包含ActionView(為End-User產生顯示，像是HTML、XML、JavaScript)和ActionController(商業流程控制)。
+(adapted from wikipedia)
+## TimeZone
+
+### 定義一個預設的時區
+
+一個新的選項被加入到**time\_zone\_select**方法，在你的用戶沒有選擇任何**TimeZone**或者資料庫欄位為空時，你可以顯示一個預設值。它已經建立一個**:default**選項，你可以按照下面的方式使用這個方法：
+
+	time_zone_select("user", "time_zone", nil, :include_blank => true)
+	
+	time_zone_select("user", "time_zone", nil, 
+		:default => "Pacific Time (US & Canada)" )
+	
+	time_zone_select( "user", 'time_zone', TimeZone.us_zones, 
+		:default => "Pacific Time (US & Canada)")
+
+如果我們使用**:default**選項，它就會顯示**TimeZone**已被選擇的選項。
+
+### formatted_offset 方法
+
+**formatted\_offset**方法被包含在**Time**和**DateTime**類別中，回傳**+HH:MM**格式的UTC時差。例如，在我們的時區(台北時間)，這個方法回傳的時差是一個字串**"+08:00"**。
+
+讓我們看看一些範例：
+
+從一個DateTime得到時差：
+
+	datetime = DateTime.civil(2000, 1, 1, 0, 0, 0, Rational(-6, 24))
+	datetime.formatted_offset         # => "-06:00″
+	datetime.formatted_offset(false)  # => "-0600″
+
+從Time：
+
+	Time.local(2000).formatted_offset         # => "-06:00″
+	Time.local(2000).formatted_offset(false)  # => "-0600″
+
+注意這個方法回傳字串，可以格式化或者不依賴於一個被給予的參數。
+
+### with\_env\_tz 方法
+
+**with\_env\_tz**方法允許我們以非常簡單的方式測試不同的時區：
+
+	def test_local_offset
+	  with_env_tz 'US/Eastern' do
+	    assert_equal Rational(-5, 24), DateTime.local_offset
+	  end
+	  with_env_tz 'US/Central' do
+	    assert_equal Rational(-6, 24), DateTime.local_offset
+	  end
+	end
+
+這個Helper可以呼叫**with\_timezone**，但是為了避免使用**ENV['TZ']**和**Time.zone**時混亂，他被重新命名為**with\_env\_tz**。
+
+### Time.zone_reset!
+
+該方法已經跟我們說再見了。
+
+### Time#in\_current\_time\_zone
+
+該方法修改為當**Time.zone**為空時傳回**self**
+
+### Time#change\_time\_zone\_to\_current
+
+該方法修改為當**Time.zone**為空時傳回**self**
+
+### TimeZone#now
+
+該方法修改為傳回**ActiveSupport::TimeWithZone**顯示當前在**TimeZone#now**中已經設定的時區。例如：
+
+	Time.zone = 'Hawaii'  # => "Hawaii"
+	Time.zone.now         # => Wed, 23 Jan 2008 20:24:27 HST -10:00
+
+### Compare\_with\_coercion
+	
+在**Time**和**DateTime**類別中新增了一個方法：**compare\_with\_coercion**(和一個alias <=>)，它使在**Time**、**DateTime**類別和**ActiveSupport::TimeWithZone**實體之間可以按照年代順序排列的比較。為了容易理解，請看下面的例子(行尾是顯示的結果)：
+
+	Time.utc(2000) <=> Time.utc(1999, 12, 31, 23, 59, 59, 999) # 1
+	Time.utc(2000) <=> Time.utc(2000, 1, 1, 0, 0, 0) # 0
+	Time.utc(2000) <=> Time.utc(2000, 1, 1, 0, 0, 0, 001)) # -1
+
+	Time.utc(2000) <=> DateTime.civil(1999, 12, 31, 23, 59, 59) # 1
+	Time.utc(2000) <=> DateTime.civil(2000, 1, 1, 0, 0, 0) # 0
+	Time.utc(2000) <=> DateTime.civil(2000, 1, 1, 0, 0, 1)) # -1
+
+	Time.utc(2000) <=> ActiveSupport::TimeWithZone.new(Time.utc(1999, 12, 31, 23, 59, 59) )
+	Time.utc(2000) <=> ActiveSupport::TimeWithZone.new(Time.utc(2000, 1, 1, 0, 0, 0) )
+	Time.utc(2000) <=> ActiveSupport::TimeWithZone.new(Time.utc(2000, 1, 1, 0, 0, 1) ))
+
+### TimeWithZone#between?
+
+在**TimeWithZone**類別中包含**between?**方法檢驗一個實體被建立在兩個日期之間。
+
+	@twz.between?(Time.utc(1999,12,31,23,59,59),
+	              Time.utc(2000,1,1,0,0,1))
+	
+### TimeZone#parse
+	
+這個方法從字串建立一個**ActiveSupport::TimeWithZone**實體。例如：
+
+	Time.zone = "Hawaii"
+	# => "Hawaii"
+	Time.zone.parse('1999-12-31 14:00:00')
+	# => Fri, 31 Dec 1999 14:00:00 HST -10:00
+
+
+	Time.zone.now
+	# => Fri, 31 Dec 1999 14:00:00 HST -10:00
+	Time.zone.parse('22:30:00')
+	# => Fri, 31 Dec 1999 22:30:00 HST -10:00
+
+### TimeZone#at
+
+這個方法可以從一個Unix epoch數字建立一個**ActiveSupport::TimeWithZone**實體，例如：
+
+	Time.zone = "Hawaii" # => "Hawaii"
+	Time.utc(2000).to_f  # => 946684800.0
+
+	Time.zone.at(946684800.0)
+	# => Fri, 31 Dec 1999 14:00:00 HST -10:00
+
+### 其他方法
+
+**to\_a**, **to\_f**, **to\_i**, **httpdate**, **rfc2822**, **to\_yaml**, **to\_datetime** 和 **eql?**被加入TimeWithZone類別中。更多關於這些方法的訊息請查閱同版本的Rails文件。
+
+### TimeWithZone為了Ruby 1.9而準備
+
+在Ruby 1.9中我們有了一些新的方法在 **Time**類別中，如：
+
+	Time.now
+	# => Thu Nov 03 18:58:25 CET 2005
+
+	Time.now.sunday?
+	# => false
+
+一週的每天都有對應的方法。
+
+另一個新的是**Time**的**to\_s**方法將會有一個不同的傳回值。現在當我們執行**Time.new.to\_s**，將得到：
+
+	Time.new.to_s
+	# => "Thu Oct 12 10:39:27 +0200 2006″
+
+在Ruby 1.9中我們將得到：
+
+	Time.new.to_s
+	# => "2006-10-12 10:39:24 +0200″
+
+Rails 2.1擁有哪些相關的東西？答案是所有東西，從Rails開始準備這些修改。**TimeWithZone**類別，例如，剛收到一個第一個範例的方法實現。
+## Auto Link
+
+為那些不知道這個方法的人，**auto\_link**方法接收所有文字參數，如果這個文字包含一個e-mail或者一個網址，將返回相同的文字，但是包含了超連結。
+
+例如：
+
+	auto_link("Go to this website now: http://www.rubyonrails.com")
+	# => Go to this website now: http://www.rubyonrails.com
+
+一些網站，像是Amazon，使用"="在URL中，該方法不認可這個符號，看這個方法怎樣處理這種情況：
+
+	auto_link("http://www.amazon.com/Testing/ref=pd_bbs_sr_1")
+	# => http://www.amazon.com/Testing/ref
+
+注意該方法會截斷"="後面的東西，因為它不支援這個符號。我的意思是，它通常是不被支援的，但在Rails 2.1中根本沒有這個問題。
+
+同樣的方法將在稍後更新，允許在網址中使用括號。
+
+這就是括號的範例：
+
+	http://en.wikipedia.org/wiki/Sprite_(computer_graphics)
+
+## Labels
+
+當使用**scaffold**產生一個新表單時，將會建立下面的程式碼：
+
+	<% form_for(@post) do |f| %>
+	  <p>
+	    <%= f.label :title %><br />
+	    <%= f.text_field :title %>
+	  </p>
+	  <p>
+	    <%= f.label :body %><br />
+	    <%= f.text_area :body %>
+	  </p>
+	  <p>
+	    <%= f.submit "Update" %>
+	  </p>
+	<% end %>
+
+這種方法更有意義，它包含了**label**方法。該做法在HTML標籤中回傳一個標題列。
+
+	>> f.label :title
+	=> <label for="post_title">Title</label>
+
+	>> f.label :title, "A short title"
+	=> <label for="post_title">A short title</label>
+
+	>> label :title, "A short title", :class => "title_label"
+	=> <label for="post_title" class="title_label">A short title</label>
+
+有在標籤中注意到**for**參數嗎？"post\_title"是包含了我們的post title的文字框。這個<label>標籤實際上是一個關連到**post\_title**物件。當有人點了這個label(非連結)時，被關聯的元件就會接收到焦點。
+
+Robby Russell在他的Blog中寫了一個關於這個主題的有趣文章。你可以從這裡閱讀：
+[http://www.robbyonrails.com/articles/2007/12/02/that-checkbox-needs-a-label](http://www.robbyonrails.com/articles/2007/12/02/that-checkbox-needs-a-label)
+
+在**FormTagHelper**中同樣也擁有**label\_tag**方法。該方法的工作方式與label一樣，但更簡單：
+
+	>> label_tag 'name'
+	=> <label for="name">Name</label> 
+
+	>> label_tag 'name', 'Your name'
+	=> <label for="name">Your name</label> 
+
+	>> label_tag 'name', nil, :class => 'small_label'
+	=> <label for="name" class="small_label">Name</label>
+
+該方法同樣接收**:for**選項，看一個範例：
+
+	label(:post, :title, nil, :for => "my_for")
+
+這將回傳這樣的結果：
+
+	<label for="my_for">Title</label>
+## 一種使用partials的新方法
+
+在Rails開發過程中使用**partials**避免重複程式碼是很正常的方式，例如：
+
+	<% form_for :user, :url => users_path do %>
+		<%= render :partial => 'form' %>
+		<%= submit_tag 'Create' %>
+	<% end %>
+
+**Partial**是一個程式碼片段(模版)。使用**partial**是避免不必要的程式碼重複。使用**partial**非常簡單，你可以這樣開始：**:render :partial => "name"**，之後，你必須建立一個與你的**partial**同樣名稱的文件，但是得先用一個底線作為開頭。
+
+上面的程式碼是我們通常使用的方式，但在新的Rails版本中，我們使用不同的方式做相同的事情，如：
+
+	<% form_for(@user) do |f| %>
+		<%= render :partial => f %>
+		<%= submit_tag 'Create' %>
+	<% end %>
+
+在這個範例中我們使用了partial "users/\_form"，將收到一個名為"form"被**FormBuilder**建立的變數。
+不過以前的用法也是不被影響。
+## Atom Feed 中新的 namespaces
+
+你知道**atom\_feed**方法嗎？這是Rails 2.0的一個新特性，使得建立Atom feeds變得更容易。來看看怎樣操作：
+
+在一個*index.atom.builder*檔案中：
+
+	atom_feed do |feed|
+	  feed.title("Nome do Jogo")
+	  feed.updated((@posts.first.created_at))
+
+	  for post in @posts
+	    feed.entry(post) do |entry|
+	      entry.title(post.title)
+	      entry.content(post.body, :type => 'html')
+
+	      entry.author do |author|
+	        author.name("Carlos Brando")
+	      end
+	    end
+	  end
+	end
+
+Atom feed是什麼？Atom的名字是根據XML的樣式與meta資料。在網路中它是一個發佈經常更新內容的協議，如：Blog、新聞。Feeds經常以XML或Atom的格式發佈標示為applicaton/atom+xml類型。
+
+在Rails 2.0的第一個版本中，該方法允許**:language**、**:root_url**和**:url**參數，你可以從Rails文件中獲得更多關於這些方法的訊息。但是這次的更新我們更可以包含新的namespace在一個Feed的root元素中，例如：
+
+	atom_feed('xmlns:app' => 'http://www.w3.org/2007/app') do |feed|
+
+將返回：
+
+	<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom" 
+		xmlns:app="http://www.w3.org/2007/app">
+
+修改這個之前的範例，我們可以這樣寫：
+
+	atom_feed({'xmlns:app' => 'http://www.w3.org/2007/app',
+		'xmlns:openSearch' => 'http://a9.com/-/spec/opensearch/1.1/'}) do |feed| 
+
+	  feed.title("Nome do Jogo")
+	  feed.updated((@posts.first.created_at))
+	  feed.tag!(openSearch:totalResults, 10) 
+
+	  for post in @posts
+	    feed.entry(post) do |entry|
+	      entry.title(post.title)
+	      entry.content(post.body, :type => 'html')
+	      entry.tag!('app:edited', Time.now) 
+
+	      entry.author do |author|
+	        author.name("Carlos Brando")
+	      end
+	    end
+	  end
+	end
+
+## Cache
+
+現在所有的**fragment\_cache\_key**方法預設回傳'view/'前綴。
+
+所有快取儲存已經從**ActionController::Caching::Fragments::**刪除，並替換為**ActiveSupport::Cache::**。在這種情況下，如果你指定一個儲存位置，像**ActionController::Caching::Fragments::MemoryStore**，你需要這樣寫：**ActiveSupport::Cache::MemoryStore**。
+
+**ActionController::Base.fragment\_cache\_store**已經不再使用，**ActionController::Base.cache\_store**取代了它的位置。
+
+由於這個新的**ActiveSupport::Cache::**函式庫使得**ActiveRecord::Base**中的**cache\_key**方法容易快取一個Active Records，它是這樣運作的：
+
+	>> Product.new.cache_key
+	=> "products/new"
+
+	>> Product.find(5).cache_key
+	=> "products/5"
+
+	>> Person.find(5).cache_key
+	=> "people/5-20071224150000"
+
+它包含了**ActiveSupport::Gzip.decompress/compress**使得用**Zlib**壓縮更加容易。
+
+現在你可以在environment選項中使用**config.cache\_store**，指定一個預設的暫存位置。有價值提起的是，如果**tmp/cache**目錄存在，預設的暫存位置是**FileStore**，否則使用**MemoryStore**。你可以用下面的方式設定它：
+
+	config.cache_store = :memory_store
+	config.cache_store = :file_store, "/path/to/cache/directory"
+	config.cache_store = :drb_store, "druby://localhost:9192"
+	config.cache_store = :mem_cache_store, "localhost"
+	config.cache_store = MyOwnStore.new("parameter")
+
+為了把事情變得更容易，在*environments/production.rb*檔案中包含了以下註解，提醒你記得這個選項：
+
+	# Use a different cache store in production
+	# config.cache_store = :mem_cache_store
+
+## 在字串中應用格式化標題
+
+以前當你在一個包含了 's 的字串中使用**String#titleize**方法時有個bug，這個bug返回大寫的'S，看看：
+
+	>> "brando’s blog".titleize
+	=> "Brando’S Blog"
+	
+相同的範例，但是此Bug已經修復了：
+
+	>> "brando’s blog".titleize
+	=> "Brando’s Blog"
+
+## action\_name
+
+現在，要知道在運行時哪個View被呼叫，我們只需使用**action\_name**方法：
+
+	<%= action_name %>
+
+回傳值將使用**params[:action]**一樣，但更優雅。
+## caches\_action 支援條件式
+
+**caches\_action**方法現在支援**:if**選項，允許使用條件式指定一個**cache**可以被暫存。例如：
+
+	caches_action :index, :if => Proc.new { |c| !c.request.format.json? }
+
+在上面的例子中，只有當請求不是JSON的時候，**action index**將被暫存。
+## 在 caches\_page method 方法中的條件式
+
+**caches\_page**方法現在支援**:if**選項，例如：
+
+	# The Rails 2.0 way
+	caches_page :index
+
+	# In Rails 2.1 you can use :if option
+	caches_page :index, :if => Proc.new { |c| !c.request.format.json? }
+
+## flash.now現在可以在test中運作
+
+誰沒有因為這個而頭痛過？這個問題在我們測試期間無法確定訊息已經儲存到了Flash中，因為它在到你的測試代碼之前就被Rails清掉了。
+
+在Rails 2.1中已經沒有這個問題。現在你可以包含下面的程式碼運行在你的測試中：
+
+	assert_equal '>value_now<', flash['test_now']
+
+## 在Views之外存取Helpers
+
+有多少次你建立了一個**helper**希望它在一個**controller**中使用？要做到這樣，你必須包含這個**helper** module到這個**controller**之中，但這使你的程式碼看起來很髒。
+
+Rails 2.1已經開發了一個方法在Views以外的地方使用Helpers。已很簡單的方式運作：
+
+ 	# To access simple_format method, for example
+	ApplicationController.helpers.simple_format(text)
+
+簡單而乾淨！
+## JSON
+
+Rails現在支援POST一個JSON內容的請求，例如你可以像這樣丟出一個POST：
+
+	POST /posts
+	{"post": {"title": "Breaking News"}}
+
+所有參數都將到**params**中。例如：
+
+	def create
+	  @post = Post.create params[:post]
+	  # …
+	end
+
+為了那些不知道JSON是一個XML競爭者的人，它在JavaScript資料交換中相當廣泛，因為它呈現為這種語言。它的名字是來自於：**JavaScript Object Notation**。
+## Path Names
+
+我的Blog(http://www.nomedojogo.com ，譯注：原作者的Blog)讀者們應該都知道我的**Custom Resource Name**外掛，但我想它應該就快要死亡了... :(
+
+在Rails中你已經包含了**:as**選項在routes(一些我實現在外掛中保持相容性的東西)中，現在你也將擁有**:path_names**選項改變你**actions**的名字。
+	
+	map.resource :schools, :as => 'escolas', :path_names => { :new => 'nova' }
+
+當然，我的外掛對於早期的Rails版本依然有效。
+## 定義你的routes文件位置
+
+在Rails 2.1中你可以定義你的routes放在哪個文件中，把底下那段程式碼寫到*environment.rb*中：
+
+	config.routes_configuration_file
+
+這在你擁有兩種分開的前端共享同models、libraries與plugins時非常有用。
+
+例如，getsatisfaction.com和api.getsatisfaction.com共用相同的models，但使用不同的controllers、helpers和views。getsatisfaction擁有自己針對SEO優化的routes文件，但API routes不需要任何關於SEO的優化。
+## session(:on)
+
+或許你還不知道這個，Rails可以關閉sessions：
+
+	class ApplicationController < ActionController::Base
+	  session :off
+	end
+
+注意在我的範例中，我關閉了所有controllers中的session(**ApplicationController**)，但我也能單獨關閉某一個controller的Session。
+
+但如果我只想打開一個controller的session，在Rails 2.1中，該方法允許**:on**選項，這樣做：
+
+	class UsersController < ApplicationController
+	  session :on
+	end
+
+## 簡單的Testing Helpers
+
+在早期最最最令人討厭的事情就是在Rails中測試**helpers**。我已經遭受到很多次100%的覆蓋，建立一些給**helpers**用的測試。
+
+透過**ActionView::TestCase**類別，在Rails 2.1中這變得簡單多了。看個範例：
+
+	module PeopleHelper
+	  def title(text)
+	    content_tag(:h1, text)
+	  end
+
+	  def homepage_path
+	    people_path
+	  end
+	end
+
+現在看我們在Rails 2.1中怎樣做同樣的事情：
+
+	class PeopleHelperTest < ActionView::TestCase
+	  def setup
+	    ActionController::Routing::Routes.draw do |map|
+	      map.people 'people', :controller => 'people', :action => 'index'
+	      map.connect ':controller/:action/:id'
+	    end
+	  end
+
+	  def test_title
+	    assert_equal "<h1>Ruby on Rails</h1>", title("Ruby on Rails")
+	  end
+
+	  def test_homepage_path
+	    assert_equal "/people", homepage_path
+	  end
+	end
+
+# ActionController
+
+ActionController 從網路中接受要求，並處理決定將要求傳給或是重新導向到一個 action 去處理。
+
+一個 action 事實上是 controller 中的一個 public 方法。而透過 Rails 的路由規則，系統將自動將要求依照規則分派(dispatch)給不同 action 處理。
+
+## ActionController::Routing
+
+### Map.root
+
+現在你可以透過別名，更加 **DRY** 的使用 **map.root**。
+
+在之前的 Rails 版本裡，您可能是像下面的方法使用：
+
+	map.new_session :controller => 'sessions', :action => 'new'
+	map.root :controller => 'sessions', :action => 'new'
+	
+在 Rails 2.1 中，你則可以直接這樣使用：
+
+	map.new_session :controller => 'sessions', :action => 'new'
+	map.root :new_session
+	
+### 路由識別 （Routes recognition）
+
+之前的路由識別實作方法是一個接著一個的檢查是否符合規則，這樣做事實上是非常耗時間的。新的路由識別功能則變的聰明了，他會依照路徑自動生成一棵路由樹。這樣只需要尋找路徑上的路由規則即可，這方式將時間的耗損減少了將近 2.7 倍。
+
+如果您有興趣了解這些實作方式，您可以參考 **recognition\_optimisation.rb** 中的新方法。其中的註解很詳細的描述了工作細節，可以提供你更多實作的相關資訊。
+
+**recognition\_optimisation.rb** 文件中新的方法和他们的工作细节都在注释中写得很详尽。通过直接阅读源代码的方份可以获得这些实现的更多信息。
+
+### Assert_routing
+
+現在可以透過一個 HTTP 方法來測試路由，如下面的例子：
+
+	assert_routing({ :method => 'put',
+	                 :path => '/product/321' },
+	               { :controller => "product",
+	                 :action => "update",
+	                 :id => "321" })
+	
+### Map.resources
+
+假設您的網站並不是使用英文寫的，而你想在路徑當中也使用相同的語言。像是：
+	
+	http://www.mysite.com.br/produtos/1234/comentarios
+
+而不是：
+
+	http://www.mysite.com.br/products/1234/reviews
+
+目前雖然是可以做到的，但是並沒有一個簡單而不需要破壞 Rails 約定(conventions)的方法。
+
+現在我們可以使用 **map.resources** 裡的 **:as** 來自定我們的路由路徑。像是剛剛那個葡萄牙語的例子：
+
+	map.resources :products, :as => 'produtos' do |product|
+	  # product_reviews_path(product) ==
+	  # '/produtos/1234/comentarios’
+	  product.resources :product_reviews, :as => 'comentarios'
+	end
+## ActionController::Caching::Sweeping
+
+在之前的 Rails 版本裡，當我們正在宣告 **sweeper** 的時候，我們必須使用 symbols：
+
+	class ListsController < ApplicationController
+	  caches_action :index, :show, :public, :feed
+	  cache_sweeper :list_sweeper,
+	                :only => [ :edit, :destroy, :share ]
+	end
+
+現在我們可以使用一個類別型態來宣告，而不需要使用 symbol。這個改變讓藏在 model 中的 **sweeper** 也可以被使用了。雖然平時您依然可以使用 symbol 宣告，但是在 Rails 2.1 中，您可以這麼做：
+
+	class ListsController < ApplicationController
+	  caches_action :index, :show, :public, :feed
+	  cache_sweeper OpenBar::Sweeper,
+	                :only => [ :edit, :destroy, :share ]
+	end
+#ActionView
+
+ActionView 是一個展示層，主要負責產生介面給使用者看，而可以透過 ERB 樣板自定產生的頁面。
+
+## ActionView::Helpers::FormHelper
+
+### fields\_for form\_for 和 index 選項
+
+原本的 **#fields\_for** 和 **form\_for** 方法接受 **:index** 選項。在 form 物件中，如果想要取消就必须使用 **:index => nil**。
+
+以前的作法可能是：
+
+	<% fields_for "project[task_attributes][]", task do |f| %>
+	  <%= f.text_field :name, :index => nil %>
+	  <%= f.hidden_field :id, :index => nil %>
+	  <%= f.hidden_field :should_destroy, :index => nil %>
+	<% end %>
+
+現在的作法則是：
+
+	<% fields_for "project[task_attributes][]", task,
+	              :index => nil do |f| %>
+	  <%= f.text_field :name %>
+	  <%= f.hidden_field :id %>
+	  <%= f.hidden_field :should_destroy %>
+	<% end %>
+## ActionView::Helpers::DateHelper
+
+現在，所有與時間處理有關的樣板方法 (**date\_select**, **time\_select**, **select\_datetime**......) 都接受 **HTML** 選項了。請看下面這個例子：
+
+	<%= date_select 'item','happening', :order => [:day], :class => 'foobar'%>
+	
+### date\_helper
+
+由於使用了 **Date.current**，用來定義預設職的 **date\_helper** 方法也隨之更新。
+
+## ActionView::Helpers::AssetTagHelper
+
+### register\_javascript\_expansion
+
+這個方法可用來定義一個符號作為稍後在 **javascript\_include\_tag** 方法中可識別的參數，使用這個方法註冊一個或是多個 JavaScript 文件可以隨著該符號被引入。這個方法是在 **init.rb** 中呼叫的，將位於 **public/javascript** 下面的 JavaScript 文件註冊進來。讓我們看看它是怎麼運作的：
+
+	# In the init.rb file
+	ActionView::Helpers::AssetTagHelper.register_javascript_expansion 
+		:monkey => ["head", "body", "tail"] 
+
+	# In our view:
+	javascript_include_tag :monkey
+
+	# We are going to have:
+	<script type="text/javascript" src="/javascripts/head.js"></script>
+	<script type="text/javascript" src="/javascripts/body.js"></script>
+	<script type="text/javascript" src="/javascripts/tail.js"></script>
+
+
+### register\_stylesheet\_expansion
+
+這個方法跟剛剛提到的 **ActionView::Helpers::AssetTagHelper#register\_javascript\_expansion** 很類似，不同點只在於它針對的是 CSS 文件而不是 JavaScript 文件。如下面的例子：
+
+	# In the init.rb file
+	ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion 
+		:monkey => ["head", "body", "tail"] 
+
+	# In our view:
+	stylesheet_link_tag :monkey
+
+	# We are going to have:
+	<link href="/stylesheets/head.css"  media="screen" rel="stylesheet" 
+		type="text/css" />
+	<link href="/stylesheets/body.css"  media="screen" rel="stylesheet" 
+		type="text/css" />
+	<link href="/stylesheets/tail.css"  media="screen" rel="stylesheet" 
+		type="text/css" />
+## ActionView::Helpers::FormTagHelper
+
+### submit\_tag
+
+**#submit\_tag** 方法中新增了 **:confirm:: 選項，同樣的選項也可以在 **link\_to** 方法中使用，像是下面這個用法：
+
+	submit_tag('Save changes', :confirm => "Are you sure?")
+## ActionView::Helpers::NumberHelper
+
+### number\_to\_currency
+
+**number\_to\_currency** 方法使用 **:format** 選項作為參數，讓我們可以格式化回傳值。之前的版本中，當我們需要對本地貨幣格式化時，我們需要在 **:unit** 選項前面多一個空格才能使輸出正確。像是下面的例子：
+
+	# R$ is the symbol for Brazilian currency
+	number_to_currency(9.99, :separator => ",", :delimiter => ".", :unit => "R$")
+	# => "R$9,99″
+
+	number_to_currency(9.99, :format => "%u %n", :separator => ",", 
+		:delimiter => ".", :unit => "R$")
+	# => "R$ 9,99″
+	
+之後，我們又更改成另外一個樣式：
+
+	number_to_currency(9.99, :format => "%n in Brazilian reais", :separator => ",", 
+		:delimiter => ".", :unit => "R$")
+	# => "9,99 em reais"
+
+當需要建立你自己的字串格式，您只需要使用下面的參數：
+
+	%u For the currency
+	%n For the number
+## ActionView::Helpers::TextHelper
+
+### excerpt
+
+**excerpt** 方法是一個 helper 方法，能夠在一段文字中搜尋一個單字，同時傳回包含這個單字之前、之後各依照指定數量的字母縮寫。像是這樣：
+
+	excerpt('This is an example', 'an', 5)
+	# => "…s is an examp…"
+
+但是這個方法卻是有 bug 的，如果你算算看，你會發現他會回傳6個字母而不是五個。這個bug已經在這個版本中解決了，下面是正確的輸出結果：
+
+	excerpt('This is an example', 'an', 5)
+	# => "…s is an exam…"
+	
+###simple\_format
+
+**simple\_format** 方法接受任何文字參數並用簡單的方式格式化為 **HTML**。它會將文字參數中的換行符號（\n) 換成 **HTML** 標記的 "<br />"，而當我們有連續換了兩行像是 (\n\n)，它就會用<p> 標籤標成一個段落。
+
+	simple_format("Hello Mom!", :class => 'description')
+	# => "<p class=’description’>Hello Mom!</p>"
+
+**HTML** 屬性將會被加到每個 "<p>" 標記的段落上。
+# Railties
+
+## config.gem
+
+新特性**config.gem**使專案在執行時載入所有必須的gems成為可能。在*environment.rb*中可以指定專案所依賴的gems，如下：
+
+	config.gem "bj" 
+
+	config.gem "hpricot", :version => '0.6',
+	                      :source => "http://code.whytheluckystiff.net" 
+
+	config.gem "aws-s3", :lib => "aws/s3"
+
+要一次安裝所有的gem依賴，我們只需要執行下面那個Rake任務：
+
+	# Installs all specified gems
+	rake gems:install
+
+你也可以在專案執行時列出正被使用的gems：
+
+	# Listing all gem dependencies
+	rake gems
+
+如果有個gem含有**rails/init.rb**這個檔案並且想將它放到專案中，可以用：
+
+	# Copy the specified gem to vendor/gems/nome_do_gem-x.x.x
+	rake gems:unpack GEM=gem_name
+
+這會把這個gem複製到**vendor/gems/gem\_name-x.x.x**。若不指定gem的名稱，Rails將複製所有gems到**vendor/gem**裡面。
+
+## 在外掛內設定gem (config.gem in plugins)
+
+新特性**config.gem**也同樣適合在外掛中使用。
+
+一直到Rails 2.0外掛內的**init.rb**都是如以下方式使用：
+
+	# init.rb of plugin open_id_authentication
+	require 'yadis' 
+	require 'openid' 
+	ActionController::Base.send :include, OpenIdAuthentication 
+
+而在Rails 2.1中則是這樣：
+
+	config.gem "ruby-openid", :lib => "openid", :version => "1.1.4"
+	config.gem "ruby-yadis",  :lib => "yadis",  :version => "0.3.4" 
+
+	config.after_initialize do
+	  ActionController::Base.send :include, OpenIdAuthentication
+	end
+
+那麼，當你執行該任務來安裝所需的gems時，這些gems都將被包含在內。
+## gems:build
+
+**gems:build** 任務可以用來編譯透過**gems:unpack**安裝的所有本地端gems擴充套件。以下是指令：
+
+	rake gems:build # For all gems
+	rake gems:build GEM=mygem # I'm specifing the gem
+
+## Rails 服務啟動時有了新訊息 (New message when starting server)
+
+Rails服務啟動時做了點改進，當執行成功後會顯示Rails的版本。
+
+	Rails 2.1 application starting on http://0.0.0.0:3000
+## Rails 公開存取目錄的路徑 (Rails.public\_path)
+
+比較快的方式：**Rails.public\_path**，用於取得專案**public**目錄的路徑。
+
+	Rails.public_path
+## Rails 的日記記錄、根目錄、環境變數與快取(Rails.logger, Rails.root, Rails.env and Rails.cache)
+
+在Rails 2.1內有新方式可以取代常數：**RAILS\_DEFAULT\_LOGGER**, **RAILS\_ROOT**, **RAILS\_ENV** 和 **RAILS\_CACHE**。取而代之的是：
+
+	# RAILS_DEFAULT_LOGGER
+	Rails.logger
+
+	# RAILS_ROOT
+	Rails.root
+
+	# RAILS_ENV
+	Rails.env
+
+	# RAILS_CACHE
+	Rails.cache
+
+## Rails 的版本 (Rails.version)
+
+在早期的Rails版本中，程式運行期間我們可以用下面的方式取得Rails的版本：
+
+	Rails::VERSION::STRING
+
+不過Rails 2.1就改成這樣了：
+
+	Rails.version
+
+
+## 取得一個外掛的相關訊息 (Getting information about a plugin)
+
+Rails 2.0 的新特性之一，或許你從未用過。我是說"大概、或許"，可能在一些比較特殊情況下會有用，來個例子，比如說取得一個外掛的版本號。
+
+不如來玩玩看，我們要在plugin目錄裡面建立一個*about.yml*檔案，寫入下面的內容：
+
+	author: Carlos Brando
+	version: 1.2.0
+	description: A description about the plugin
+	url: http://www.nomedojogo.com
+
+然後我們可以使用下面的方式來獲得相關訊息：
+
+	plugin = Rails::Plugin.new(plugin_directory)
+	plugin.about["author"] # => “Carlos Brando”
+	plugin.about["url"] # => “http://www.nomedojogo.com”
+
+如果你能在這個新特性中找到一些好的用處並願意分享，也許將改變我對它的一些看法.. 若真的有需要的話！
+# Rake任務、外掛、腳本 (Rake Tasks, Plugins and Scripts)
+## Tasks
+
+### rails:update
+
+從Rails 2.1開始，每次執行**rake rails:freeze:edge**指令時都會自動執行**rails:update**來更新設定檔(config)與*JavaScripts*檔案。
+
+### Database in 127.0.0.1
+
+databases.rake以前只用於local資料庫，現在增加對IP為127.0.0.1的資料庫。其主要是用於建立(**create**)和刪除(**drop**)任務。databases.rake採取refactored避免程式碼重複。
+
+### 凍結指定的Rails版本 (Freezing a specific Rails release)
+
+在Rails 2.1之前，你無法在專案內指定一個Rails版本來凍結，只能用當前版本作為參數；而在Rails 2.1後則可以用下面的指令直接指定要凍結的Rails版本：
+
+	rake rails:freeze:edge RELEASE=1.2.0
+
+## 時區 (TimeZone)
+
+#### rake time:zones:all
+
+根據時區位移(offset)分組列出所有Rails所支援的時區；你也可以透過OFFSET參數來過濾回傳的時區，例如：OFFSET=-6
+
+#### rake time:zones:us
+
+顯示美國的所有時區，OFFSET參數依然有效。
+
+#### rake time:zones:local
+
+回傳本地端系統上Rails所支援且相同的時區。
+
+範例：
+
+	C:\project_1> rake time:zones:local
+	(in C:/project_1)
+	* UTC +08:00 *
+    Beijing
+    Chongqing
+    Hong Kong
+    Irkutsk
+    Kuala Lumpur
+    Perth
+    Singapore
+    Taipei
+    Ulaan Bataar
+    Urumqi
+## Scripts
+
+### plugin
+
+現在這個命令(script/plugin install)可以使用 –e/--export 參數來導出SVN。另外增加了對Git的支援。
+
+### dbconsole
+
+這個腳本和script/console一樣，但是是針對你的資料庫操作，換句話說，它採用命令列型態來連接到你的資料庫。
+
+不過就目前為止，僅僅支援mysql, postgresql與sqlite(含第3版)，如果你在database.yml中設定其他類型的資料庫介面時，會顯示"Unknown command-line client for 你的資料庫名稱. Submit a Rails patch to add support!"(不明的命令列模式用戶端。給我們一個Patch讓Rails支援!)
+
+## 外掛 (Plugins)
+
+### Gems可外掛化 (Gems can now be plugins)
+
+現在，任何包含**rails/init.rb**文件的gem都可以以外掛的方式安裝在**vendor**目錄底下。
+
+### 使用插件中的生成器 (Using generators in plugins)
+
+可以設定**Rails**使其在除了**vendor/plugins**以外的地方加入外掛，設定方法則是在*environment.rb*中加入以下程式碼：
+
+    config.plugin_paths = ['lib/plugins', 'vendor/plugins']
+    
+不過Rails 2.0在這個地方有個Bug，該Bug是只在**vendor/plugins**中尋找含有生成器(Generator)的外掛，所以上面設定的路徑下的外掛的生成器並不會生效。在Rails 2.1中已經修復此問題。
+# Prototype 和 script.aculo.us
+
+Rails 2.1 使用 Prototype 1.6.0.1 版本和script.aculo.us 1.8.1 版本。
+## Prototype
+
+# Ruby 1.9
+
+## 詳細資訊 (Details)
+
+Rails的修改還是集中在對Ruby 1.9的支援程度，對於新版Ruby中的細微改變都做了相對應的調整以求更好的整合，例如把**File.exists?**改為**File.exist?**。
+
+另外，在Ruby 1.9中去掉了**Base64**模組(base64.rb)，因此在Rails中所有使用這個模組的都得修改為**ActiveSupport::Base64**。
+## DateTime類別的新方法 (New methods for DateTime class)
+
+為了保證對**Time**類別的兼容性(duck-typing)，對**DateTime**加入了三個新方法：**#utc**, **#utc?**, **#utc_offset**：
+
+	>> date = DateTime.civil(2005, 2, 21, 10, 11, 12, Rational(-6, 24))
+	#=> Mon, 21 Feb 2005 10:11:12 -0600
+
+	>> date.utc
+	#=> Mon, 21 Feb 2005 16:11:12 +0000
+
+	>> DateTime.civil(2005, 2, 21, 10, 11, 12, Rational(-6, 24)).utc?
+	#=> false
+
+	>> DateTime.civil(2005, 2, 21, 10, 11, 12, 0).utc?
+	#=> true
+
+	>> DateTime.civil(2005, 2, 21, 10, 11, 12, Rational(-6, 24)).utc_offset
+	#=> -21600
+
+# Debug
+
+## 本地 Ruby-debug (Native Ruby-debug)
+
+Rails 2.1重新允許在測試中使用**ruby-debug**選項。現在從你安裝gem開始，就可以直接使用**debugger**方法。
+# Bugs and Fixes
+
+## 在PostgreSQL中新增欄位
+
+在使用**PostgreSQL**有個bug，透過migration新增一個已經存在的表的欄位時會出錯，來看看範例：
+
+檔案： *db/migrate/002\_add\_cost.rb*
+
+	class AddCost < ActiveRecord::Migration
+	  def self.up
+	    add_column :items, :cost, :decimal, :precision => 6, 
+	   :scale => 2
+	  end
+
+	  def self.down
+	    remove_column :items, :cost
+	  end
+	end
+
+看一下，我們建立一個欄位並且**:precision => 6**、**:scale => 2**，現在執行**rake db:migration**然後看看我們的表的結果：
+
+<table border="1" cellspacing="0" cellpadding="5">
+	<tr>
+		<td><strong>Column</strong></td>
+		<td><strong>Type</strong></td>
+		<td><strong>Modifiers</strong></td>
+	</tr>
+	<tr>
+		<td>id</td>
+		<td>integer</td>
+		<td>not null</td>
+	</tr>
+	<tr>
+		<td>desc</td>
+		<td>character varying(255)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>price</td>
+		<td>numeric(5,2)</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>cost</td>
+		<td>numeric</td>
+		<td></td>
+	</tr>
+</table>
+
+看看我們剛建立的"cost"欄位。它是一個常見的數值，但是更該像是上面的欄位如"price"，正確應該是**numeric(6, 2)**。在Rails 2.1中這個問題就已經解決囉。
+##Mime Types
+
+不允許定義被指派過的屬性以symbol型態給**request.format**的問題已經解決了，現在你可以以以下的方式來撰寫程式碼：
+
+	request.format = :iphone
+	assert_equal :iphone, request.format
+
+##change\_column的Bug fixes
+
+當**change\_column**加上**:null => true**與**:null => false**會產生的問題都已經修正了。
+# Additional Information
+
+## Cross-Site Scripting的防禦
+
+在Rails 2.0的*application.rb*中應該曾留意過以下程式碼吧？
+
+    class ApplicationController < ActionController::Base
+       helper :all
+       protect_from_forgery
+    end
+
+請注意上面這段程式碼中對**protect\_from\_forgery**的呼叫。
+
+你聽說過跨站(XSS)嗎？最近一段時間XSS攻擊日益風行，就目前而言在大多數的網站中或多或少都存在著XSS的漏洞；而XSS漏洞會被一些懷有惡意的人利用，可以用來修改網站內容、釣魚，甚至通過JavaScript來控制其他用戶的瀏覽器等等。儘管攻擊方式不同，但是其主要的目的都是使用戶在不知情的狀態下做出一些邪惡到讓我都想不出來的事情。最新的攻擊手段就叫做"Cross-Site Request Forgery"。
+
+Cross-Site Request Forgery與前面所說的XSS原理差不多，但是更有危害性，隨著Ajax的流行，此類漏洞的利用空間與手法更加靈活！(補充：此文章簡體中文版翻譯者在之前曾寫了一篇介紹CSRF的文章，建議一讀：CSRF: 不要低估了我的危害和攻?能力)
+
+protect_from_forgery用來確保系統接收到的表單訊息都來自於系統本身，而不會是從第三方傳送過來的；實做的原理是在表單中與Ajax請求中添加一個基於Session的標示(token)，Controller收到表單的資訊時會檢查這個Token是否匹配以決定如何回應這個Post請求。
+
+不過這個方法並不保護以Get為主的請求，但是也沒關係，Get主要就是為了要求資料，而不會修改到資料庫中。
+
+如果你想更多的了解CSRF (Cross-Site Request Forgery)，請參考底下幾個網址：
+
+    * http://www.nomedojogo.com/2008/01/14/como-um-garoto-chamado-samy-pode-derrubar-seu-site/isc.sans.org/diary.html?storyid=1750
+    * http://www.nomedojogo.com/2008/01/14/como-um-garoto-chamado-samy-pode-derrubar-seu-site/isc.sans.org/diary.html?storyid=1750
+    * (再多一個：前面所介紹的《CSRF: 不要低估了我的危害和攻?能力》。)
+
+請謹記，此方法並不能夠萬無一失，就像平常我們都喜歡說的那樣：他並不是銀彈！(It's not a silver bullet)
+## 使用method\_missing時請小心
+
+由於Ruby是動態語言，這樣就使得**respond\_to?**非常重要，你是否經常檢查某個物件是否擁有某個方法？你是否經常使用**is\_a?**來檢查某個物件是否是我們所需要的？
+
+
+然而，人們常常忘記這樣做，先來看個**method\_missing**的例子吧：
+
+    class Dog
+        def method_missing(method, *args, &block)
+            if method.to_s =~ /^bark/
+                puts "woofwoof!"
+            else
+                super
+            end
+        end
+    end
+
+    rex = Dog.new
+    rex.bark #=> woofwof!
+    rex.bark! #=> woofwoof!
+    rex.bark_and_run #=> woofwoof!
+
+我想你肯定知道**method\_missing**！在上面的例子中我建立了一個**Dog**類別的實體，然後呼叫三個並不存在的方法：**bark**, **bark!**與**bark\_and\_run**，它就會去呼叫**method\_missing**按照我用正規表達式規定的只要是bark開頭就輸出"woofwoof!"。
+
+看起來沒任何問題吧？那麼請繼續看看我用**respond\_to?**來檢查：
+
+    rex.respond_to? :bark #=> false
+    rex.bark #=> woofwoof!
+
+看到了嗎？它返回false，也就是說它認為該實體並沒有bark方法，怎辦？是時候來按照我們的規則來完善**respond\_to?**了！
+
+    class Dog
+    METHOD_BARK = /^bark/
+        def respond_to?(method)
+            return true if method.to_s =~ METHOD_BARK
+        super
+        end
+        def method_missing(method, *args, &block)
+            if method.to_s =~ METHOD_BARK
+                puts "woofwoof!"
+            else
+                super
+            end
+        end
+    end
+    rex = Dog.new
+    rex.respond_to?(:bark) #=> true
+    rex.bark #=> woofwoof!
+
+ 
+
+OK！搞定了！這樣的問題在Rails中普遍存在，你可以試試看用**respond\_to?**來檢查**find\_by\_xxx**就很明白了。
+
+Ruby的擴展性能讓人稱奇，但是如果一不注意就有機會把自己搞得一頭霧水。
+
+當然你應該已經猜到我要說什麼了，在Rails 2.1中這個問題已經修復了，不信的話你一樣可以試試看用**respond\_to?**來檢查**find\_by\_xxx**
+## PostgreSQL
+
+在Rails 2.0中，**PostgreSQL**的介面(Adapter)支援的版本從8.1到8.3，而在Rails 2.1中支援的版本範圍擴展到7.4到8.3。

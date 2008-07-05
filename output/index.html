@@ -1,0 +1,2139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="../layout/second.css"/>
+	<link rel="stylesheet" type="text/css" href="../layout/mac_classic.css"/>
+</head>
+<body>
+	<div class="frontcover"></div>
+
+	<div class="halftitlepage">
+		<h1 class="no-toc">Ruby on Rails 2.1</h1>
+		<h2 class="no-toc">新特性介绍</h2>
+		<h3 class="no-toc">第二版 (中文版)</h3>
+	</div>
+
+	<div class="titlepage">
+	<h1 class="no-toc">Ruby on Rails 2.1</h1>
+
+	<h2 class="no-toc">新特性介绍</h2>
+	<h3 class="no-toc">第二版 (中文版)</h3>
+
+	<p class="no-toc">Carlos Brando<br/>Marcos Tapajós</p>
+	<!-- also, the publisher's name would typically be printed here -->
+	</div>
+	
+	<div class="imprint">
+		<p>&copy; Copyright 2008 Carlos Brando. All Rights Reserved.</p>
+		<br/>
+		<p>Second edition: June 2008</p>
+		<br/>
+		<p>Carlos Brando<br/>Website: www.nomedojogo.com</p>
+		<p>Marcos Tapajós<br/>Website: www.improveit.com.br/en/company/tapajos</p>
+	</div>
+	
+	<!-- <div class="toc">
+		<h1>Sumário</h1>
+		#toc
+	</div> -->
+	
+	<div class="chapter">
+		<h1>簡介(Introduction)</h1>
+
+<p>2004年7月，DHH(David Heinemeiser hansson) 從他旗下的一個計畫 Basecamp 中取出並發佈了 Ruby on Rails 框架。三年後的2007年12月7日，具有劃時代意義的 Ruby on Rails 2.0 版本也發表了，其中包含了一系列的新內容。</p>
+
+<p>接下來的六個月，全世界有<strong>1400</strong>多位開發者為 Rails 貢獻了 <strong>1600</strong> 多種不同的 patch。 今天， 2008年6月1日，Ruby on Rails 2.1發表了！</p>
+
+<p>這次的版本更新包含但不限於下面的特色：</p>
+
+<ul>
+<li>時區</li>
+<li>修改追蹤 (Dirty tracking)</li>
+<li>RubyGems 相依性</li>
+<li>命名空間(Named scope)</li>
+<li>以UTC時間為基礎的 migrations</li>
+<li>更好的快取機制</li>
+</ul>
+
+
+<p>當然，就像以前一樣，更新 Rails 是很簡單的：</p>
+
+<pre class="mac_classic">gem install rails
+</pre>
+
+<h2>致謝</h2>
+
+<p>感謝Marcos Tapajós，如果沒有他，我們到現在肯定看不到這本書。感謝Daniel Lopes幫本書製作了漂亮的封面。</p>
+
+<p>還有Ruby on Rails Brazilian中那些給本書直接或是間接幫助的朋友們，您們的評論和建議都彌足珍貴，正像我以往說的一樣，Rails中最精華的是其充滿激情、創造力和分享精神的社區。</p>
+
+<p>還有chinaonrails.com社區中的朋友們，正是大家的辛勤工作，才使得我們能這麼短的時間內即可完成翻譯，謝謝你們。</p>
+
+<h2>中文譯者</h2>
+
+<p>本書正是由China on Rails社區中一些朋友翻譯成中文的,我們是：</p>
+
+<p><strong>IceskYsl</strong>
+<a href="http://iceskysl.1sters.com/">http://iceskysl.1sters.com/</a></p>
+
+<p>第1章(Introduction)，第9章(Rake Tasks, Plugins and Scripts) 
+第11章(Ruby 1.9)，第14章(Additional Information). </p>
+
+<p><strong>jesse.cai</strong>
+<a href="http://www.caiwangqin.com">http://www.caiwangqin.com/</a></p>
+
+<p>第5章(ActionPack)，第12章(Debug)</p>
+
+<p><strong>suave.su</strong>
+<a href="http://chinaonrails.com/u/suave">http://chinaonrails.com/u/suave</a></p>
+
+<p>第1章(Introduction) </p>
+
+<p><strong>dongbin</strong>
+<a href="http://dongbin.org/">http://dongbin.org/</a></p>
+
+<p>第3章(ActiveSupport)</p>
+
+<p><strong>海陽</strong>
+<a href="http://rubyjin.cn/">http://rubyjin.cn/</a></p>
+
+<p>第6章(ActionController) </p>
+
+<p><strong>404</strong>
+<a href="http://chinaonrails.com/u/404">http://chinaonrails.com/u/404</a></p>
+
+<p>第8章(Railties) </p>
+
+<p><strong>ashchan</strong>
+<a href="http://blog.ashchan.com/">http://blog.ashchan.com/</a></p>
+
+<p>第4章(ActiveResource),第10章(Prototype and script.aculo.us) </p>
+
+<p><strong>cash.zhao</strong>
+<a href="http://www.cashplk.com/">http://www.cashplk.com/</a></p>
+
+<p>第7章(ActionView),第13章(Bugs and Fixes) </p>
+
+<p><strong>snow zhang</strong>
+<a href="http://blog.snowonrails.com">http://blog.snowonrails.com</a></p>
+
+<p>第2章(ActiveRecord)</p>
+
+<p><strong>Libin Pan</strong>
+<a href="http://blog.libinpan.com">http://blog.libinpan.com</a></p>
+
+<p>Markdown Editor</p>
+
+<h2> 正體中文翻譯</h2>
+
+<p>這本書的正體中文翻譯由 Zero, CFC 完成。</p>
+
+<p><strong>CFC</strong>
+MSN: zusocfc@gmail.com, Blog: <a href="http://blog.pixnet.net/zusocfc">http://blog.pixnet.net/zusocfc</a></p>
+
+<p>第1章 ActiveRecord, 第3章 ActiveResource, 第4章 ActionPack, 第7章 Railties, 第8章 Rake Tasks, 第9章 Prototype &amp; script.aculo.us, 第10章 Ruby 1.9, 第11章 Debug, 第12章 Bugs &amp; Fixes, 第13章 Additional Information </p>
+
+<p><strong>Zero</strong>
+Chien-An Cho, <a href="http://orez.us/">http://orez.us/</a> or <a href="mailto:itszero%2Brailsbook%40gmail.com">itszero+railsbook@gmail.com</a></p>
+
+<p>第0章 簡介, 第2章 ActiveSupport, 第5章 ActionController, 第6章 ActionView</p>
+
+<h1> ActiveRecord</h1>
+
+<p>ActiveRecord是一個物件-關聯映射層，主要負責應用層與資料層之間的相互操作性(解耦)與資料抽象‧(wikipedia)</p>
+
+<h2> <strong>sum</strong>方法</h2>
+
+<h3> <strong>sum</strong>方法中的表達式</h3>
+
+<p>現在我們可以在<strong>ActiveRecord</strong>方法當中使用表達式來處理諸如<strong>sum</strong>等各種計算，如:</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Person</span>.<span class="FunctionName">sum</span>(<span class="String"><span class="String">&quot;</span>2 * age<span class="String">&quot;</span></span>)
+</pre>
+
+<h3> <strong>sum</strong>方法預設返回值的改變</h3>
+
+<p>在之前的版本中，當我們使用<strong>ActiveRecord</strong>的<strong>sum</strong>方法來計算表中所有記錄的和的時候，如果沒有跟所需條件匹配的記錄時，則預設的返回值是<strong>nil</strong>‧在Rails 2.1中，預設返回值(當沒有匹配的記錄的時候)是0，如：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Account</span>.<span class="FunctionName">sum</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>balance</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; <span class="String"><span class="String">'</span>1 = 2<span class="String">'</span></span>) <span class="Comment"><span class="Comment">#</span>=&gt; 0</span>
+</pre>
+
+<h2> Has_one</h2>
+
+<h3> 支援 through 選項</h3>
+
+<p><strong>has_one</strong>方法現在支援<strong>through</strong>選項。他的用法與<strong>has_many :through</strong>相同，不過代表的是和單一一個<strong>ActiveRecord</strong>物件的關連。</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Magazine<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>subscriptions</span>
+<span class="Keyword">end</span>
+
+<span class="Keyword">class</span> <span class="TypeName">Subscription<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  belongs_to <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>magazine</span>
+  belongs_to <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>user</span>
+<span class="Keyword">end</span>
+
+<span class="Keyword">class</span> <span class="TypeName">User<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>subscriptions</span>
+  has_one <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>magazine</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>through</span> =&gt; : subscriptions, 
+            <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; [<span class="String"><span class="String">'</span>subscriptions.active = ?<span class="String">'</span></span>, <span class="BuiltInConstant">true</span>]
+<span class="Keyword">end</span>
+</pre>
+
+<h3> Has_one :source_type 選項</h3>
+
+<p>上面提到的<strong>has_one :through</strong>方法還能接收一個<strong>:source_type</strong>選項，我會試著透過一些例子來解釋。我們先來看看這個類別：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Client<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contact_cards</span> 
+
+  has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contacts</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>through</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contact_cards</span>
+<span class="Keyword">end</span> 
+</pre>
+
+<p>上面的程式碼是一個<strong>Client</strong>類別，<strong>has_many</strong>種聯絡人(contacts)，由於<strong>ContactCard</strong>類別具有多型的關連。</p>
+
+<p>下一步將建立兩個類別來表示<strong>ContractCard</strong>：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Person<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contact_cards</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>as</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contact</span>
+<span class="Keyword">end</span>
+
+<span class="Keyword">class</span> <span class="TypeName">Business<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contact_cards</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>as</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contact</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p><strong>Person</strong>和<strong>Business</strong>透過<strong>ContactCard</strong>表與<strong>Client</strong>類別做關聯，換句話說，我有兩個聯絡人，私人的(personal)與工作上的(business)。然而，這樣做卻行不通，看看當我試著獲取一個contact時發生了什麼事情：</p>
+
+<pre class="mac_classic"><span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">Client</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>).<span class="FunctionName">contacts</span>
+<span class="Comment"><span class="Comment">#</span> ArgumentError: /…/active_support/core_ext/hash/keys.rb:48:</span>
+<span class="Comment"><span class="Comment">#</span> in `assert_valid_keys’: Unknown key(s): polymorphic </span>
+</pre>
+
+<p>為了讓上述程式碼成功，我們需要使用<strong>:source_type</strong>。我們修改一下<strong>Client</strong>類別：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Client<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>people_contacts</span>,
+           <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>through</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contact_cards</span>,
+           <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>source</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contacts</span>,
+           <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>source_type</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>person</span> 
+
+  has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>business_contacts</span>,
+           <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>through</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contact_cards</span>,
+           <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>source</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>contacts</span>,
+           <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>source_type</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>business</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>注意到現在我們有兩種取得聯絡人的方式，我們可以選擇我們期待哪種<strong>:source_type</strong>。</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Client</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>).<span class="FunctionName">people_contacts</span>
+<span class="LibraryObject">Client</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>).<span class="FunctionName">business_contacts</span>
+</pre>
+
+<h2> Named_scope</h2>
+
+<p><em>has_finder</em> gem已經添加到Rails當中了，有一個新名字<strong>:named_scope</strong>。</p>
+
+<p>為了全面了解一下這為Rails帶來了什麼，我們看看下面的例子：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Article<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  named_scope <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>published</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; {<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>published</span> =&gt; <span class="BuiltInConstant">true</span>}
+  named_scope <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>containing_the_letter_a</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; <span class="String"><span class="String">&quot;</span>body LIKE '%a%’<span class="String">&quot;</span></span>
+<span class="Keyword">end</span> 
+
+<span class="LibraryObject">Article</span>.<span class="FunctionName">published</span>.<span class="FunctionName">paginate</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>page</span> =&gt; <span class="Number">1</span>)
+<span class="LibraryObject">Article</span>.<span class="FunctionName">published</span>.<span class="FunctionName">containing_the_letter_a</span>.<span class="FunctionName">count</span>
+<span class="LibraryObject">Article</span>.<span class="FunctionName">containing_the_letter_a</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>)
+<span class="LibraryObject">Article</span>.<span class="FunctionName">containing_the_letter_a</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>all</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; {…})
+</pre>
+
+<p>通常我會建立一個新的叫做<strong>published</strong>的方法來取得所有已經發布的文章，不過在這裡我是用了<strong>named_scope</strong>來做相同的事情，而且還能得到其他的效果。來看看另一個例子：</p>
+
+<pre class="mac_classic">named_scope <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>written_before</span>, lambda { |<span class="Variable">time</span>|
+  { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; [<span class="String"><span class="String">'</span>written_on &lt; ?<span class="String">'</span></span>, time] }
+}
+
+named_scope <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>anonymous_extension</span> <span class="Keyword">do</span>
+  <span class="Keyword">def</span> <span class="FunctionName">one</span>
+    <span class="Number">1</span>
+  <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+
+named_scope <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>named_extension</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>extend</span> =&gt; <span class="Variable">NamedExtension</span> 
+
+named_scope <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>multiple_extensions</span>, 
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>extend</span> =&gt; [<span class="Variable">MultipleExtensionTwo</span>, <span class="Variable">MultipleExtensionOne</span>]
+</pre>
+
+<h2> 用proxy_options來測試named_scope</h2>
+
+<p><strong>Named scopes</strong>是Rails 2.1中很有趣的新功能，不過使用一段時間以後你就會發現想建立一些複雜的情況的測是會有點麻煩，看看例子：</p>
+
+<pre class="mac_classic">    <span class="Keyword">class</span> <span class="TypeName">Shirt<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+      named_scope <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>colored</span>, lambda { |<span class="Variable">color</span>|
+        { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>color</span> =&gt; color } }
+      }
+    <span class="Keyword">end</span>
+</pre>
+
+<p>該如何建立一個可以測試scope的結果的測試呢？</p>
+
+<p>為了解決這個問題，<strong>proxy_options</strong>被開發出來。它允許我們來檢測<strong>named_scope</strong>使用的選項。為了測試上面的程式碼，我們可以這樣寫測試：</p>
+
+<pre class="mac_classic">    <span class="Keyword">class</span> <span class="TypeName">ShirtTest<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> Test::Unit</span></span>
+      <span class="Keyword">def</span> <span class="FunctionName">test_colored_scope</span>
+        red_scope <span class="Keyword">=</span> { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>colored</span> =&gt; <span class="String"><span class="String">'</span>red<span class="String">'</span></span> } }
+        blue_scope <span class="Keyword">=</span> { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>colored</span> =&gt; <span class="String"><span class="String">'</span>blue<span class="String">'</span></span> } }
+        assert_equal red_scope, <span class="LibraryObject">Shirt</span>.<span class="FunctionName">colored</span>(<span class="String"><span class="String">'</span>red<span class="String">'</span></span>).<span class="FunctionName">scope_options</span>
+        assert_equal blue_scope, <span class="LibraryObject">Shirt</span>.<span class="FunctionName">colored</span>(<span class="String"><span class="String">'</span>blue<span class="String">'</span></span>).<span class="FunctionName">scope_options</span>
+      <span class="Keyword">end</span>
+    <span class="Keyword">end</span>
+</pre>
+
+<h2> Increment 和 decrement</h2>
+
+<p><strong>ActiveRecord</strong>的方法<strong>increment</strong>,<strong>increment!</strong>,<strong>decrement</strong>和<strong>decrement!</strong>現在支援一個新的可選參數。之前版本的Rails中你可以透過這些方法指定的屬性值加一或減一。在Rails 2.1中，你可以指定要增加或者減少的值，像這樣：</p>
+
+<pre class="mac_classic">player1.<span class="FunctionName">increment!</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>points</span>, <span class="Number">5</span>)
+player2.<span class="FunctionName">decrement!</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>points</span>, <span class="Number">2</span>)
+</pre>
+
+<p>上面的例子中，我向player加了5分，從player2減了2分。由於這是一個可選填的參數，所以之前的程式碼不會受到影響。</p>
+
+<h2> Find</h2>
+
+<h3> Conditions</h3>
+
+<p>從現在開始，你可以向<strong>ActiveRecord</strong>的<strong>find</strong>方法中傳一個物件作為參數。看以下的例子：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Account<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>
+  composed_of <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>balance</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>class_name</span> =&gt; <span class="String"><span class="String">&quot;</span>Money<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>mapping</span> =&gt; <span class="String"><span class="String">%w(</span>balance amount<span class="String">)</span></span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>這個例子中你可以向<strong>Account</strong>類別的<strong>find</strong>方法中傳入一個<strong>Money</strong>實體做為參數，像這樣：</p>
+
+<pre class="mac_classic">amount <span class="Keyword">=</span> <span class="Number">500</span>
+currency <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>USD<span class="String">&quot;</span></span>
+<span class="LibraryObject">Account</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>all</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>balance</span> =&gt; <span class="LibraryObject">Money</span>.<span class="FunctionName">new</span>(amount, currency) })
+</pre>
+
+<h3> Last</h3>
+
+<p>到現在為止我們只能在<strong>ActiveRecord</strong>的<strong>find</strong>方法中使用三個運算子來搜尋資料，他們是<strong>:first</strong>,<strong>:all</strong>和物件自己的id(這種情況下，我們除了id以外，不再傳入其他的參數)。</p>
+
+<p>在Rails 2.1中，有了第四個運算子<strong>:last</strong>，幾個例子：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Person</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>last</span>)
+<span class="LibraryObject">Person</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>last</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>conditions</span> =&gt; [ <span class="String"><span class="String">&quot;</span>user_name = ?<span class="String">&quot;</span></span>, user_name])
+<span class="LibraryObject">Person</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>last</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>order</span> =&gt; <span class="String"><span class="String">&quot;</span>created_on DESC<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>offset</span> =&gt; <span class="Number">5</span>)
+</pre>
+
+<p>為了能明白這個新的運算子如何操作，來看看底下的測試：</p>
+
+<pre class="mac_classic"><span class="Keyword">def</span> <span class="FunctionName">test_find_last</span>
+  last  <span class="Keyword">=</span> <span class="LibraryObject">Developer</span>.<span class="FunctionName">find</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>last</span>
+  assert_equal last, <span class="LibraryObject">Developer</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>order</span> =&gt; <span class="String"><span class="String">'</span>id desc<span class="String">'</span></span>)
+<span class="Keyword">end</span>
+</pre>
+
+<h3> All</h3>
+
+<p>類別方法<strong>all</strong>是另外一個類別方法<strong>find(:all)</strong>的別名，如：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Topic</span>.<span class="FunctionName">all</span> is the same as <span class="LibraryObject">Topic</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>all</span>)
+</pre>
+
+<h3> First</h3>
+
+<p>類別方法<strong>first</strong>是另外一個類別方法<strong>find(:first)</strong>的別名，如：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Topic</span>.<span class="FunctionName">first</span> is the same as <span class="LibraryObject">Topic</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>)
+</pre>
+
+<h3> Last</h3>
+
+<p>類別方法<strong>last</strong>是另外一個類別方法<strong>find(:last)</strong>的別名，如：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Topic</span>.<span class="FunctionName">last</span> is the same as <span class="LibraryObject">Topic</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>last</span>)
+</pre>
+
+<h2> 在<strong>named_scope</strong>中使用<strong>first</strong>和<strong>last</strong>方法</h2>
+
+<p>所有上述的方法同樣適用於<strong>named_scope</strong>。比如我們建立一個叫<strong>recent</strong>的<strong>named_scope</strong>，下列程式碼是有效的：</p>
+
+<pre class="mac_classic">    post.<span class="FunctionName">comments</span>.<span class="FunctionName">recent</span>.<span class="FunctionName">last</span>
+</pre>
+
+<h2>Eager Loading</h2>
+
+<p>為了解釋這個新的功能，我們看看下面的代碼：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Author</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>all</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>include</span> =&gt; [<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>posts</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>comments</span>])
+</pre>
+
+<p>我在查詢<strong>authors</strong>這個表的記錄，同時通過<strong>author_id</strong>包含進<strong>posts</strong>和<strong>comments</strong>表。這個查詢原本會產生這樣的SQL查詢語句：</p>
+
+<pre class="mac_classic"><span class="Variable">SELECT</span>
+  authors.<span class="String"><span class="String">&quot;</span>id<span class="String">&quot;</span></span>          <span class="Variable">AS</span> t0_r0,
+  authors.<span class="String"><span class="String">&quot;</span>created_at<span class="String">&quot;</span></span>  <span class="Variable">AS</span> t0_r1,
+  authors.<span class="String"><span class="String">&quot;</span>updated_at<span class="String">&quot;</span></span>  <span class="Variable">AS</span> t0_r2,
+  posts.<span class="String"><span class="String">&quot;</span>id<span class="String">&quot;</span></span>            <span class="Variable">AS</span> t1_r0,
+  posts.<span class="String"><span class="String">&quot;</span>author_id<span class="String">&quot;</span></span>     <span class="Variable">AS</span> t1_r1,
+  posts.<span class="String"><span class="String">&quot;</span>created_at<span class="String">&quot;</span></span>    <span class="Variable">AS</span> t1_r2,
+  posts.<span class="String"><span class="String">&quot;</span>updated_at<span class="String">&quot;</span></span>    <span class="Variable">AS</span> t1_r3,
+  comments.<span class="String"><span class="String">&quot;</span>id<span class="String">&quot;</span></span>         <span class="Variable">AS</span> t2_r0,
+  comments.<span class="String"><span class="String">&quot;</span>author_id<span class="String">&quot;</span></span>  <span class="Variable">AS</span> t2_r1,
+  comments.<span class="String"><span class="String">&quot;</span>created_at<span class="String">&quot;</span></span> <span class="Variable">AS</span> t2_r2,
+  comments.<span class="String"><span class="String">&quot;</span>updated_at<span class="String">&quot;</span></span> <span class="Variable">AS</span> t2_r3
+<span class="Variable">FROM</span>
+  authors
+  <span class="Variable">LEFT</span> <span class="Variable">OUTER</span> <span class="Variable">JOIN</span> posts <span class="Variable">ON</span> posts.<span class="FunctionName">author_id</span> <span class="Keyword">=</span> authors.<span class="FunctionName">id</span>
+  <span class="Variable">LEFT</span> <span class="Variable">OUTER</span> <span class="Variable">JOIN</span> comments <span class="Variable">ON</span> comments.<span class="FunctionName">author_id</span> <span class="Keyword">=</span> authors.<span class="FunctionName">id</span>
+</pre>
+
+<p>這個SQL可真夠長的了，在<strong>authors</strong>，<strong>posts</strong>和<strong>comments</strong>三個表之間用了joins。我們叫這個為笛卡爾乘積(<strong>cartesian product</strong>)。</p>
+
+<p>這種查詢往往效率上不高，所以Rails 2.1做了些改進。同樣對於<strong>Author</strong>表的查詢，現在使用了一種不同的方式從三個表中取得資料。原來用了一條SQL語句獲得三個表的記錄，現在Rails用三條不同的查詢語句，每個表一條，這比之前生成的查詢要更短。新的結果可以在執行上述程式碼後的log中看到：</p>
+
+<pre class="mac_classic"><span class="Variable">SELECT</span> <span class="Keyword">*</span> <span class="Variable">FROM</span> <span class="String"><span class="String">&quot;</span>authors<span class="String">&quot;</span></span>
+<span class="Variable">SELECT</span> posts.<span class="Keyword">*</span> <span class="Variable">FROM</span> <span class="String"><span class="String">&quot;</span>posts<span class="String">&quot;</span></span> <span class="Variable">WHERE</span> (posts.<span class="FunctionName">author_id</span> <span class="Variable">IN</span> (<span class="Number">1</span>))
+<span class="Variable">SELECT</span> comments.<span class="Keyword">*</span> <span class="Variable">FROM</span> <span class="String"><span class="String">&quot;</span>comments<span class="String">&quot;</span></span> <span class="Variable">WHERE</span> (comments.<span class="FunctionName">author_id</span> <span class="Variable">IN</span> (<span class="Number">1</span>))
+</pre>
+
+<p>絕大多數的情況下，三個簡單的查詢要比一個複雜的場查詢語句執行得更快。</p>
+
+<h2> Belongs_to</h2>
+
+<p>為了能在關連中使用<strong>:dependent => :destroy</strong>與<strong>:delete</strong>, <strong>belongs_to</strong>方法做了些變更，比如：</p>
+
+<pre class="mac_classic">belongs_to <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>author_address</span>
+belongs_to <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>author_address</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>dependent</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>destroy</span>
+belongs_to <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>author_address_extra</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>dependent</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>delete</span>, 
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>class_name</span> =&gt; <span class="String"><span class="String">&quot;</span>AuthorAddress<span class="String">&quot;</span></span>
+</pre>
+
+<h2> Polymorphic url</h2>
+
+<p>一些多型URL的輔助方法也被引入到新的Rails中，用來提供一種更為簡潔優雅的routes操作方式。</p>
+
+<p>這些方法在你想生成基於<strong>RESTful</strong>資源的URL，同時又不必顯示指定資源的類型的時候會顯得十分有用。</p>
+
+<p>使用方面則是非常的簡單，來看看一些例子(注釋的部份是Rails 2.1之前的做法)：</p>
+
+<pre class="mac_classic">record <span class="Keyword">=</span> <span class="LibraryObject">Article</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>)
+<span class="FunctionName">polymorphic_url</span>(record) <span class="Comment"><span class="Comment">#</span>-&gt; article_url(record)</span>
+
+record <span class="Keyword">=</span> <span class="LibraryObject">Comment</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>)
+<span class="FunctionName">polymorphic_url</span>(record)  <span class="Comment"><span class="Comment">#</span>-&gt;  comment_url(record)</span>
+
+<span class="Comment"><span class="Comment">#</span> it can also identify recently created elements</span>
+record <span class="Keyword">=</span> <span class="LibraryObject">Comment</span>.<span class="FunctionName">new</span>
+<span class="FunctionName">polymorphic_url</span>(record)  <span class="Comment"><span class="Comment">#</span>-&gt;  comments_url()</span>
+</pre>
+
+<p>注意到<strong>polymorphic_url</strong>方法是如何確認傳入參數的類型並生成正確的routes，內嵌資源(<strong>Nested resources</strong>)和<strong>namespaces</strong>也同樣支援：</p>
+
+<pre class="mac_classic"><span class="FunctionName">polymorphic_url</span>([<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>admin</span>, <span class="Variable"><span class="Variable">@</span>article</span>, <span class="Variable"><span class="Variable">@</span>comment</span>])
+<span class="Comment"><span class="Comment">#</span>-&gt; this will return:</span>
+<span class="FunctionName">admin_article_comment_url</span>(<span class="Variable"><span class="Variable">@</span>article</span>, <span class="Variable"><span class="Variable">@</span>comment</span>)
+</pre>
+
+<p>你同樣可使用<strong>new</strong>, <strong>edit</strong>, <strong>formatted</strong>等前綴，看看下面的例子：</p>
+
+<pre class="mac_classic"><span class="FunctionName">edit_polymorphic_path</span>(<span class="Variable"><span class="Variable">@</span>post</span>)
+<span class="Comment"><span class="Comment">#</span>=&gt; /posts/1/edit</span>
+
+<span class="FunctionName">formatted_polymorphic_path</span>([<span class="Variable"><span class="Variable">@</span>post</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>pdf</span>])
+<span class="Comment"><span class="Comment">#</span>=&gt; /posts/1.pdf</span>
+</pre>
+
+<h2> 唯讀關聯 (Readonly relationships)</h2>
+
+<p>一個新的功能被添加到了models之間的關聯當中。為了避免更改關聯模型的狀態，現在你可以使用<strong>:readonly</strong>來描述一個關連。我們來看例子：</p>
+
+<pre class="mac_classic">has_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>reports</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>readonly</span> =&gt; <span class="BuiltInConstant">true</span>
+
+has_one <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>boss</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>readonly</span> =&gt; <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>true</span>
+
+belongs_to <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>project</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>readonly</span> =&gt; <span class="BuiltInConstant">true</span>
+
+has_and_belongs_to_many <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>categories</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>readonly</span> =&gt; <span class="BuiltInConstant">true</span>
+</pre>
+
+<p>這樣，關聯的models就能避免在model中被更改，如果試圖更改就會得到一個<strong>ActiveRecord::ReadOnlyRecord</strong>異常</p>
+
+<h2> add_timestamps和remove_timestamps方法     </h2>
+
+<p>現在我們有兩個新的方法<strong>add_timestamps</strong>與<strong>remove_timestamps</strong>，他們分別添加、刪除<strong>timestamp</strong>列。看個例子：</p>
+
+<pre class="mac_classic"><span class="Keyword">def</span> <span class="FunctionName">self.up</span>
+  add_timestamps <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>feeds</span>
+  add_timestamps <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>urls</span>
+<span class="Keyword">end</span>
+
+<span class="Keyword">def</span> <span class="FunctionName">self.down</span>
+  remove_timestamps <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>urls</span>
+  remove_timestamps <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>feeds</span>
+<span class="Keyword">end</span>
+</pre>
+
+<h2> Calculations </h2>
+
+<p><strong>ActiveRecord::Calculations</strong>做了些更改已支援資料庫表名。這個功能在幾個不同表之間存在關聯且相關列名相同時會非常有用。我們有兩個選項可用：</p>
+
+<pre class="mac_classic">authors.<span class="FunctionName">categories</span>.<span class="FunctionName">maximum</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>id</span>)
+authors.<span class="FunctionName">categories</span>.<span class="FunctionName">maximum</span>(<span class="String"><span class="String">&quot;</span>categories.id<span class="String">&quot;</span></span>)
+</pre>
+
+<h2> ActiveRecord::Base.create接受blocks</h2>
+
+<p>我們已經習慣<strong>ActiveRecord::Base.new</strong>接受block作為參數了，現在<strong>create</strong>也同樣支援block了：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> Creating an object and passing it a block describing its attributes</span>
+<span class="LibraryObject">User</span>.<span class="FunctionName">create</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first_name</span> =&gt; <span class="String"><span class="String">'</span>Jamie<span class="String">'</span></span>) <span class="Keyword">do </span>|<span class="Variable">u</span>|
+  u.<span class="FunctionName">is_admin</span> <span class="Keyword">=</span> <span class="BuiltInConstant">false</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>我們也能用同樣的方法一次建立多個物件：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> Creating an array of new objects using a block.</span>
+<span class="Comment"><span class="Comment">#</span> The block is executed once for each of object that is created.</span>
+<span class="LibraryObject">User</span>.<span class="FunctionName">create</span>([{<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first_name</span> =&gt; <span class="String"><span class="String">'</span>Jamie<span class="String">'</span></span>}, {<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first_name</span> =&gt; <span class="String"><span class="String">'</span>Jeremy<span class="String">'</span></span>}]) <span class="Keyword">do </span>|<span class="Variable">u</span>|
+  u.<span class="FunctionName">is_admin</span> <span class="Keyword">=</span> <span class="BuiltInConstant">false</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>同樣在關聯中也可以使用：</p>
+
+<pre class="mac_classic">author.<span class="FunctionName">posts</span>.<span class="FunctionName">create!</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>title</span> =&gt; <span class="String"><span class="String">&quot;</span>New on Edge<span class="String">&quot;</span></span>) {|<span class="Variable">p</span>| p.<span class="FunctionName">body</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>More cool stuff!<span class="String">&quot;</span></span>}
+
+<span class="Comment"><span class="Comment">#</span> or</span>
+
+author.<span class="FunctionName">posts</span>.<span class="FunctionName">create!</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>title</span> =&gt; <span class="String"><span class="String">&quot;</span>New on Edge<span class="String">&quot;</span></span>) <span class="Keyword">do </span>|<span class="Variable">p</span>|
+  p.<span class="FunctionName">body</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>More cool stuff!<span class="String">&quot;</span></span>
+<span class="Keyword">end</span>
+</pre>
+
+<h2> change_table</h2>
+
+<p>在Rails 2.0中建立的<strong>migrations</strong>要比之前的版本更為性感，不過要想用<strong>migrations</strong>修改一個表可就不那麼性感了。</p>
+
+<p>在Rails 2.1中修改表也由於新方法<strong>change_table</strong>而變得同樣性感了。來看看性感的例子：</p>
+
+<pre class="mac_classic">change_table <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>videos</span> <span class="Keyword">do </span>|<span class="Variable">t</span>|
+  t.<span class="FunctionName">timestamps</span> <span class="Comment"><span class="Comment">#</span> this adds columns created_at and updated_at</span>
+  t.<span class="FunctionName">belongs_to</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>goat</span> <span class="Comment"><span class="Comment">#</span> this adds column goat_id (integer)</span>
+  t.<span class="FunctionName">string</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>name</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>email</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>limit</span> =&gt; <span class="Number">20</span> <span class="Comment"><span class="Comment">#</span> this adds columns name and email</span>
+  t.<span class="FunctionName">remove</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>name</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>email</span> <span class="Comment"><span class="Comment">#</span> this removes columns name and email</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>新方法<strong>change_table</strong>的使用就如同他的表兄<strong>create_table</strong>，不過不是建立新的表，而是透過添加或者刪除列或索引來更改現有的表。</p>
+
+<pre class="mac_classic">change_table <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>table</span> <span class="Keyword">do </span>|<span class="Variable">t</span>|
+  t.<span class="FunctionName">column</span> <span class="Comment"><span class="Comment">#</span> adds an ordinary column. Ex: t.column(:name, :string)</span>
+  t.<span class="FunctionName">index</span> <span class="Comment"><span class="Comment">#</span> adds a new index.</span>
+  t.<span class="FunctionName">timestamps</span>
+  t.<span class="FunctionName">change</span> <span class="Comment"><span class="Comment">#</span> changes the column definition. Ex: t.change(:name, :string, :limit =&gt; 80)</span>
+  t.<span class="FunctionName">change_default</span> <span class="Comment"><span class="Comment">#</span> changes the column default value.</span>
+  t.<span class="FunctionName">rename</span> <span class="Comment"><span class="Comment">#</span> changes the name of the column.</span>
+  t.<span class="FunctionName">references</span>
+  t.<span class="FunctionName">belongs_to</span>
+  t.<span class="FunctionName">string</span>
+  t.<span class="FunctionName">text</span>
+  t.<span class="FunctionName">integer</span>
+  t.<span class="FunctionName">float</span>
+  t.<span class="FunctionName">decimal</span>
+  t.<span class="FunctionName">datetime</span>
+  t.<span class="FunctionName">timestamp</span>
+  t.<span class="FunctionName">time</span>
+  t.<span class="FunctionName">date</span>
+  t.<span class="FunctionName">binary</span>
+  t.<span class="FunctionName">boolean</span>
+  t.<span class="FunctionName">remove</span>
+  t.<span class="FunctionName">remove_references</span>
+  t.<span class="FunctionName">remove_belongs_to</span>
+  t.<span class="FunctionName">remove_index</span>
+  t.<span class="FunctionName">remove_timestamps</span>
+<span class="Keyword">end</span>
+</pre>
+
+<h2> Dirty Objects</h2>
+
+<p>在新的Rails當中，我們同樣可以跟蹤對<strong>ActiveRecord</strong>所做的更改。我們能夠知道是否一個物件被進行了修改，如果有更改就能跟蹤到最新的變更。來看看例子：</p>
+
+<p>  article = Article.find(:first)</p>
+
+<pre class="mac_classic">article.<span class="FunctionName">changed?</span>  <span class="Comment"><span class="Comment">#</span>=&gt; false</span>
+
+article.<span class="FunctionName">title</span>  <span class="Comment"><span class="Comment">#</span>=&gt; &quot;Title&quot;</span>
+article.<span class="FunctionName">title</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>New Title<span class="String">&quot;</span></span>
+article.<span class="FunctionName">title_changed?</span> <span class="Comment"><span class="Comment">#</span>=&gt; true</span>
+
+<span class="Comment"><span class="Comment">#</span> shows title before change</span>
+article.<span class="FunctionName">title_was</span>  <span class="Comment"><span class="Comment">#</span>=&gt; &quot;Title&quot;</span>
+
+<span class="Comment"><span class="Comment">#</span> before and after the change</span>
+article.<span class="FunctionName">title_change</span>  <span class="Comment"><span class="Comment">#</span>=&gt; [&quot;Title&quot;, &quot;New Title&quot;]</span>
+</pre>
+
+<p>可以看到，使用上非常的簡單，同時也能透過下列兩種方法的任意一種列出對一個物件的所有更改：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> returns a list with all of the attributes that were changed</span>
+article.<span class="FunctionName">changed</span>  <span class="Comment"><span class="Comment">#</span>=&gt; ['title']</span>
+
+<span class="Comment"><span class="Comment">#</span> returns a hash with attributes that were changed </span>
+<span class="Comment"><span class="Comment">#</span> along with its values before and after</span>
+article.<span class="FunctionName">changes</span>  <span class="Comment"><span class="Comment">#</span>=&gt; { 'title’ =&gt; [&quot;Title&quot;, &quot;New Title&quot;] }</span>
+</pre>
+
+<p>注意到一個物件被儲存後，他的狀態也隨之改變：</p>
+
+<pre class="mac_classic">article.<span class="FunctionName">changed?</span>  <span class="Comment"><span class="Comment">#</span>=&gt; true</span>
+article.<span class="FunctionName">save</span>  <span class="Comment"><span class="Comment">#</span>=&gt; true</span>
+article.<span class="FunctionName">changed?</span>  <span class="Comment"><span class="Comment">#</span>=&gt; false</span>
+</pre>
+
+<p>如果不透過<strong>attr=</strong>來更改一個物件的狀態，那你需要透過呼叫<strong>attr_name_will_change!</strong>方法(用物件的實際屬性名稱替換<strong>attr</strong>)來通知屬性已經被更改，來看最後一個例子：</p>
+
+<pre class="mac_classic">article <span class="Keyword">=</span> <span class="LibraryObject">Article</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>)
+article.<span class="FunctionName">title_will_change!</span>
+article.<span class="FunctionName">title</span>.<span class="FunctionName">upcase!</span>
+article.<span class="FunctionName">title_change</span>  <span class="Comment"><span class="Comment">#</span>=&gt; ['Title', 'TITLE']</span>
+</pre>
+
+<h2> Partial Updates</h2>
+
+<p><strong>Dirty Objects</strong>的實現讓另一個非常有趣的功能變為可能。</p>
+
+<p>由於我們現在可以跟蹤一個物件的狀態是否發生改變，那麼為什麼不用它來避免那些不必要的對資料庫的更新呢？</p>
+
+<p>在之前版本中的Rails，當我們對一個已經存在的<strong>ActiveRecord</strong>物件呼叫<strong>save</strong>方法時，所有資料庫中的欄位都會被更新，即使那些沒有做到任何更改的欄位。</p>
+
+<p>這種方式在有了Dirty Objects以後會有很大的改進，而實際情況也的確如此。看看保存一個有一點更改的物件時，Rails 2.1產生的SQL查詢語句：</p>
+
+<pre class="mac_classic">article <span class="Keyword">=</span> <span class="LibraryObject">Article</span>.<span class="FunctionName">find</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>first</span>)
+article.<span class="FunctionName">title</span>  <span class="Comment"><span class="Comment">#</span>=&gt; &quot;Title&quot;</span>
+article.<span class="FunctionName">subject</span>  <span class="Comment"><span class="Comment">#</span>=&gt; &quot;Edge Rails&quot;</span>
+
+<span class="Comment"><span class="Comment">#</span> Let's change the title</span>
+article.<span class="FunctionName">title</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>New Title<span class="String">&quot;</span></span>
+
+<span class="Comment"><span class="Comment">#</span> it creates the following SQL</span>
+article.<span class="FunctionName">save</span>
+<span class="Comment"><span class="Comment">#</span>=&gt;  &quot;UPDATE articles SET title = 'New Title' WHERE id = 1&quot;</span>
+</pre>
+
+<p>注意到，只有那些在應用中被更改的屬性才會被更新，如果沒有屬性被更改那<strong>ActiveRecord</strong>就不執行任何更新語句。</p>
+
+<p>為了開啟/關閉這個新功能，你得更改model的<strong>partial_updates</strong>屬性。</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> To enable it</span>
+<span class="LibraryObject">MyClass</span>.<span class="FunctionName">partial_updates</span> <span class="Keyword">=</span> <span class="BuiltInConstant">true</span>
+</pre>
+
+<p>如果希望對所有的models開啟/關閉這個功能，那你得編輯<em>config/initializers/new_rails_defaults.rb</em>：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> Enable it to all models</span>
+<span class="LibraryObject">ActiveRecord</span>::<span class="FunctionName">Base</span>.<span class="FunctionName">partial_updates</span> <span class="Keyword">=</span> <span class="BuiltInConstant">true</span>
+</pre>
+
+<p>別忘了如果你不透過attr=更改欄位，同樣得通過<em>config/initializers/new_rails_defaults.rb</em>來通知Rails，像這樣：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> If you use **attr=**,</span>
+<span class="Comment"><span class="Comment">#</span> then it's ok not informing</span>
+person.<span class="FunctionName">name</span> <span class="Keyword">=</span> <span class="String"><span class="String">'</span>bobby<span class="String">'</span></span>
+person.<span class="FunctionName">name_change</span>    <span class="Comment"><span class="Comment">#</span> =&gt; ['bob', 'bobby']</span>
+
+
+<span class="Comment"><span class="Comment">#</span> But you must inform that the field will be changed</span>
+<span class="Comment"><span class="Comment">#</span> if you plan not to use **attr=** </span>
+person.<span class="FunctionName">name_will_change!</span>
+person.<span class="FunctionName">name</span> <span class="Keyword">&lt;&lt;</span> <span class="String"><span class="String">'</span>by<span class="String">'</span></span>
+person.<span class="FunctionName">name_change</span>    <span class="Comment"><span class="Comment">#</span> =&gt; ['bob', 'bobby']</span>
+</pre>
+
+<p>如果你不通知Rails，那麼上述的程式碼同樣會更改物件的屬性，但是卻不能被跟蹤到，也就無法正確的更新資料庫中的對應欄位。</p>
+
+<h2> MySQL中使用Smallint, int還是bigint？</h2>
+
+<p>現在建立或者更改整行列的時候，<strong>ActiveRecord</strong>的<strong>MySQL</strong>介面(Adapter)會用更聰明的方式去處理，它可根據<strong>:limit</strong>屬性確定一個欄位的類型應該是<strong>smallint</strong>、<strong>int</strong>還是<strong>bigint</strong>。我們來看個實現上述功能的例子：</p>
+
+<pre class="mac_classic"><span class="Keyword">case</span> limit
+<span class="Keyword">when</span> <span class="Number">0</span>..<span class="Number">3</span>
+  <span class="String"><span class="String">&quot;</span>smallint(<span class="StringInterpolation"><span class="StringInterpolation">#{</span>limit<span class="StringInterpolation">}</span></span>)<span class="String">&quot;</span></span>
+<span class="Keyword">when</span> <span class="Number">4</span>..<span class="Number">8</span>
+  <span class="String"><span class="String">&quot;</span>int(<span class="StringInterpolation"><span class="StringInterpolation">#{</span>limit<span class="StringInterpolation">}</span></span>)<span class="String">&quot;</span></span>
+<span class="Keyword">when</span> <span class="Number">9</span>..<span class="Number">20</span>
+  <span class="String"><span class="String">&quot;</span>bigint(<span class="StringInterpolation"><span class="StringInterpolation">#{</span>limit<span class="StringInterpolation">}</span></span>)<span class="String">&quot;</span></span>
+<span class="Keyword">else</span>
+  <span class="String"><span class="String">'</span>int(11)<span class="String">'</span></span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>現在我們在<strong>migration</strong>中使用它，看看每個欄位應該匹配什麼類型：</p>
+
+<pre class="mac_classic">create_table <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>table_name</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>force</span> =&gt; <span class="BuiltInConstant">true</span> <span class="Keyword">do </span>|<span class="Variable">t</span>|
+
+<span class="Comment">  <span class="Comment">#</span> 0 - 3: smallint</span>
+  t.<span class="FunctionName">integer</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>column_one</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>limit</span> =&gt; <span class="Number">2</span> <span class="Comment"><span class="Comment">#</span> smallint(2)</span>
+
+<span class="Comment">  <span class="Comment">#</span> 4 - 8: int</span>
+  t.<span class="FunctionName">integer</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>column_two</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>limit</span> =&gt; <span class="Number">6</span> <span class="Comment"><span class="Comment">#</span> int(6)</span>
+
+<span class="Comment">  <span class="Comment">#</span> 9 - 20: bigint</span>
+  t.<span class="FunctionName">integer</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>column_three</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>limit</span> =&gt; <span class="Number">15</span> <span class="Comment"><span class="Comment">#</span> bigint(15)</span>
+
+<span class="Comment">  <span class="Comment">#</span> if :limit is not informed: int(11)</span>
+  t.<span class="FunctionName">integer</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>column_four</span> <span class="Comment"><span class="Comment">#</span> int(11)</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p><strong>PostgreSQL</strong>介面(Adapter)已經有這個功能了，現在<strong>MySQL</strong>也不甘落後了。</p>
+
+<p>譯者注：
+前些日子在Rails的Git中注意到一個新的fix，是MySQL Adapter的更新，剛好就是這個部份。
+修改的部份原始碼是：</p>
+
+<pre class="mac_classic">    <span class="Keyword">case</span> limit
+    <span class="Keyword">when</span> <span class="Number">1</span>; <span class="String"><span class="String">'</span>tinyint<span class="String">'</span></span>
+    <span class="Keyword">when</span> <span class="Number">2</span>; <span class="String"><span class="String">'</span>smallint<span class="String">'</span></span>
+    <span class="Keyword">when</span> <span class="Number">3</span>; <span class="String"><span class="String">'</span>mediumint<span class="String">'</span></span>
+    <span class="Keyword">when</span> <span class="Number">4</span>, <span class="BuiltInConstant">nil</span>; <span class="String"><span class="String">'</span>int(11)<span class="String">'</span></span>
+    <span class="Keyword">else</span>; <span class="String"><span class="String">'</span>bigint<span class="String">'</span></span>
+    <span class="Keyword">end</span>
+</pre>
+
+<p>注意到了嗎？現在只要limit是4以上就屬於bigint，所以跟原文有點出入，請注意。
+未來會怎樣變更不一定，不過我想可能會就此固定也說不定
+更改的Commit網址是：http://github.com/rails/rails/commit/290e1e2fc53d80165cc876491ec0cbe18be376cf
+今天日期：2008-06-24</p>
+
+<h2> has_one和belongs_to中的:select選項</h2>
+
+<p>已經為人熟知的<strong>has_one</strong>和<strong>belongs_to</strong>方法現在接收一個新屬性：<strong>:select</strong>。</p>
+
+<p>他的預設值是"<em>"(正如同"SELECT </em> FROM table")，不過你可以更改預設值來獲得任何你希望取得的欄位。</p>
+
+<p>也別忘了把主鍵(Primary key)與外鍵(Foreign key)一併包入，不然會錯誤。</p>
+
+<p><strong>belongs_to</strong>方法不再支援<strong>:order</strong>了，不過不要擔心，因為基本上也沒什麼用處。</p>
+
+<h2> 使用單表繼承(STI)的時候儲存類別的全名</h2>
+
+<p>當我們的<strong>models</strong>有<strong>namespace</strong>，並且是單表繼承(STI)時，<strong>ActiveRecord</strong>僅僅將類別名稱而不是包括<strong>namespace</strong>(<strong>demodulized</strong>)在內的全名存起來。這種情況僅僅當單表繼承的所有類別在一個<strong>namespace</strong>的時候有效，看例子：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">CollectionItem<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Base</span></span>; <span class="Keyword">end</span>
+<span class="Keyword">class</span> <span class="TypeName">ComicCollection::Item<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> CollectionItem</span></span>; <span class="Keyword">end</span>
+
+item <span class="Keyword">=</span> <span class="LibraryObject">ComicCollection</span>::<span class="FunctionName">Item</span>.<span class="FunctionName">new</span>
+item.<span class="FunctionName">type</span> <span class="Comment"><span class="Comment">#</span> =&gt; 'Item’</span>
+
+item2 <span class="Keyword">=</span> <span class="LibraryObject">CollectionItem</span>.<span class="FunctionName">find</span>(item.<span class="FunctionName">id</span>)
+<span class="Comment"><span class="Comment">#</span> returns an error, because it can't find</span>
+<span class="Comment"><span class="Comment">#</span> the class Item</span>
+</pre>
+
+<p>新的Rails添加了一個屬性，從而使<strong>ActiveRecord</strong>能儲存類別的全名。
+可以在<strong>environment.rb</strong>當中添加如下程式碼來啟動/關閉這個功能：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">ActiveRecord</span>::<span class="FunctionName">Base</span>.<span class="FunctionName">store_full_sti_class</span> <span class="Keyword">=</span> <span class="BuiltInConstant">true</span>
+</pre>
+
+<p>預設值是true。</p>
+
+<h2>table_exists?方法</h2>
+
+<p><strong>AbstractAdapter</strong>類別有個新方法<strong>table_exists</strong>，用法非常容易：</p>
+
+<pre class="mac_classic"><span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">ActiveRecord</span>::<span class="FunctionName">Base</span>.<span class="FunctionName">connection</span>.<span class="FunctionName">table_exists?</span>(<span class="String"><span class="String">&quot;</span>users<span class="String">&quot;</span></span>)
+=&gt; <span class="BuiltInConstant">true</span>
+</pre>
+
+<h2> 根據時間戳記的Migrations (Timestamped Migrations)</h2>
+
+<p>當你一個人使用Rails開發時，<strong>migrations</strong>似乎是所有問題的最好解決方案。不過當和團隊的其他成員共同開發一個專案時，你會發現(如果你還沒發現)處理<strong>migrations</strong>的同步是非常棘手的。Rails 2.1中根據時間戳記的<strong>migrations</strong>解決方案則是漂亮的解決了這個問題。</p>
+
+<p>在根據時間戳記的<strong>migrations</strong>引入之前，建立每個migration都會在其名字之前產生一個數字，如果兩個<strong>migrations</strong>分別由兩個開發者產生，並且都沒有即時的提交到版本庫中，那麼最後就有可能存在相同的前綴數字，但是不同內容的<strong>migrations</strong>，這時你的schema_info表就會過期，同時在版本控制系統中出現衝突。</p>
+
+<p>嘗試解決這個問題的方式有很多，人們建立了很多plugins以不同的方式解決這個問題。儘管有些plugins可用，不過有一點是非常清楚的，舊的方式已經無法滿足我們的要求了。</p>
+
+<p>如果你使用Git，那麼你可能再給自己挖一個更大的陷阱，因為你的團隊可能同時有幾個working branches，過期的migrations則在每個branch中都存在。這樣當合併這些branches時就會有嚴重的衝突問題。</p>
+
+<p>為了解決這個大問題，Rails核心團隊已經改變了<strong>migrations</strong>的運作方式。他們捨棄了原有以當前schema_info中version列的值作為migration前綴的依據方式，取而代之的是根據<strong>UTC</strong>時間按照YYYYMMDDHHMMSS格式的字串表達方式作為前綴。</p>
+
+<p>同時建立了一個新的叫做<strong>schema_migrations</strong>的表，表中存著哪些<strong>migrations</strong>已經執行了，這樣如果發現有人建立了一個有較小值的<strong>migration</strong>，Rails會回滾(rollback)<strong>migrations</strong>到之前的版本，然後重新執行所有的<strong>migration</strong>直到當前的版本。</p>
+
+<p>顯然這樣的做法解決了<strong>migrations</strong>所帶來的衝突問題。</p>
+
+<p>有兩個新的和<strong>migrations</strong>相關的rake指令：</p>
+
+<pre class="mac_classic">rake db<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>migrate</span><span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>up</span>
+rake db<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>migrate</span><span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>down</span>
+</pre>
+
+<h1> ActiveSupport</h1>
+
+<p>ActiveSupport之中提供了許多非常實用的類別，而且對預設的函式庫提供了一些對Ruby on Rails程式非常有用的外掛。（翻譯自 wikipedia）</p>
+
+<h2> ActiveSupport::CoreExtensions::Date::Calculations</h2>
+
+<h3> Time#end_of_day</h3>
+
+<p>回傳當天的結束時間（11:59:59 PM)</p>
+
+<h3> Time#end_of_week</h3>
+
+<p>回傳當週的週末結束時間 (Sunday 11:59:59 PM)</p>
+
+<h3> Time#end_of_quarter</h3>
+
+<p>回傳一個 Date 物件，表示本季的最後一天。換句話說，他是根據目前日期回傳三月、六月、九月或者十二月的最後一天。</p>
+
+<h3> Time#end_of_year</h3>
+
+<p>回傳本年度的結束時間，也就是 12/31 11:59:59 PM</p>
+
+<h3> Time#in_time_zone</h3>
+
+<p>這個方法跟 <strong>Time#localtime</strong> 很類似，除了他使用 Time.zone 作為時區基準，而不是目前作業系統設定的時區。您可以傳入 <strong>TimeZone</strong> 或是 <strong>String</strong> 作為參數。如下面的例子：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span> <span class="Keyword">=</span> <span class="String"><span class="String">'</span>Hawaii<span class="String">'</span></span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>).<span class="FunctionName">in_time_zone</span>
+<span class="Comment"><span class="Comment">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span>
+
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>).<span class="FunctionName">in_time_zone</span>(<span class="String"><span class="String">'</span>Alaska<span class="String">'</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; Fri, 31 Dec 1999 15:00:00 AKST -09:00</span>
+</pre>
+
+<h3> Time#days_in_month</h3>
+
+<p>這個方法本來有個bug，當沒有指定年份的時候，對於二月他沒有辦法正確處理潤年。不過在 Rails 2.1 中這個問題已經被修正了。</p>
+
+<p>這個修正的作法是，如果您沒有指定年份，則使用呼叫時的當年度作為預設值。如果您處於潤年的話，參考下面的例子：</p>
+
+<pre class="mac_classic"><span class="Variable">Loading</span> development environment (<span class="Variable">Rails</span> <span class="Number">2.0</span>.<span class="Number">2</span>)
+<span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">Time</span>.<span class="FunctionName">days_in_month</span>(<span class="Number">2</span>)
+=&gt; <span class="Number">28</span>
+
+<span class="Variable">Loading</span> development environment (<span class="Variable">Rails</span> <span class="Number">2.1</span>.<span class="Number">0</span>)
+<span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">Time</span>.<span class="FunctionName">days_in_month</span>(<span class="Number">2</span>)
+=&gt; <span class="Number">29</span>
+</pre>
+
+<h3> DateTime#to_f</h3>
+
+<p>DateTime 類別新增了一個方法 <strong>to_f</strong>，它的作用是將日期以浮點數的形態回傳。這個浮點數遞逮表從 Unix 紀元 (1970, 1月1日午夜。也就是平常熟知的 UNIX Timestamp) 開始計算經過的秒數。</p>
+
+<h3> Date.current</h3>
+
+<p>Date 類別則新增了一個新方法稱為 <strong>current</strong> 來取代原有的 <strong>Date.today</strong> 。這個方法將會考慮到您在 <strong>config.time_zone</strong> 中設定的時區。如果您有設定，這個方法將回傳 <strong>Time.zone.today</strong> 。如果沒有的話，則直接回傳 <strong>Date.today</strong> 。</p>
+
+<h2> Fragment_exist?</h2>
+
+<p>在 <strong>cache_store</strong> 中新增加了兩個方法： <strong>fragment_exist?</strong> 和 <strong>exist?</strong> 。</p>
+
+<p><strong>fragment_exist?</strong> 顧名思義，它將檢查一個由 key 指定的緩衝區片段存不存在。這個方法將可以用來替代常用的：</p>
+
+<pre class="mac_classic"><span class="FunctionName">read_fragment</span>(path).<span class="FunctionName">nil?</span>
+</pre>
+
+<p><strong>exist?</strong> 方法被實際的加入到 <strong>cache_store</strong>，而 <strong>fragement_exist?</strong> 則是一個您能夠在 Controller 中使用的 helper。</p>
+
+<h2> UTC or GMT?</h2>
+
+<p>這是一個很有趣的修正。:P 到目前為止，Rails 通常使用 UTC 這個縮寫。但是在 <strong>TimeZone.to_s</strong> 裡頭，它卻回傳 GMT，而不是熟系的 UTC。這是因為使用 GMT 對您的產品使用者來說是最為熟悉的縮寫。</p>
+
+<p>如果您注意觀察 Windows 的時間設定視窗，時區它也使用 GMT 作為縮寫。同樣的，Google 和 Yahoo 也在他們旗下的產品中使用 GMT。</p>
+
+<pre class="mac_classic"><span class="LibraryObject">TimeZone</span>[<span class="String"><span class="String">'</span>Moscow<span class="String">'</span></span>].<span class="FunctionName">to_s</span> <span class="Comment"><span class="Comment">#</span>=&gt; &quot;(GMT+03:00) Moscow&quot;</span>
+</pre>
+
+<h2> JSON escape</h2>
+
+<p><strong>json_escape</strong> 方法就像是 <strong>html_escape</strong> 所做的事情一樣。當我們想在 <strong>HTML</strong> 頁面中顯示 <strong>JSON</strong> 字串的時候非常有用。例如：</p>
+
+<pre class="mac_classic"><span class="FunctionName">json_escape</span>(<span class="String"><span class="String">&quot;</span>is a &gt; 0 &amp; a &lt; 10?<span class="String">&quot;</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;is a \u003E 0 \u0026 a #body03C 10?&quot;</span>
+</pre>
+
+<p>在 ERB 樣板中，我們可以使用簡寫 <strong>j</strong> (就像是 <strong>h</strong> 一樣)：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span><span class="Keyword">%=</span> j <span class="Variable"><span class="Variable">@</span>person</span>.<span class="FunctionName">to_json</span> <span class="String"><span class="String">%&gt;</span></span>
+</pre>
+
+<p>如果您希望所有 <strong>JSON</strong> 碼都自動被跳脫（esacped），您可以在 <em>environment.rb</em> 中加入下面的程式碼：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">ActiveSupport</span>.<span class="FunctionName">escape_html_entities_in_json</span> <span class="Keyword">=</span> <span class="BuiltInConstant">true</span>
+</pre>
+
+<h2> Mem_cache_store now accepts options</h2>
+
+<p>  自從 <strong>Memcache-Client</strong> 被包入 <strong>ActiveSupport::Cache</strong> 後就使得事情變得比以前更容易了。但是他也相對的剝奪了靈活性。它只允許您設定 <strong>memcahced</strong> 伺服器的 IP 位置而已。</p>
+
+<p>  <strong>Jonathan Weiss</strong> 送給 Rails 團隊一個修正，使其能夠接受額外的選項，像是：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">ActiveSupport</span>::<span class="FunctionName">Cache</span>.<span class="FunctionName">lookup_store</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>mem_cache_store</span>, <span class="String"><span class="String">&quot;</span>localhost<span class="String">&quot;</span></span>
+
+<span class="LibraryObject">ActiveSupport</span>::<span class="FunctionName">Cache</span>.<span class="FunctionName">lookup_store</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>mem_cache_store</span>, <span class="String"><span class="String">&quot;</span>localhost<span class="String">&quot;</span></span>, <span class="String"><span class="String">'</span>192.168.1.1<span class="String">'</span></span>, 
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>namespace</span> =&gt; <span class="String"><span class="String">'</span>foo<span class="String">'</span></span>
+</pre>
+
+<p>   或者</p>
+
+<pre class="mac_classic">config.<span class="FunctionName">action_controller</span>.<span class="FunctionName">fragment_cache_store</span> <span class="Keyword">=</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>mem_cache_store</span>, <span class="String"><span class="String">'</span>localhost<span class="String">'</span></span>, {<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>compression</span> =&gt; <span class="BuiltInConstant">true</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>debug</span> =&gt; <span class="BuiltInConstant">true</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>namespace</span> =&gt;<span class="String"><span class="String">'</span>foo<span class="String">'</span></span>}
+</pre>
+
+<h2> Time.current</h2>
+
+<p><strong>Time</strong> 類別中的新方法。 <strong>current</strong> 的回傳值將視 <strong>config.time_zone</strong> 而定。如果之前有指定時區，則傳為 <strong>Time.zone.now</strong>，否則回傳 <strong>Time.now</strong> 。</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> return value depends on config.time_zone</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">current</span>
+</pre>
+
+<p><strong>since</strong> 和 <strong>ago</strong> 方法同樣的也受到影響, 如果 <strong>config.time_zone</strong> 已經指定了，它就會回傳一個 *TimeWithZone**。</p>
+
+<p>這個修正使得 <strong>Time.current</strong> 方法作為取得目前時區的預設方法，替換了原有的 <strong>Time.now</strong> （這個方法依然可以使用，只是他不會考慮時區差異）。</p>
+
+<p><strong>datetime_select</strong>方法， <strong>select_datetime</strong> 和 <strong>select_time</strong> 也已經改用  <strong>Time.current</strong> 了。</p>
+
+<h2>Removing whitespaces with squish method</h2>
+
+<p><strong>String</strong>物件中增加了兩個方法， <strong>squish</strong> 和 <strong>squish!</strong>。</p>
+
+<p>這兩個方法和 <strong>strip</strong> 一樣，它刪除了文字前後的空格，也刪除了文字中間無用的空格。像是下面這個例子：</p>
+
+<pre class="mac_classic">“    <span class="Variable">A</span>    text    full    of     spaces    “.<span class="FunctionName">strip</span>
+<span class="Comment"><span class="Comment">#</span>=&gt; “A    text    full    of     spaces”</span>
+
+“    <span class="Variable">A</span>    text    full    of     spaces    “.<span class="FunctionName">squish</span>
+<span class="Comment"><span class="Comment">#</span>=&gt; “A text full of spaces”</span>
+</pre>
+
+<h1> ActiveResource</h1>
+
+<p>ActiveResource是RESTful系統中的客戶端實作。使用類似代理或者遠端服務的物件可以呼叫RESTful服務。</p>
+
+<h2> 使用Email當作使用者名稱</h2>
+
+<p>某些服務使用Email作為使用者名稱，這會要求使用如下形式的URL：</p>
+
+<pre class="mac_classic">http<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span><span class="Keyword">/</span>ernesto.<span class="FunctionName">jimenez</span><span class="Variable"><span class="Variable">@</span>negonation</span>.<span class="FunctionName">com</span><span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>pass</span><span class="Variable"><span class="Variable">@</span>tractis</span>.<span class="FunctionName">com</span>
+</pre>
+
+<p>這個URL中有兩個"@"，這會帶來些問題：直譯器無法正確解析這個URL。因此對<strong>ActiveResource</strong>的使用方式做了擴展，以方便使用Email進行身分驗證。可以這樣使用：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Person<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveResource::Base</span></span>
+  <span class="Variable">self</span>.<span class="FunctionName">site</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>http://tractis.com<span class="String">&quot;</span></span>
+  <span class="Variable">self</span>.<span class="FunctionName">user</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>ernesto.jimenez@negonation.com<span class="String">&quot;</span></span>
+  <span class="Variable">self</span>.<span class="FunctionName">password</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>pass<span class="String">&quot;</span></span>
+<span class="Keyword">end</span>
+</pre>
+
+<h2> clone 方法</h2>
+
+<p>現在我們可以複製已經有的resource：</p>
+
+<pre class="mac_classic">ryan <span class="Keyword">=</span> <span class="LibraryObject">Person</span>.<span class="FunctionName">find</span>(<span class="Number">1</span>)
+not_ryan <span class="Keyword">=</span> ryan.<span class="FunctionName">clone</span>
+not_ryan.<span class="FunctionName">new?</span>  <span class="Comment"><span class="Comment">#</span> =&gt; true</span>
+</pre>
+
+<p>要注意複製出來的物件並不複製任何類別屬性，僅複製resource屬性。</p>
+
+<pre class="mac_classic">ryan <span class="Keyword">=</span> <span class="LibraryObject">Person</span>.<span class="FunctionName">find</span>(<span class="Number">1</span>)
+ryan.<span class="FunctionName">address</span> <span class="Keyword">=</span> <span class="LibraryObject">StreetAddress</span>.<span class="FunctionName">find</span>(<span class="Number">1</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>person_id</span> =&gt; ryan.<span class="FunctionName">id</span>)
+ryan.<span class="FunctionName">hash</span> <span class="Keyword">=</span> {<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>not</span> =&gt; <span class="String"><span class="String">&quot;</span>an ARes instance<span class="String">&quot;</span></span>} 
+
+not_ryan <span class="Keyword">=</span> ryan.<span class="FunctionName">clone</span>
+not_ryan.<span class="FunctionName">new?</span>            <span class="Comment"><span class="Comment">#</span> =&gt; true</span>
+not_ryan.<span class="FunctionName">address</span>         <span class="Comment"><span class="Comment">#</span> =&gt; NoMethodError</span>
+not_ryan.<span class="FunctionName">hash</span>            <span class="Comment"><span class="Comment">#</span> =&gt; {:not =&gt; &quot;an ARes instance&quot;}</span>
+</pre>
+
+<h2> 逾時</h2>
+
+<p>由於ActiveResource使用<strong>HTTP</strong>來存取RESTful API，當伺服器回應緩慢或者伺服器罷工時會出問題。在某些情況下呼叫ActiveResource會逾時失敗。現在可以用timeout屬性來設定逾時時間了。</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Person<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveResource::Base</span></span>
+  <span class="Variable">self</span>.<span class="FunctionName">site</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>http://api.people.com:3000/<span class="String">&quot;</span></span>
+  <span class="Variable">self</span>.<span class="FunctionName">timeout</span> <span class="Keyword">=</span> <span class="Number">5</span> <span class="Comment"><span class="Comment">#</span> waits 5 seconds before expire</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>本例子將逾時設定為5秒。推荐的做法是將該值設得小一點使系統能快速偵測到失敗，以避免相關錯誤引發伺服器錯誤。</p>
+
+<p>ActiveResource內部使用Net::HTTP來發起HTTP請求。當timeout屬性設定時，該值同時被設定到Net::HTTP物件實體的<strong>read_timeout</strong>屬性上。</p>
+
+<p>該屬性的預設值是60秒。</p>
+
+<h1> ActionPack</h1>
+
+<p>包含ActionView(為End-User產生顯示，像是HTML、XML、JavaScript)和ActionController(商業流程控制)。
+(adapted from wikipedia)</p>
+
+<h2> TimeZone</h2>
+
+<h3> 定義一個預設的時區</h3>
+
+<p>一個新的選項被加入到<strong>time_zone_select</strong>方法，在你的用戶沒有選擇任何<strong>TimeZone</strong>或者資料庫欄位為空時，你可以顯示一個預設值。它已經建立一個<strong>:default</strong>選項，你可以按照下面的方式使用這個方法：</p>
+
+<pre class="mac_classic"><span class="FunctionName">time_zone_select</span>(<span class="String"><span class="String">&quot;</span>user<span class="String">&quot;</span></span>, <span class="String"><span class="String">&quot;</span>time_zone<span class="String">&quot;</span></span>, <span class="BuiltInConstant">nil</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>include_blank</span> =&gt; <span class="BuiltInConstant">true</span>)
+
+<span class="FunctionName">time_zone_select</span>(<span class="String"><span class="String">&quot;</span>user<span class="String">&quot;</span></span>, <span class="String"><span class="String">&quot;</span>time_zone<span class="String">&quot;</span></span>, <span class="BuiltInConstant">nil</span>, 
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>default</span> =&gt; <span class="String"><span class="String">&quot;</span>Pacific Time (US &amp; Canada)<span class="String">&quot;</span></span> )
+
+<span class="FunctionName">time_zone_select</span>( <span class="String"><span class="String">&quot;</span>user<span class="String">&quot;</span></span>, <span class="String"><span class="String">'</span>time_zone<span class="String">'</span></span>, <span class="LibraryObject">TimeZone</span>.<span class="FunctionName">us_zones</span>, 
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>default</span> =&gt; <span class="String"><span class="String">&quot;</span>Pacific Time (US &amp; Canada)<span class="String">&quot;</span></span>)
+</pre>
+
+<p>如果我們使用<strong>:default</strong>選項，它就會顯示<strong>TimeZone</strong>已被選擇的選項。</p>
+
+<h3> formatted_offset 方法</h3>
+
+<p><strong>formatted_offset</strong>方法被包含在<strong>Time</strong>和<strong>DateTime</strong>類別中，回傳<strong>+HH:MM</strong>格式的UTC時差。例如，在我們的時區(台北時間)，這個方法回傳的時差是一個字串<strong>"+08:00"</strong>。</p>
+
+<p>讓我們看看一些範例：</p>
+
+<p>從一個DateTime得到時差：</p>
+
+<pre class="mac_classic">datetime <span class="Keyword">=</span> <span class="LibraryObject">DateTime</span>.<span class="FunctionName">civil</span>(<span class="Number">2000</span>, <span class="Number">1</span>, <span class="Number">1</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Variable">Rational</span>(<span class="Keyword">-</span><span class="Number">6</span>, <span class="Number">24</span>))
+datetime.<span class="FunctionName">formatted_offset</span>         <span class="Comment"><span class="Comment">#</span> =&gt; &quot;-06:00″</span>
+datetime.<span class="FunctionName">formatted_offset</span>(<span class="BuiltInConstant">false</span>)  <span class="Comment"><span class="Comment">#</span> =&gt; &quot;-0600″</span>
+</pre>
+
+<p>從Time：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">local</span>(<span class="Number">2000</span>).<span class="FunctionName">formatted_offset</span>         <span class="Comment"><span class="Comment">#</span> =&gt; &quot;-06:00″</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">local</span>(<span class="Number">2000</span>).<span class="FunctionName">formatted_offset</span>(<span class="BuiltInConstant">false</span>)  <span class="Comment"><span class="Comment">#</span> =&gt; &quot;-0600″</span>
+</pre>
+
+<p>注意這個方法回傳字串，可以格式化或者不依賴於一個被給予的參數。</p>
+
+<h3> with_env_tz 方法</h3>
+
+<p><strong>with_env_tz</strong>方法允許我們以非常簡單的方式測試不同的時區：</p>
+
+<pre class="mac_classic"><span class="Keyword">def</span> <span class="FunctionName">test_local_offset</span>
+  with_env_tz <span class="String"><span class="String">'</span>US/Eastern<span class="String">'</span></span> <span class="Keyword">do</span>
+    assert_equal <span class="Variable">Rational</span>(<span class="Keyword">-</span><span class="Number">5</span>, <span class="Number">24</span>), <span class="LibraryObject">DateTime</span>.<span class="FunctionName">local_offset</span>
+  <span class="Keyword">end</span>
+  with_env_tz <span class="String"><span class="String">'</span>US/Central<span class="String">'</span></span> <span class="Keyword">do</span>
+    assert_equal <span class="Variable">Rational</span>(<span class="Keyword">-</span><span class="Number">6</span>, <span class="Number">24</span>), <span class="LibraryObject">DateTime</span>.<span class="FunctionName">local_offset</span>
+  <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>這個Helper可以呼叫<strong>with_timezone</strong>，但是為了避免使用<strong>ENV['TZ']</strong>和<strong>Time.zone</strong>時混亂，他被重新命名為<strong>with_env_tz</strong>。</p>
+
+<h3> Time.zone_reset!</h3>
+
+<p>該方法已經跟我們說再見了。</p>
+
+<h3> Time#in_current_time_zone</h3>
+
+<p>該方法修改為當<strong>Time.zone</strong>為空時傳回<strong>self</strong></p>
+
+<h3> Time#change_time_zone_to_current</h3>
+
+<p>該方法修改為當<strong>Time.zone</strong>為空時傳回<strong>self</strong></p>
+
+<h3> TimeZone#now</h3>
+
+<p>該方法修改為傳回<strong>ActiveSupport::TimeWithZone</strong>顯示當前在<strong>TimeZone#now</strong>中已經設定的時區。例如：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span> <span class="Keyword">=</span> <span class="String"><span class="String">'</span>Hawaii<span class="String">'</span></span>  <span class="Comment"><span class="Comment">#</span> =&gt; &quot;Hawaii&quot;</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span>.<span class="FunctionName">now</span>         <span class="Comment"><span class="Comment">#</span> =&gt; Wed, 23 Jan 2008 20:24:27 HST -10:00</span>
+</pre>
+
+<h3> Compare_with_coercion</h3>
+
+<p>在<strong>Time</strong>和<strong>DateTime</strong>類別中新增了一個方法：<strong>compare_with_coercion</strong>(和一個alias &lt;=>)，它使在<strong>Time</strong>、<strong>DateTime</strong>類別和<strong>ActiveSupport::TimeWithZone</strong>實體之間可以按照年代順序排列的比較。為了容易理解，請看下面的例子(行尾是顯示的結果)：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">1999</span>, <span class="Number">12</span>, <span class="Number">31</span>, <span class="Number">23</span>, <span class="Number">59</span>, <span class="Number">59</span>, <span class="Number">999</span>) <span class="Comment"><span class="Comment">#</span> 1</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>, <span class="Number">1</span>, <span class="Number">1</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Number">0</span>) <span class="Comment"><span class="Comment">#</span> 0</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>, <span class="Number">1</span>, <span class="Number">1</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Number">001</span>)) <span class="Comment"><span class="Comment">#</span> -1</span>
+
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">DateTime</span>.<span class="FunctionName">civil</span>(<span class="Number">1999</span>, <span class="Number">12</span>, <span class="Number">31</span>, <span class="Number">23</span>, <span class="Number">59</span>, <span class="Number">59</span>) <span class="Comment"><span class="Comment">#</span> 1</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">DateTime</span>.<span class="FunctionName">civil</span>(<span class="Number">2000</span>, <span class="Number">1</span>, <span class="Number">1</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Number">0</span>) <span class="Comment"><span class="Comment">#</span> 0</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">DateTime</span>.<span class="FunctionName">civil</span>(<span class="Number">2000</span>, <span class="Number">1</span>, <span class="Number">1</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Number">1</span>)) <span class="Comment"><span class="Comment">#</span> -1</span>
+
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">ActiveSupport</span>::<span class="FunctionName">TimeWithZone</span>.<span class="FunctionName">new</span>(<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">1999</span>, <span class="Number">12</span>, <span class="Number">31</span>, <span class="Number">23</span>, <span class="Number">59</span>, <span class="Number">59</span>) )
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">ActiveSupport</span>::<span class="FunctionName">TimeWithZone</span>.<span class="FunctionName">new</span>(<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>, <span class="Number">1</span>, <span class="Number">1</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Number">0</span>) )
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>) <span class="Keyword">&lt;=&gt;</span> <span class="LibraryObject">ActiveSupport</span>::<span class="FunctionName">TimeWithZone</span>.<span class="FunctionName">new</span>(<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>, <span class="Number">1</span>, <span class="Number">1</span>, <span class="Number">0</span>, <span class="Number">0</span>, <span class="Number">1</span>) ))
+</pre>
+
+<h3> TimeWithZone#between?</h3>
+
+<p>在<strong>TimeWithZone</strong>類別中包含<strong>between?</strong>方法檢驗一個實體被建立在兩個日期之間。</p>
+
+<pre class="mac_classic"><span class="Variable"><span class="Variable">@</span>twz</span>.<span class="FunctionName">between?</span>(<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">1999</span>,<span class="Number">12</span>,<span class="Number">31</span>,<span class="Number">23</span>,<span class="Number">59</span>,<span class="Number">59</span>),
+              <span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>,<span class="Number">1</span>,<span class="Number">1</span>,<span class="Number">0</span>,<span class="Number">0</span>,<span class="Number">1</span>))
+</pre>
+
+<h3> TimeZone#parse</h3>
+
+<p>這個方法從字串建立一個<strong>ActiveSupport::TimeWithZone</strong>實體。例如：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>Hawaii<span class="String">&quot;</span></span>
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;Hawaii&quot;</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span>.<span class="FunctionName">parse</span>(<span class="String"><span class="String">'</span>1999-12-31 14:00:00<span class="String">'</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span>
+
+
+<span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span>.<span class="FunctionName">now</span>
+<span class="Comment"><span class="Comment">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span>.<span class="FunctionName">parse</span>(<span class="String"><span class="String">'</span>22:30:00<span class="String">'</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; Fri, 31 Dec 1999 22:30:00 HST -10:00</span>
+</pre>
+
+<h3> TimeZone#at</h3>
+
+<p>這個方法可以從一個Unix epoch數字建立一個<strong>ActiveSupport::TimeWithZone</strong>實體，例如：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span> <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>Hawaii<span class="String">&quot;</span></span> <span class="Comment"><span class="Comment">#</span> =&gt; &quot;Hawaii&quot;</span>
+<span class="LibraryObject">Time</span>.<span class="FunctionName">utc</span>(<span class="Number">2000</span>).<span class="FunctionName">to_f</span>  <span class="Comment"><span class="Comment">#</span> =&gt; 946684800.0</span>
+
+<span class="LibraryObject">Time</span>.<span class="FunctionName">zone</span>.<span class="FunctionName">at</span>(<span class="Number">946684800.0</span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span>
+</pre>
+
+<h3> 其他方法</h3>
+
+<p><strong>to_a</strong>, <strong>to_f</strong>, <strong>to_i</strong>, <strong>httpdate</strong>, <strong>rfc2822</strong>, <strong>to_yaml</strong>, <strong>to_datetime</strong> 和 <strong>eql?</strong>被加入TimeWithZone類別中。更多關於這些方法的訊息請查閱同版本的Rails文件。</p>
+
+<h3> TimeWithZone為了Ruby 1.9而準備</h3>
+
+<p>在Ruby 1.9中我們有了一些新的方法在 <strong>Time</strong>類別中，如：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">now</span>
+<span class="Comment"><span class="Comment">#</span> =&gt; Thu Nov 03 18:58:25 CET 2005</span>
+
+<span class="LibraryObject">Time</span>.<span class="FunctionName">now</span>.<span class="FunctionName">sunday?</span>
+<span class="Comment"><span class="Comment">#</span> =&gt; false</span>
+</pre>
+
+<p>一週的每天都有對應的方法。</p>
+
+<p>另一個新的是<strong>Time</strong>的<strong>to_s</strong>方法將會有一個不同的傳回值。現在當我們執行<strong>Time.new.to_s</strong>，將得到：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">new</span>.<span class="FunctionName">to_s</span>
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;Thu Oct 12 10:39:27 +0200 2006″</span>
+</pre>
+
+<p>在Ruby 1.9中我們將得到：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Time</span>.<span class="FunctionName">new</span>.<span class="FunctionName">to_s</span>
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;2006-10-12 10:39:24 +0200″</span>
+</pre>
+
+<p>Rails 2.1擁有哪些相關的東西？答案是所有東西，從Rails開始準備這些修改。<strong>TimeWithZone</strong>類別，例如，剛收到一個第一個範例的方法實現。</p>
+
+<h2> Auto Link</h2>
+
+<p>為那些不知道這個方法的人，<strong>auto_link</strong>方法接收所有文字參數，如果這個文字包含一個e-mail或者一個網址，將返回相同的文字，但是包含了超連結。</p>
+
+<p>例如：</p>
+
+<pre class="mac_classic"><span class="FunctionName">auto_link</span>(<span class="String"><span class="String">&quot;</span>Go to this website now: http://www.rubyonrails.com<span class="String">&quot;</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; Go to this website now: http://www.rubyonrails.com</span>
+</pre>
+
+<p>一些網站，像是Amazon，使用"="在URL中，該方法不認可這個符號，看這個方法怎樣處理這種情況：</p>
+
+<pre class="mac_classic"><span class="FunctionName">auto_link</span>(<span class="String"><span class="String">&quot;</span>http://www.amazon.com/Testing/ref=pd_bbs_sr_1<span class="String">&quot;</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; http://www.amazon.com/Testing/ref</span>
+</pre>
+
+<p>注意該方法會截斷"="後面的東西，因為它不支援這個符號。我的意思是，它通常是不被支援的，但在Rails 2.1中根本沒有這個問題。</p>
+
+<p>同樣的方法將在稍後更新，允許在網址中使用括號。</p>
+
+<p>這就是括號的範例：</p>
+
+<pre class="mac_classic">http<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span><span class="Keyword">/</span>en.<span class="FunctionName">wikipedia</span>.<span class="FunctionName">org</span><span class="Keyword">/</span>wiki<span class="Keyword">/</span><span class="Variable">Sprite_</span>(computer_graphics)
+</pre>
+
+<h2> Labels</h2>
+
+<p>當使用<strong>scaffold</strong>產生一個新表單時，將會建立下面的程式碼：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span><span class="Keyword">%</span> <span class="FunctionName">form_for</span>(<span class="Variable"><span class="Variable">@</span>post</span>) <span class="Keyword">do </span>|<span class="Variable">f</span>| <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;p<span class="String">&gt;</span></span>
+    <span class="Keyword">&lt;</span><span class="Keyword">%=</span> f.<span class="FunctionName">label</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>title</span> <span class="String"><span class="String">%&gt;</span>&lt;br /<span class="String">&gt;</span></span>
+    <span class="Keyword">&lt;</span><span class="Keyword">%=</span> f.<span class="FunctionName">text_field</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>title</span> <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;/p<span class="String">&gt;</span></span>
+  <span class="Keyword">&lt;</span>p<span class="Keyword">&gt;</span>
+    <span class="Keyword">&lt;</span><span class="Keyword">%=</span> f.<span class="FunctionName">label</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>body</span> <span class="String"><span class="String">%&gt;</span>&lt;br /<span class="String">&gt;</span></span>
+    <span class="Keyword">&lt;</span><span class="Keyword">%=</span> f.<span class="FunctionName">text_area</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>body</span> <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;/p<span class="String">&gt;</span></span>
+  <span class="Keyword">&lt;</span>p<span class="Keyword">&gt;</span>
+    <span class="Keyword">&lt;</span><span class="Keyword">%=</span> f.<span class="FunctionName">submit</span> <span class="String"><span class="String">&quot;</span>Update<span class="String">&quot;</span></span> <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;/p<span class="String">&gt;</span></span>
+<span class="Keyword">&lt;</span><span class="Keyword">%</span> <span class="Keyword">end</span> <span class="String"><span class="String">%&gt;</span></span>
+</pre>
+
+<p>這種方法更有意義，它包含了<strong>label</strong>方法。該做法在HTML標籤中回傳一個標題列。</p>
+
+<pre class="mac_classic"><span class="Keyword">&gt;&gt;</span> f.<span class="FunctionName">label</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>title</span>
+=&gt; <span class="Keyword">&lt;</span>label <span class="Keyword">for</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>post_title<span class="String">&quot;</span></span><span class="Keyword">&gt;</span><span class="Variable">Title</span><span class="Keyword">&lt;</span><span class="Keyword">/</span>label<span class="Keyword">&gt;</span>
+
+<span class="Keyword">&gt;&gt;</span> f.<span class="FunctionName">label</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>title</span>, <span class="String"><span class="String">&quot;</span>A short title<span class="String">&quot;</span></span>
+=&gt; <span class="Keyword">&lt;</span>label <span class="Keyword">for</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>post_title<span class="String">&quot;</span></span><span class="Keyword">&gt;</span><span class="Variable">A</span> short title<span class="Keyword">&lt;</span><span class="Keyword">/</span>label<span class="Keyword">&gt;</span>
+
+<span class="Keyword">&gt;&gt;</span> label <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>title</span>, <span class="String"><span class="String">&quot;</span>A short title<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>class</span> =&gt; <span class="String"><span class="String">&quot;</span>title_label<span class="String">&quot;</span></span>
+=&gt; <span class="Keyword">&lt;</span>label <span class="Keyword">for</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>post_title<span class="String">&quot;</span></span> <span class="Keyword">class</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>title_label<span class="String">&quot;</span></span><span class="Keyword">&gt;</span><span class="Variable">A</span> short title<span class="Keyword">&lt;</span><span class="Keyword">/</span>label<span class="Keyword">&gt;</span>
+</pre>
+
+<p>有在標籤中注意到<strong>for</strong>參數嗎？"post_title"是包含了我們的post title的文字框。這個<label>標籤實際上是一個關連到<strong>post_title</strong>物件。當有人點了這個label(非連結)時，被關聯的元件就會接收到焦點。</p>
+
+<p>Robby Russell在他的Blog中寫了一個關於這個主題的有趣文章。你可以從這裡閱讀：
+<a href="http://www.robbyonrails.com/articles/2007/12/02/that-checkbox-needs-a-label">http://www.robbyonrails.com/articles/2007/12/02/that-checkbox-needs-a-label</a></p>
+
+<p>在<strong>FormTagHelper</strong>中同樣也擁有<strong>label_tag</strong>方法。該方法的工作方式與label一樣，但更簡單：</p>
+
+<pre class="mac_classic"><span class="Keyword">&gt;&gt;</span> label_tag <span class="String"><span class="String">'</span>name<span class="String">'</span></span>
+=&gt; <span class="Keyword">&lt;</span>label <span class="Keyword">for</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>name<span class="String">&quot;</span></span><span class="Keyword">&gt;</span><span class="Variable">Name</span><span class="Keyword">&lt;</span><span class="Keyword">/</span>label<span class="Keyword">&gt;</span> 
+
+<span class="Keyword">&gt;&gt;</span> label_tag <span class="String"><span class="String">'</span>name<span class="String">'</span></span>, <span class="String"><span class="String">'</span>Your name<span class="String">'</span></span>
+=&gt; <span class="Keyword">&lt;</span>label <span class="Keyword">for</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>name<span class="String">&quot;</span></span><span class="Keyword">&gt;</span><span class="Variable">Your</span> name<span class="Keyword">&lt;</span><span class="Keyword">/</span>label<span class="Keyword">&gt;</span> 
+
+<span class="Keyword">&gt;&gt;</span> label_tag <span class="String"><span class="String">'</span>name<span class="String">'</span></span>, <span class="BuiltInConstant">nil</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>class</span> =&gt; <span class="String"><span class="String">'</span>small_label<span class="String">'</span></span>
+=&gt; <span class="Keyword">&lt;</span>label <span class="Keyword">for</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>name<span class="String">&quot;</span></span> <span class="Keyword">class</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>small_label<span class="String">&quot;</span></span><span class="Keyword">&gt;</span><span class="Variable">Name</span><span class="Keyword">&lt;</span><span class="Keyword">/</span>label<span class="Keyword">&gt;</span>
+</pre>
+
+<p>該方法同樣接收<strong>:for</strong>選項，看一個範例：</p>
+
+<pre class="mac_classic"><span class="FunctionName">label</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>post</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>title</span>, <span class="BuiltInConstant">nil</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>for</span> =&gt; <span class="String"><span class="String">&quot;</span>my_for<span class="String">&quot;</span></span>)
+</pre>
+
+<p>這將回傳這樣的結果：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span>label <span class="Keyword">for</span><span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>my_for<span class="String">&quot;</span></span><span class="Keyword">&gt;</span><span class="Variable">Title</span><span class="Keyword">&lt;</span><span class="Keyword">/</span>label<span class="Keyword">&gt;</span>
+</pre>
+
+<h2> 一種使用partials的新方法</h2>
+
+<p>在Rails開發過程中使用<strong>partials</strong>避免重複程式碼是很正常的方式，例如：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span><span class="Keyword">%</span> form_for <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>user</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>url</span> =&gt; users_path <span class="Keyword">do </span><span class="String"><span class="String">%&gt;</span></span>
+<span class="String">    &lt;%= render :partial =<span class="String">&gt;</span></span> <span class="String"><span class="String">'</span>form<span class="String">'</span></span> <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">    &lt;%= submit_tag 'Create' %<span class="String">&gt;</span></span>
+<span class="Keyword">&lt;</span><span class="Keyword">%</span> <span class="Keyword">end</span> <span class="String"><span class="String">%&gt;</span></span>
+</pre>
+
+<p><strong>Partial</strong>是一個程式碼片段(模版)。使用<strong>partial</strong>是避免不必要的程式碼重複。使用<strong>partial</strong>非常簡單，你可以這樣開始：<strong>:render :partial => "name"</strong>，之後，你必須建立一個與你的<strong>partial</strong>同樣名稱的文件，但是得先用一個底線作為開頭。</p>
+
+<p>上面的程式碼是我們通常使用的方式，但在新的Rails版本中，我們使用不同的方式做相同的事情，如：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span><span class="Keyword">%</span> <span class="FunctionName">form_for</span>(<span class="Variable"><span class="Variable">@</span>user</span>) <span class="Keyword">do </span>|<span class="Variable">f</span>| <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">    &lt;%= render :partial =<span class="String">&gt;</span></span> f <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">    &lt;%= submit_tag 'Create' %<span class="String">&gt;</span></span>
+<span class="Keyword">&lt;</span><span class="Keyword">%</span> <span class="Keyword">end</span> <span class="String"><span class="String">%&gt;</span></span>
+</pre>
+
+<p>在這個範例中我們使用了partial "users/_form"，將收到一個名為"form"被<strong>FormBuilder</strong>建立的變數。
+不過以前的用法也是不被影響。</p>
+
+<h2> Atom Feed 中新的 namespaces</h2>
+
+<p>你知道<strong>atom_feed</strong>方法嗎？這是Rails 2.0的一個新特性，使得建立Atom feeds變得更容易。來看看怎樣操作：</p>
+
+<p>在一個<em>index.atom.builder</em>檔案中：</p>
+
+<pre class="mac_classic">atom_feed <span class="Keyword">do </span>|<span class="Variable">feed</span>|
+  feed.<span class="FunctionName">title</span>(<span class="String"><span class="String">&quot;</span>Nome do Jogo<span class="String">&quot;</span></span>)
+  feed.<span class="FunctionName">updated</span>((<span class="Variable"><span class="Variable">@</span>posts</span>.<span class="FunctionName">first</span>.<span class="FunctionName">created_at</span>))
+
+  <span class="Keyword">for</span> post <span class="Keyword">in</span> <span class="Variable"><span class="Variable">@</span>posts</span>
+    feed.<span class="FunctionName">entry</span>(post) <span class="Keyword">do </span>|<span class="Variable">entry</span>|
+      entry.<span class="FunctionName">title</span>(post.<span class="FunctionName">title</span>)
+      entry.<span class="FunctionName">content</span>(post.<span class="FunctionName">body</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>type</span> =&gt; <span class="String"><span class="String">'</span>html<span class="String">'</span></span>)
+
+      entry.<span class="FunctionName">author</span> <span class="Keyword">do </span>|<span class="Variable">author</span>|
+        author.<span class="FunctionName">name</span>(<span class="String"><span class="String">&quot;</span>Carlos Brando<span class="String">&quot;</span></span>)
+      <span class="Keyword">end</span>
+    <span class="Keyword">end</span>
+  <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>Atom feed是什麼？Atom的名字是根據XML的樣式與meta資料。在網路中它是一個發佈經常更新內容的協議，如：Blog、新聞。Feeds經常以XML或Atom的格式發佈標示為applicaton/atom+xml類型。</p>
+
+<p>在Rails 2.0的第一個版本中，該方法允許<strong>:language</strong>、<strong>:root_url</strong>和<strong>:url</strong>參數，你可以從Rails文件中獲得更多關於這些方法的訊息。但是這次的更新我們更可以包含新的namespace在一個Feed的root元素中，例如：</p>
+
+<pre class="mac_classic"><span class="FunctionName">atom_feed</span>(<span class="String"><span class="String">'</span>xmlns:app<span class="String">'</span></span> =&gt; <span class="String"><span class="String">'</span>http://www.w3.org/2007/app<span class="String">'</span></span>) <span class="Keyword">do </span>|<span class="Variable">feed</span>|
+</pre>
+
+<p>將返回：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span>feed xml<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>lang=</span><span class="String"><span class="String">&quot;</span>en-US<span class="String">&quot;</span></span> xmlns<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>http://www.w3.org/2005/Atom<span class="String">&quot;</span></span>
+    xmlns<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>app=</span><span class="String"><span class="String">&quot;</span>http://www.w3.org/2007/app<span class="String">&quot;</span></span><span class="Keyword">&gt;</span>
+</pre>
+
+<p>修改這個之前的範例，我們可以這樣寫：</p>
+
+<pre class="mac_classic"><span class="FunctionName">atom_feed</span>({<span class="String"><span class="String">'</span>xmlns:app<span class="String">'</span></span> =&gt; <span class="String"><span class="String">'</span>http://www.w3.org/2007/app<span class="String">'</span></span>,
+    <span class="String"><span class="String">'</span>xmlns:openSearch<span class="String">'</span></span> =&gt; <span class="String"><span class="String">'</span>http://a9.com/-/spec/opensearch/1.1/<span class="String">'</span></span>}) <span class="Keyword">do </span>|<span class="Variable">feed</span>| 
+
+  feed.<span class="FunctionName">title</span>(<span class="String"><span class="String">&quot;</span>Nome do Jogo<span class="String">&quot;</span></span>)
+  feed.<span class="FunctionName">updated</span>((<span class="Variable"><span class="Variable">@</span>posts</span>.<span class="FunctionName">first</span>.<span class="FunctionName">created_at</span>))
+  feed.<span class="FunctionName">tag!</span>(openSearch<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>totalResults</span>, <span class="Number">10</span>) 
+
+  <span class="Keyword">for</span> post <span class="Keyword">in</span> <span class="Variable"><span class="Variable">@</span>posts</span>
+    feed.<span class="FunctionName">entry</span>(post) <span class="Keyword">do </span>|<span class="Variable">entry</span>|
+      entry.<span class="FunctionName">title</span>(post.<span class="FunctionName">title</span>)
+      entry.<span class="FunctionName">content</span>(post.<span class="FunctionName">body</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>type</span> =&gt; <span class="String"><span class="String">'</span>html<span class="String">'</span></span>)
+      entry.<span class="FunctionName">tag!</span>(<span class="String"><span class="String">'</span>app:edited<span class="String">'</span></span>, <span class="LibraryObject">Time</span>.<span class="FunctionName">now</span>) 
+
+      entry.<span class="FunctionName">author</span> <span class="Keyword">do </span>|<span class="Variable">author</span>|
+        author.<span class="FunctionName">name</span>(<span class="String"><span class="String">&quot;</span>Carlos Brando<span class="String">&quot;</span></span>)
+      <span class="Keyword">end</span>
+    <span class="Keyword">end</span>
+  <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+</pre>
+
+<h2> Cache</h2>
+
+<p>現在所有的<strong>fragment_cache_key</strong>方法預設回傳'view/'前綴。</p>
+
+<p>所有快取儲存已經從<strong>ActionController::Caching::Fragments::</strong>刪除，並替換為<strong>ActiveSupport::Cache::</strong>。在這種情況下，如果你指定一個儲存位置，像<strong>ActionController::Caching::Fragments::MemoryStore</strong>，你需要這樣寫：<strong>ActiveSupport::Cache::MemoryStore</strong>。</p>
+
+<p><strong>ActionController::Base.fragment_cache_store</strong>已經不再使用，<strong>ActionController::Base.cache_store</strong>取代了它的位置。</p>
+
+<p>由於這個新的<strong>ActiveSupport::Cache::</strong>函式庫使得<strong>ActiveRecord::Base</strong>中的<strong>cache_key</strong>方法容易快取一個Active Records，它是這樣運作的：</p>
+
+<pre class="mac_classic"><span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">Product</span>.<span class="FunctionName">new</span>.<span class="FunctionName">cache_key</span>
+=&gt; <span class="String"><span class="String">&quot;</span>products/new<span class="String">&quot;</span></span>
+
+<span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">Product</span>.<span class="FunctionName">find</span>(<span class="Number">5</span>).<span class="FunctionName">cache_key</span>
+=&gt; <span class="String"><span class="String">&quot;</span>products/5<span class="String">&quot;</span></span>
+
+<span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">Person</span>.<span class="FunctionName">find</span>(<span class="Number">5</span>).<span class="FunctionName">cache_key</span>
+=&gt; <span class="String"><span class="String">&quot;</span>people/5-20071224150000<span class="String">&quot;</span></span>
+</pre>
+
+<p>它包含了<strong>ActiveSupport::Gzip.decompress/compress</strong>使得用<strong>Zlib</strong>壓縮更加容易。</p>
+
+<p>現在你可以在environment選項中使用<strong>config.cache_store</strong>，指定一個預設的暫存位置。有價值提起的是，如果<strong>tmp/cache</strong>目錄存在，預設的暫存位置是<strong>FileStore</strong>，否則使用<strong>MemoryStore</strong>。你可以用下面的方式設定它：</p>
+
+<pre class="mac_classic">config.<span class="FunctionName">cache_store</span> <span class="Keyword">=</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>memory_store</span>
+config.<span class="FunctionName">cache_store</span> <span class="Keyword">=</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>file_store</span>, <span class="String"><span class="String">&quot;</span>/path/to/cache/directory<span class="String">&quot;</span></span>
+config.<span class="FunctionName">cache_store</span> <span class="Keyword">=</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>drb_store</span>, <span class="String"><span class="String">&quot;</span>druby://localhost:9192<span class="String">&quot;</span></span>
+config.<span class="FunctionName">cache_store</span> <span class="Keyword">=</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>mem_cache_store</span>, <span class="String"><span class="String">&quot;</span>localhost<span class="String">&quot;</span></span>
+config.<span class="FunctionName">cache_store</span> <span class="Keyword">=</span> <span class="LibraryObject">MyOwnStore</span>.<span class="FunctionName">new</span>(<span class="String"><span class="String">&quot;</span>parameter<span class="String">&quot;</span></span>)
+</pre>
+
+<p>為了把事情變得更容易，在<em>environments/production.rb</em>檔案中包含了以下註解，提醒你記得這個選項：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> Use a different cache store in production</span>
+<span class="Comment"><span class="Comment">#</span> config.cache_store = :mem_cache_store</span>
+</pre>
+
+<h2> 在字串中應用格式化標題</h2>
+
+<p>以前當你在一個包含了 's 的字串中使用<strong>String#titleize</strong>方法時有個bug，這個bug返回大寫的'S，看看：</p>
+
+<pre class="mac_classic"><span class="Keyword">&gt;&gt;</span> <span class="String"><span class="String">&quot;</span>brando’s blog<span class="String">&quot;</span></span>.<span class="FunctionName">titleize</span>
+=&gt; <span class="String"><span class="String">&quot;</span>Brando’S Blog<span class="String">&quot;</span></span>
+</pre>
+
+<p>相同的範例，但是此Bug已經修復了：</p>
+
+<pre class="mac_classic"><span class="Keyword">&gt;&gt;</span> <span class="String"><span class="String">&quot;</span>brando’s blog<span class="String">&quot;</span></span>.<span class="FunctionName">titleize</span>
+=&gt; <span class="String"><span class="String">&quot;</span>Brando’s Blog<span class="String">&quot;</span></span>
+</pre>
+
+<h2> action_name</h2>
+
+<p>現在，要知道在運行時哪個View被呼叫，我們只需使用<strong>action_name</strong>方法：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span><span class="Keyword">%=</span> action_name <span class="String"><span class="String">%&gt;</span></span>
+</pre>
+
+<p>回傳值將使用<strong>params[:action]</strong>一樣，但更優雅。</p>
+
+<h2> caches_action 支援條件式</h2>
+
+<p><strong>caches_action</strong>方法現在支援<strong>:if</strong>選項，允許使用條件式指定一個<strong>cache</strong>可以被暫存。例如：</p>
+
+<pre class="mac_classic">caches_action <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>index</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>if</span> =&gt; <span class="LibraryObject">Proc</span>.<span class="FunctionName">new</span> { |<span class="Variable">c</span>| <span class="Keyword">!</span>c.<span class="FunctionName">request</span>.<span class="FunctionName">format</span>.<span class="FunctionName">json?</span> }
+</pre>
+
+<p>在上面的例子中，只有當請求不是JSON的時候，<strong>action index</strong>將被暫存。</p>
+
+<h2> 在 caches_page method 方法中的條件式</h2>
+
+<p><strong>caches_page</strong>方法現在支援<strong>:if</strong>選項，例如：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> The Rails 2.0 way</span>
+caches_page <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>index</span>
+
+<span class="Comment"><span class="Comment">#</span> In Rails 2.1 you can use :if option</span>
+caches_page <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>index</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>if</span> =&gt; <span class="LibraryObject">Proc</span>.<span class="FunctionName">new</span> { |<span class="Variable">c</span>| <span class="Keyword">!</span>c.<span class="FunctionName">request</span>.<span class="FunctionName">format</span>.<span class="FunctionName">json?</span> }
+</pre>
+
+<h2> flash.now現在可以在test中運作</h2>
+
+<p>誰沒有因為這個而頭痛過？這個問題在我們測試期間無法確定訊息已經儲存到了Flash中，因為它在到你的測試代碼之前就被Rails清掉了。</p>
+
+<p>在Rails 2.1中已經沒有這個問題。現在你可以包含下面的程式碼運行在你的測試中：</p>
+
+<pre class="mac_classic">assert_equal <span class="String"><span class="String">'</span>&gt;value_now&lt;<span class="String">'</span></span>, flash[<span class="String"><span class="String">'</span>test_now<span class="String">'</span></span>]
+</pre>
+
+<h2> 在Views之外存取Helpers</h2>
+
+<p>有多少次你建立了一個<strong>helper</strong>希望它在一個<strong>controller</strong>中使用？要做到這樣，你必須包含這個<strong>helper</strong> module到這個<strong>controller</strong>之中，但這使你的程式碼看起來很髒。</p>
+
+<p>Rails 2.1已經開發了一個方法在Views以外的地方使用Helpers。已很簡單的方式運作：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> To access simple_format method, for example</span>
+<span class="LibraryObject">ApplicationController</span>.<span class="FunctionName">helpers</span>.<span class="FunctionName">simple_format</span>(text)
+</pre>
+
+<p>簡單而乾淨！</p>
+
+<h2> JSON</h2>
+
+<p>Rails現在支援POST一個JSON內容的請求，例如你可以像這樣丟出一個POST：</p>
+
+<pre class="mac_classic"><span class="Variable">POST</span> <span class="Keyword">/</span>posts
+{<span class="String"><span class="String">&quot;</span>post<span class="String">&quot;</span></span>: {<span class="String"><span class="String">&quot;</span>title<span class="String">&quot;</span></span>: <span class="String"><span class="String">&quot;</span>Breaking News<span class="String">&quot;</span></span>}}
+</pre>
+
+<p>所有參數都將到<strong>params</strong>中。例如：</p>
+
+<pre class="mac_classic"><span class="Keyword">def</span> <span class="FunctionName">create</span>
+  <span class="Variable"><span class="Variable">@</span>post</span> <span class="Keyword">=</span> <span class="LibraryObject">Post</span>.<span class="FunctionName">create</span> params[<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>post</span>]
+<span class="Comment">  <span class="Comment">#</span> …</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>為了那些不知道JSON是一個XML競爭者的人，它在JavaScript資料交換中相當廣泛，因為它呈現為這種語言。它的名字是來自於：<strong>JavaScript Object Notation</strong>。</p>
+
+<h2> Path Names</h2>
+
+<p>我的Blog(http://www.nomedojogo.com ，譯注：原作者的Blog)讀者們應該都知道我的<strong>Custom Resource Name</strong>外掛，但我想它應該就快要死亡了... :(</p>
+
+<p>在Rails中你已經包含了<strong>:as</strong>選項在routes(一些我實現在外掛中保持相容性的東西)中，現在你也將擁有<strong>:path_names</strong>選項改變你<strong>actions</strong>的名字。</p>
+
+<pre class="mac_classic">map.<span class="FunctionName">resource</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>schools</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>as</span> =&gt; <span class="String"><span class="String">'</span>escolas<span class="String">'</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>path_names</span> =&gt; { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>new</span> =&gt; <span class="String"><span class="String">'</span>nova<span class="String">'</span></span> }
+</pre>
+
+<p>當然，我的外掛對於早期的Rails版本依然有效。</p>
+
+<h2> 定義你的routes文件位置</h2>
+
+<p>在Rails 2.1中你可以定義你的routes放在哪個文件中，把底下那段程式碼寫到<em>environment.rb</em>中：</p>
+
+<pre class="mac_classic">config.<span class="FunctionName">routes_configuration_file</span>
+</pre>
+
+<p>這在你擁有兩種分開的前端共享同models、libraries與plugins時非常有用。</p>
+
+<p>例如，getsatisfaction.com和api.getsatisfaction.com共用相同的models，但使用不同的controllers、helpers和views。getsatisfaction擁有自己針對SEO優化的routes文件，但API routes不需要任何關於SEO的優化。</p>
+
+<h2> session(:on)</h2>
+
+<p>或許你還不知道這個，Rails可以關閉sessions：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">ApplicationController<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActionController::Base</span></span>
+  session <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>off</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>注意在我的範例中，我關閉了所有controllers中的session(<strong>ApplicationController</strong>)，但我也能單獨關閉某一個controller的Session。</p>
+
+<p>但如果我只想打開一個controller的session，在Rails 2.1中，該方法允許<strong>:on</strong>選項，這樣做：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">UsersController<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ApplicationController</span></span>
+  session <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>on</span>
+<span class="Keyword">end</span>
+</pre>
+
+<h2> 簡單的Testing Helpers</h2>
+
+<p>在早期最最最令人討厭的事情就是在Rails中測試<strong>helpers</strong>。我已經遭受到很多次100%的覆蓋，建立一些給<strong>helpers</strong>用的測試。</p>
+
+<p>透過<strong>ActionView::TestCase</strong>類別，在Rails 2.1中這變得簡單多了。看個範例：</p>
+
+<pre class="mac_classic"><span class="Keyword">module</span> <span class="TypeName">PeopleHelper</span>
+  <span class="Keyword">def</span> <span class="FunctionName">title</span>(<span class="FunctionParameter">text</span>)
+    <span class="FunctionName">content_tag</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>h1</span>, text)
+  <span class="Keyword">end</span>
+
+  <span class="Keyword">def</span> <span class="FunctionName">homepage_path</span>
+    people_path
+  <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>現在看我們在Rails 2.1中怎樣做同樣的事情：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">PeopleHelperTest<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActionView::TestCase</span></span>
+  <span class="Keyword">def</span> <span class="FunctionName">setup</span>
+    <span class="LibraryObject">ActionController</span>::<span class="FunctionName">Routing</span>::<span class="FunctionName">Routes</span>.<span class="FunctionName">draw</span> <span class="Keyword">do </span>|<span class="Variable">map</span>|
+      map.<span class="FunctionName">people</span> <span class="String"><span class="String">'</span>people<span class="String">'</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>controller</span> =&gt; <span class="String"><span class="String">'</span>people<span class="String">'</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>action</span> =&gt; <span class="String"><span class="String">'</span>index<span class="String">'</span></span>
+      map.<span class="FunctionName">connect</span> <span class="String"><span class="String">'</span>:controller/:action/:id<span class="String">'</span></span>
+    <span class="Keyword">end</span>
+  <span class="Keyword">end</span>
+
+  <span class="Keyword">def</span> <span class="FunctionName">test_title</span>
+    assert_equal <span class="String"><span class="String">&quot;</span>&lt;h1&gt;Ruby on Rails&lt;/h1&gt;<span class="String">&quot;</span></span>, <span class="FunctionName">title</span>(<span class="String"><span class="String">&quot;</span>Ruby on Rails<span class="String">&quot;</span></span>)
+  <span class="Keyword">end</span>
+
+  <span class="Keyword">def</span> <span class="FunctionName">test_homepage_path</span>
+    assert_equal <span class="String"><span class="String">&quot;</span>/people<span class="String">&quot;</span></span>, homepage_path
+  <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+</pre>
+
+<h1> ActionController</h1>
+
+<p>ActionController 從網路中接受要求，並處理決定將要求傳給或是重新導向到一個 action 去處理。</p>
+
+<p>一個 action 事實上是 controller 中的一個 public 方法。而透過 Rails 的路由規則，系統將自動將要求依照規則分派(dispatch)給不同 action 處理。</p>
+
+<h2> ActionController::Routing</h2>
+
+<h3> Map.root</h3>
+
+<p>現在你可以透過別名，更加 <strong>DRY</strong> 的使用 <strong>map.root</strong>。</p>
+
+<p>在之前的 Rails 版本裡，您可能是像下面的方法使用：</p>
+
+<pre class="mac_classic">map.<span class="FunctionName">new_session</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>controller</span> =&gt; <span class="String"><span class="String">'</span>sessions<span class="String">'</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>action</span> =&gt; <span class="String"><span class="String">'</span>new<span class="String">'</span></span>
+map.<span class="FunctionName">root</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>controller</span> =&gt; <span class="String"><span class="String">'</span>sessions<span class="String">'</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>action</span> =&gt; <span class="String"><span class="String">'</span>new<span class="String">'</span></span>
+</pre>
+
+<p>在 Rails 2.1 中，你則可以直接這樣使用：</p>
+
+<pre class="mac_classic">map.<span class="FunctionName">new_session</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>controller</span> =&gt; <span class="String"><span class="String">'</span>sessions<span class="String">'</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>action</span> =&gt; <span class="String"><span class="String">'</span>new<span class="String">'</span></span>
+map.<span class="FunctionName">root</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>new_session</span>
+</pre>
+
+<h3> 路由識別 （Routes recognition）</h3>
+
+<p>之前的路由識別實作方法是一個接著一個的檢查是否符合規則，這樣做事實上是非常耗時間的。新的路由識別功能則變的聰明了，他會依照路徑自動生成一棵路由樹。這樣只需要尋找路徑上的路由規則即可，這方式將時間的耗損減少了將近 2.7 倍。</p>
+
+<p>如果您有興趣了解這些實作方式，您可以參考 <strong>recognition_optimisation.rb</strong> 中的新方法。其中的註解很詳細的描述了工作細節，可以提供你更多實作的相關資訊。</p>
+
+<p><strong>recognition_optimisation.rb</strong> 文件中新的方法和他们的工作细节都在注释中写得很详尽。通过直接阅读源代码的方份可以获得这些实现的更多信息。</p>
+
+<h3> Assert_routing</h3>
+
+<p>現在可以透過一個 HTTP 方法來測試路由，如下面的例子：</p>
+
+<pre class="mac_classic"><span class="FunctionName">assert_routing</span>({ <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>method</span> =&gt; <span class="String"><span class="String">'</span>put<span class="String">'</span></span>,
+                 <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>path</span> =&gt; <span class="String"><span class="String">'</span>/product/321<span class="String">'</span></span> },
+               { <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>controller</span> =&gt; <span class="String"><span class="String">&quot;</span>product<span class="String">&quot;</span></span>,
+                 <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>action</span> =&gt; <span class="String"><span class="String">&quot;</span>update<span class="String">&quot;</span></span>,
+                 <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>id</span> =&gt; <span class="String"><span class="String">&quot;</span>321<span class="String">&quot;</span></span> })
+</pre>
+
+<h3> Map.resources</h3>
+
+<p>假設您的網站並不是使用英文寫的，而你想在路徑當中也使用相同的語言。像是：</p>
+
+<pre class="mac_classic">http<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span><span class="Keyword">/</span>www.<span class="FunctionName">mysite</span>.<span class="FunctionName">com</span>.<span class="FunctionName">br</span><span class="Keyword">/</span>produtos<span class="Keyword">/</span><span class="Number">1234</span><span class="Keyword">/</span>comentarios
+</pre>
+
+<p>而不是：</p>
+
+<pre class="mac_classic">http<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span><span class="Keyword">/</span>www.<span class="FunctionName">mysite</span>.<span class="FunctionName">com</span>.<span class="FunctionName">br</span><span class="Keyword">/</span>products<span class="Keyword">/</span><span class="Number">1234</span><span class="Keyword">/</span>reviews
+</pre>
+
+<p>目前雖然是可以做到的，但是並沒有一個簡單而不需要破壞 Rails 約定(conventions)的方法。</p>
+
+<p>現在我們可以使用 <strong>map.resources</strong> 裡的 <strong>:as</strong> 來自定我們的路由路徑。像是剛剛那個葡萄牙語的例子：</p>
+
+<pre class="mac_classic">map.<span class="FunctionName">resources</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>products</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>as</span> =&gt; <span class="String"><span class="String">'</span>produtos<span class="String">'</span></span> <span class="Keyword">do </span>|<span class="Variable">product</span>|
+<span class="Comment">  <span class="Comment">#</span> product_reviews_path(product) ==</span>
+<span class="Comment">  <span class="Comment">#</span> '/produtos/1234/comentarios’</span>
+  product.<span class="FunctionName">resources</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>product_reviews</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>as</span> =&gt; <span class="String"><span class="String">'</span>comentarios<span class="String">'</span></span>
+<span class="Keyword">end</span>
+</pre>
+
+<h2> ActionController::Caching::Sweeping</h2>
+
+<p>在之前的 Rails 版本裡，當我們正在宣告 <strong>sweeper</strong> 的時候，我們必須使用 symbols：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">ListsController<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ApplicationController</span></span>
+  caches_action <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>index</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>show</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>public</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>feed</span>
+  cache_sweeper <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>list_sweeper</span>,
+                <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>only</span> =&gt; [ <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>edit</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>destroy</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>share</span> ]
+<span class="Keyword">end</span>
+</pre>
+
+<p>現在我們可以使用一個類別型態來宣告，而不需要使用 symbol。這個改變讓藏在 model 中的 <strong>sweeper</strong> 也可以被使用了。雖然平時您依然可以使用 symbol 宣告，但是在 Rails 2.1 中，您可以這麼做：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">ListsController<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ApplicationController</span></span>
+  caches_action <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>index</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>show</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>public</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>feed</span>
+  cache_sweeper <span class="LibraryObject">OpenBar</span>::<span class="FunctionName">Sweeper</span>,
+                <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>only</span> =&gt; [ <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>edit</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>destroy</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>share</span> ]
+<span class="Keyword">end</span>
+</pre>
+
+<h1>ActionView</h1>
+
+<p>ActionView 是一個展示層，主要負責產生介面給使用者看，而可以透過 ERB 樣板自定產生的頁面。</p>
+
+<h2> ActionView::Helpers::FormHelper</h2>
+
+<h3> fields_for form_for 和 index 選項</h3>
+
+<p>原本的 <strong>#fields_for</strong> 和 <strong>form_for</strong> 方法接受 <strong>:index</strong> 選項。在 form 物件中，如果想要取消就必须使用 <strong>:index => nil</strong>。</p>
+
+<p>以前的作法可能是：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span><span class="Keyword">%</span> fields_for <span class="String"><span class="String">&quot;</span>project[task_attributes][]<span class="String">&quot;</span></span>, task <span class="Keyword">do </span>|<span class="Variable">f</span>| <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;%= f.text_field :name, :index =<span class="String">&gt;</span></span> <span class="BuiltInConstant">nil</span> <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;%= f.hidden_field :id, :index =<span class="String">&gt;</span></span> <span class="BuiltInConstant">nil</span> <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;%= f.hidden_field :should_destroy, :index =<span class="String">&gt;</span></span> <span class="BuiltInConstant">nil</span> <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">&lt;% end %<span class="String">&gt;</span></span>
+</pre>
+
+<p>現在的作法則是：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span><span class="Keyword">%</span> fields_for <span class="String"><span class="String">&quot;</span>project[task_attributes][]<span class="String">&quot;</span></span>, task,
+              <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>index</span> =&gt; <span class="BuiltInConstant">nil</span> <span class="Keyword">do </span>|<span class="Variable">f</span>| <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;%= f.text_field :name %<span class="String">&gt;</span></span>
+  <span class="Keyword">&lt;</span><span class="Keyword">%=</span> f.<span class="FunctionName">hidden_field</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>id</span> <span class="String"><span class="String">%&gt;</span></span>
+<span class="String">  &lt;%= f.hidden_field :should_destroy %<span class="String">&gt;</span></span>
+<span class="Keyword">&lt;</span><span class="Keyword">%</span> <span class="Keyword">end</span> <span class="String"><span class="String">%&gt;</span></span>
+</pre>
+
+<h2> ActionView::Helpers::DateHelper</h2>
+
+<p>現在，所有與時間處理有關的樣板方法 (<strong>date_select</strong>, <strong>time_select</strong>, <strong>select_datetime</strong>......) 都接受 <strong>HTML</strong> 選項了。請看下面這個例子：</p>
+
+<pre class="mac_classic"><span class="Keyword">&lt;</span><span class="Keyword">%=</span> date_select <span class="String"><span class="String">'</span>item<span class="String">'</span></span>,<span class="String"><span class="String">'</span>happening<span class="String">'</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>order</span> =&gt; [<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>day</span>], <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>class</span> =&gt; <span class="String"><span class="String">'</span>foobar<span class="String">'</span></span><span class="String"><span class="String">%&gt;</span></span>
+</pre>
+
+<h3> date_helper</h3>
+
+<p>由於使用了 <strong>Date.current</strong>，用來定義預設職的 <strong>date_helper</strong> 方法也隨之更新。</p>
+
+<h2> ActionView::Helpers::AssetTagHelper</h2>
+
+<h3> register_javascript_expansion</h3>
+
+<p>這個方法可用來定義一個符號作為稍後在 <strong>javascript_include_tag</strong> 方法中可識別的參數，使用這個方法註冊一個或是多個 JavaScript 文件可以隨著該符號被引入。這個方法是在 <strong>init.rb</strong> 中呼叫的，將位於 <strong>public/javascript</strong> 下面的 JavaScript 文件註冊進來。讓我們看看它是怎麼運作的：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> In the init.rb file</span>
+<span class="LibraryObject">ActionView</span>::<span class="FunctionName">Helpers</span>::<span class="FunctionName">AssetTagHelper</span>.<span class="FunctionName">register_javascript_expansion</span> 
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>monkey</span> =&gt; [<span class="String"><span class="String">&quot;</span>head<span class="String">&quot;</span></span>, <span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span>, <span class="String"><span class="String">&quot;</span>tail<span class="String">&quot;</span></span>] 
+
+<span class="Comment"><span class="Comment">#</span> In our view:</span>
+javascript_include_tag <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>monkey</span>
+
+<span class="Comment"><span class="Comment">#</span> We are going to have:</span>
+<span class="Keyword">&lt;</span>script type<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>text/javascript<span class="String">&quot;</span></span> src<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>/javascripts/head.js<span class="String">&quot;</span></span>&gt;<span class="Keyword">&lt;</span><span class="Keyword">/</span>script<span class="Keyword">&gt;</span>
+<span class="Keyword">&lt;</span>script type<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>text/javascript<span class="String">&quot;</span></span> src<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>/javascripts/body.js<span class="String">&quot;</span></span>&gt;<span class="Keyword">&lt;</span><span class="Keyword">/</span>script<span class="Keyword">&gt;</span>
+<span class="Keyword">&lt;</span>script type<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>text/javascript<span class="String">&quot;</span></span> src<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>/javascripts/tail.js<span class="String">&quot;</span></span>&gt;<span class="Keyword">&lt;</span><span class="Keyword">/</span>script<span class="Keyword">&gt;</span>
+</pre>
+
+<h3> register_stylesheet_expansion</h3>
+
+<p>這個方法跟剛剛提到的 <strong>ActionView::Helpers::AssetTagHelper#register_javascript_expansion</strong> 很類似，不同點只在於它針對的是 CSS 文件而不是 JavaScript 文件。如下面的例子：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> In the init.rb file</span>
+<span class="LibraryObject">ActionView</span>::<span class="FunctionName">Helpers</span>::<span class="FunctionName">AssetTagHelper</span>.<span class="FunctionName">register_stylesheet_expansion</span> 
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>monkey</span> =&gt; [<span class="String"><span class="String">&quot;</span>head<span class="String">&quot;</span></span>, <span class="String"><span class="String">&quot;</span>body<span class="String">&quot;</span></span>, <span class="String"><span class="String">&quot;</span>tail<span class="String">&quot;</span></span>] 
+
+<span class="Comment"><span class="Comment">#</span> In our view:</span>
+stylesheet_link_tag <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>monkey</span>
+
+<span class="Comment"><span class="Comment">#</span> We are going to have:</span>
+<span class="Keyword">&lt;</span>link href<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>/stylesheets/head.css<span class="String">&quot;</span></span>  media<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>screen<span class="String">&quot;</span></span> rel<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>stylesheet<span class="String">&quot;</span></span> 
+    type<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>text/css<span class="String">&quot;</span></span> <span class="Keyword">/</span><span class="Keyword">&gt;</span>
+<span class="Keyword">&lt;</span>link href<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>/stylesheets/body.css<span class="String">&quot;</span></span>  media<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>screen<span class="String">&quot;</span></span> rel<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>stylesheet<span class="String">&quot;</span></span> 
+    type<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>text/css<span class="String">&quot;</span></span> <span class="Keyword">/</span><span class="Keyword">&gt;</span>
+<span class="Keyword">&lt;</span>link href<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>/stylesheets/tail.css<span class="String">&quot;</span></span>  media<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>screen<span class="String">&quot;</span></span> rel<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>stylesheet<span class="String">&quot;</span></span> 
+    type<span class="Keyword">=</span><span class="String"><span class="String">&quot;</span>text/css<span class="String">&quot;</span></span> <span class="Keyword">/</span><span class="Keyword">&gt;</span>
+</pre>
+
+<h2> ActionView::Helpers::FormTagHelper</h2>
+
+<h3> submit_tag</h3>
+
+<p><strong>#submit_tag</strong> 方法中新增了 <strong>:confirm:: 選項，同樣的選項也可以在 </strong>link_to** 方法中使用，像是下面這個用法：</p>
+
+<pre class="mac_classic"><span class="FunctionName">submit_tag</span>(<span class="String"><span class="String">'</span>Save changes<span class="String">'</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>confirm</span> =&gt; <span class="String"><span class="String">&quot;</span>Are you sure?<span class="String">&quot;</span></span>)
+</pre>
+
+<h2> ActionView::Helpers::NumberHelper</h2>
+
+<h3> number_to_currency</h3>
+
+<p><strong>number_to_currency</strong> 方法使用 <strong>:format</strong> 選項作為參數，讓我們可以格式化回傳值。之前的版本中，當我們需要對本地貨幣格式化時，我們需要在 <strong>:unit</strong> 選項前面多一個空格才能使輸出正確。像是下面的例子：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> R$ is the symbol for Brazilian currency</span>
+<span class="FunctionName">number_to_currency</span>(<span class="Number">9.99</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>separator</span> =&gt; <span class="String"><span class="String">&quot;</span>,<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>delimiter</span> =&gt; <span class="String"><span class="String">&quot;</span>.<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>unit</span> =&gt; <span class="String"><span class="String">&quot;</span>R$<span class="String">&quot;</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;R$9,99″</span>
+
+<span class="FunctionName">number_to_currency</span>(<span class="Number">9.99</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>format</span> =&gt; <span class="String"><span class="String">&quot;</span>%u %n<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>separator</span> =&gt; <span class="String"><span class="String">&quot;</span>,<span class="String">&quot;</span></span>, 
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>delimiter</span> =&gt; <span class="String"><span class="String">&quot;</span>.<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>unit</span> =&gt; <span class="String"><span class="String">&quot;</span>R$<span class="String">&quot;</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;R$ 9,99″</span>
+</pre>
+
+<p>之後，我們又更改成另外一個樣式：</p>
+
+<pre class="mac_classic"><span class="FunctionName">number_to_currency</span>(<span class="Number">9.99</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>format</span> =&gt; <span class="String"><span class="String">&quot;</span>%n in Brazilian reais<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>separator</span> =&gt; <span class="String"><span class="String">&quot;</span>,<span class="String">&quot;</span></span>,
+    <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>delimiter</span> =&gt; <span class="String"><span class="String">&quot;</span>.<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>unit</span> =&gt; <span class="String"><span class="String">&quot;</span>R$<span class="String">&quot;</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;9,99 em reais&quot;</span>
+</pre>
+
+<p>當需要建立你自己的字串格式，您只需要使用下面的參數：</p>
+
+<pre class="mac_classic"><span class="Keyword">%</span>u <span class="Variable">For</span> the currency
+<span class="Keyword">%</span>n <span class="Variable">For</span> the number
+</pre>
+
+<h2> ActionView::Helpers::TextHelper</h2>
+
+<h3> excerpt</h3>
+
+<p><strong>excerpt</strong> 方法是一個 helper 方法，能夠在一段文字中搜尋一個單字，同時傳回包含這個單字之前、之後各依照指定數量的字母縮寫。像是這樣：</p>
+
+<pre class="mac_classic"><span class="FunctionName">excerpt</span>(<span class="String"><span class="String">'</span>This is an example<span class="String">'</span></span>, <span class="String"><span class="String">'</span>an<span class="String">'</span></span>, <span class="Number">5</span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;…s is an examp…&quot;</span>
+</pre>
+
+<p>但是這個方法卻是有 bug 的，如果你算算看，你會發現他會回傳6個字母而不是五個。這個bug已經在這個版本中解決了，下面是正確的輸出結果：</p>
+
+<pre class="mac_classic"><span class="FunctionName">excerpt</span>(<span class="String"><span class="String">'</span>This is an example<span class="String">'</span></span>, <span class="String"><span class="String">'</span>an<span class="String">'</span></span>, <span class="Number">5</span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;…s is an exam…&quot;</span>
+</pre>
+
+<h3>simple_format</h3>
+
+<p><strong>simple_format</strong> 方法接受任何文字參數並用簡單的方式格式化為 <strong>HTML</strong>。它會將文字參數中的換行符號（\n) 換成 <strong>HTML</strong> 標記的 "<br />"，而當我們有連續換了兩行像是 (\n\n)，它就會用<p> 標籤標成一個段落。</p>
+
+<pre class="mac_classic"><span class="FunctionName">simple_format</span>(<span class="String"><span class="String">&quot;</span>Hello Mom!<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>class</span> =&gt; <span class="String"><span class="String">'</span>description<span class="String">'</span></span>)
+<span class="Comment"><span class="Comment">#</span> =&gt; &quot;&lt;p class=’description’&gt;Hello Mom!&lt;/p&gt;&quot;</span>
+</pre>
+
+<p><strong>HTML</strong> 屬性將會被加到每個 "<p>" 標記的段落上。</p>
+
+<h1> Railties</h1>
+
+<h2> config.gem</h2>
+
+<p>新特性<strong>config.gem</strong>使專案在執行時載入所有必須的gems成為可能。在<em>environment.rb</em>中可以指定專案所依賴的gems，如下：</p>
+
+<pre class="mac_classic">config.<span class="FunctionName">gem</span> <span class="String"><span class="String">&quot;</span>bj<span class="String">&quot;</span></span>
+
+config.<span class="FunctionName">gem</span> <span class="String"><span class="String">&quot;</span>hpricot<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>version</span> =&gt; <span class="String"><span class="String">'</span>0.6<span class="String">'</span></span>,
+                      <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>source</span> =&gt; <span class="String"><span class="String">&quot;</span>http://code.whytheluckystiff.net<span class="String">&quot;</span></span> 
+
+config.<span class="FunctionName">gem</span> <span class="String"><span class="String">&quot;</span>aws-s3<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>lib</span> =&gt; <span class="String"><span class="String">&quot;</span>aws/s3<span class="String">&quot;</span></span>
+</pre>
+
+<p>要一次安裝所有的gem依賴，我們只需要執行下面那個Rake任務：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> Installs all specified gems</span>
+rake gems<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>install</span>
+</pre>
+
+<p>你也可以在專案執行時列出正被使用的gems：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> Listing all gem dependencies</span>
+rake gems
+</pre>
+
+<p>如果有個gem含有<strong>rails/init.rb</strong>這個檔案並且想將它放到專案中，可以用：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> Copy the specified gem to vendor/gems/nome_do_gem-x.x.x</span>
+rake gems<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>unpack</span> <span class="Variable">GEM</span><span class="Keyword">=</span>gem_name
+</pre>
+
+<p>這會把這個gem複製到<strong>vendor/gems/gem_name-x.x.x</strong>。若不指定gem的名稱，Rails將複製所有gems到<strong>vendor/gem</strong>裡面。</p>
+
+<h2> 在外掛內設定gem (config.gem in plugins)</h2>
+
+<p>新特性<strong>config.gem</strong>也同樣適合在外掛中使用。</p>
+
+<p>一直到Rails 2.0外掛內的<strong>init.rb</strong>都是如以下方式使用：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> init.rb of plugin open_id_authentication</span>
+<span class="Keyword">require</span> <span class="String"><span class="String">'</span>yadis<span class="String">'</span></span> 
+<span class="Keyword">require</span> <span class="String"><span class="String">'</span>openid<span class="String">'</span></span> 
+<span class="LibraryObject">ActionController</span>::<span class="FunctionName">Base</span>.<span class="FunctionName">send</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>include</span>, <span class="Variable">OpenIdAuthentication</span> 
+</pre>
+
+<p>而在Rails 2.1中則是這樣：</p>
+
+<pre class="mac_classic">config.<span class="FunctionName">gem</span> <span class="String"><span class="String">&quot;</span>ruby-openid<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>lib</span> =&gt; <span class="String"><span class="String">&quot;</span>openid<span class="String">&quot;</span></span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>version</span> =&gt; <span class="String"><span class="String">&quot;</span>1.1.4<span class="String">&quot;</span></span>
+config.<span class="FunctionName">gem</span> <span class="String"><span class="String">&quot;</span>ruby-yadis<span class="String">&quot;</span></span>,  <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>lib</span> =&gt; <span class="String"><span class="String">&quot;</span>yadis<span class="String">&quot;</span></span>,  <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>version</span> =&gt; <span class="String"><span class="String">&quot;</span>0.3.4<span class="String">&quot;</span></span> 
+
+config.<span class="FunctionName">after_initialize</span> <span class="Keyword">do</span>
+  <span class="LibraryObject">ActionController</span>::<span class="FunctionName">Base</span>.<span class="FunctionName">send</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>include</span>, <span class="Variable">OpenIdAuthentication</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>那麼，當你執行該任務來安裝所需的gems時，這些gems都將被包含在內。</p>
+
+<h2> gems:build</h2>
+
+<p><strong>gems:build</strong> 任務可以用來編譯透過<strong>gems:unpack</strong>安裝的所有本地端gems擴充套件。以下是指令：</p>
+
+<pre class="mac_classic">rake gems<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>build</span> <span class="Comment"><span class="Comment">#</span> For all gems</span>
+rake gems<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>build</span> <span class="Variable">GEM</span><span class="Keyword">=</span>mygem <span class="Comment"><span class="Comment">#</span> I'm specifing the gem</span>
+</pre>
+
+<h2> Rails 服務啟動時有了新訊息 (New message when starting server)</h2>
+
+<p>Rails服務啟動時做了點改進，當執行成功後會顯示Rails的版本。</p>
+
+<pre class="mac_classic"><span class="Variable">Rails</span> <span class="Number">2.1</span> application starting on http<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span><span class="Keyword">/</span><span class="Number">0.0</span>.<span class="Number">0.0</span>:<span class="Number">3000</span>
+</pre>
+
+<h2> Rails 公開存取目錄的路徑 (Rails.public_path)</h2>
+
+<p>比較快的方式：<strong>Rails.public_path</strong>，用於取得專案<strong>public</strong>目錄的路徑。</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Rails</span>.<span class="FunctionName">public_path</span>
+</pre>
+
+<h2> Rails 的日記記錄、根目錄、環境變數與快取(Rails.logger, Rails.root, Rails.env and Rails.cache)</h2>
+
+<p>在Rails 2.1內有新方式可以取代常數：<strong>RAILS_DEFAULT_LOGGER</strong>, <strong>RAILS_ROOT</strong>, <strong>RAILS_ENV</strong> 和 <strong>RAILS_CACHE</strong>。取而代之的是：</p>
+
+<pre class="mac_classic"><span class="Comment"><span class="Comment">#</span> RAILS_DEFAULT_LOGGER</span>
+<span class="LibraryObject">Rails</span>.<span class="FunctionName">logger</span>
+
+<span class="Comment"><span class="Comment">#</span> RAILS_ROOT</span>
+<span class="LibraryObject">Rails</span>.<span class="FunctionName">root</span>
+
+<span class="Comment"><span class="Comment">#</span> RAILS_ENV</span>
+<span class="LibraryObject">Rails</span>.<span class="FunctionName">env</span>
+
+<span class="Comment"><span class="Comment">#</span> RAILS_CACHE</span>
+<span class="LibraryObject">Rails</span>.<span class="FunctionName">cache</span>
+</pre>
+
+<h2> Rails 的版本 (Rails.version)</h2>
+
+<p>在早期的Rails版本中，程式運行期間我們可以用下面的方式取得Rails的版本：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Rails</span>::<span class="FunctionName">VERSION</span>::<span class="FunctionName">STRING</span>
+</pre>
+
+<p>不過Rails 2.1就改成這樣了：</p>
+
+<pre class="mac_classic"><span class="LibraryObject">Rails</span>.<span class="FunctionName">version</span>
+</pre>
+
+<h2> 取得一個外掛的相關訊息 (Getting information about a plugin)</h2>
+
+<p>Rails 2.0 的新特性之一，或許你從未用過。我是說"大概、或許"，可能在一些比較特殊情況下會有用，來個例子，比如說取得一個外掛的版本號。</p>
+
+<p>不如來玩玩看，我們要在plugin目錄裡面建立一個<em>about.yml</em>檔案，寫入下面的內容：</p>
+
+<pre class="mac_classic">author: <span class="Variable">Carlos</span> <span class="Variable">Brando</span>
+version: <span class="Number">1.2</span>.<span class="Number">0</span>
+description: <span class="Variable">A</span> description about the plugin
+url: http<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span><span class="Keyword">/</span>www.<span class="FunctionName">nomedojogo</span>.<span class="FunctionName">com</span>
+</pre>
+
+<p>然後我們可以使用下面的方式來獲得相關訊息：</p>
+
+<pre class="mac_classic">plugin <span class="Keyword">=</span> <span class="LibraryObject">Rails</span>::<span class="FunctionName">Plugin</span>.<span class="FunctionName">new</span>(plugin_directory)
+plugin.<span class="FunctionName">about</span>[<span class="String"><span class="String">&quot;</span>author<span class="String">&quot;</span></span>] <span class="Comment"><span class="Comment">#</span> =&gt; “Carlos Brando”</span>
+plugin.<span class="FunctionName">about</span>[<span class="String"><span class="String">&quot;</span>url<span class="String">&quot;</span></span>] <span class="Comment"><span class="Comment">#</span> =&gt; “http://www.nomedojogo.com”</span>
+</pre>
+
+<p>如果你能在這個新特性中找到一些好的用處並願意分享，也許將改變我對它的一些看法.. 若真的有需要的話！</p>
+
+<h1> Rake任務、外掛、腳本 (Rake Tasks, Plugins and Scripts)</h1>
+
+<h2> Tasks</h2>
+
+<h3> rails:update</h3>
+
+<p>從Rails 2.1開始，每次執行<strong>rake rails:freeze:edge</strong>指令時都會自動執行<strong>rails:update</strong>來更新設定檔(config)與<em>JavaScripts</em>檔案。</p>
+
+<h3> Database in 127.0.0.1</h3>
+
+<p>databases.rake以前只用於local資料庫，現在增加對IP為127.0.0.1的資料庫。其主要是用於建立(<strong>create</strong>)和刪除(<strong>drop</strong>)任務。databases.rake採取refactored避免程式碼重複。</p>
+
+<h3> 凍結指定的Rails版本 (Freezing a specific Rails release)</h3>
+
+<p>在Rails 2.1之前，你無法在專案內指定一個Rails版本來凍結，只能用當前版本作為參數；而在Rails 2.1後則可以用下面的指令直接指定要凍結的Rails版本：</p>
+
+<pre class="mac_classic">rake rails<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>freeze</span><span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>edge</span> <span class="Variable">RELEASE</span><span class="Keyword">=</span><span class="Number">1.2</span>.<span class="Number">0</span>
+</pre>
+
+<h2> 時區 (TimeZone)</h2>
+
+<h4> rake time:zones:all</h4>
+
+<p>根據時區位移(offset)分組列出所有Rails所支援的時區；你也可以透過OFFSET參數來過濾回傳的時區，例如：OFFSET=-6</p>
+
+<h4> rake time:zones:us</h4>
+
+<p>顯示美國的所有時區，OFFSET參數依然有效。</p>
+
+<h4> rake time:zones:local</h4>
+
+<p>回傳本地端系統上Rails所支援且相同的時區。</p>
+
+<p>範例：</p>
+
+<pre class="mac_classic"><span class="Variable">C</span>:\project_1<span class="Keyword">&gt;</span> rake time<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>zones</span><span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>local</span>
+(<span class="Keyword">in</span> <span class="Variable">C</span><span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span>project_1)
+<span class="Keyword">*</span> <span class="Variable">UTC</span> <span class="Keyword">+</span><span class="Number">08</span>:<span class="Number">00</span> <span class="Keyword">*</span>
+<span class="Variable">Beijing</span>
+<span class="Variable">Chongqing</span>
+<span class="Variable">Hong</span> <span class="Variable">Kong</span>
+<span class="Variable">Irkutsk</span>
+<span class="Variable">Kuala</span> <span class="Variable">Lumpur</span>
+<span class="Variable">Perth</span>
+<span class="Variable">Singapore</span>
+<span class="Variable">Taipei</span>
+<span class="Variable">Ulaan</span> <span class="Variable">Bataar</span>
+<span class="Variable">Urumqi</span>
+</pre>
+
+<h2> Scripts</h2>
+
+<h3> plugin</h3>
+
+<p>現在這個命令(script/plugin install)可以使用 –e/--export 參數來導出SVN。另外增加了對Git的支援。</p>
+
+<h3> dbconsole</h3>
+
+<p>這個腳本和script/console一樣，但是是針對你的資料庫操作，換句話說，它採用命令列型態來連接到你的資料庫。</p>
+
+<p>不過就目前為止，僅僅支援mysql, postgresql與sqlite(含第3版)，如果你在database.yml中設定其他類型的資料庫介面時，會顯示"Unknown command-line client for 你的資料庫名稱. Submit a Rails patch to add support!"(不明的命令列模式用戶端。給我們一個Patch讓Rails支援!)</p>
+
+<h2> 外掛 (Plugins)</h2>
+
+<h3> Gems可外掛化 (Gems can now be plugins)</h3>
+
+<p>現在，任何包含<strong>rails/init.rb</strong>文件的gem都可以以外掛的方式安裝在<strong>vendor</strong>目錄底下。</p>
+
+<h3> 使用插件中的生成器 (Using generators in plugins)</h3>
+
+<p>可以設定<strong>Rails</strong>使其在除了<strong>vendor/plugins</strong>以外的地方加入外掛，設定方法則是在<em>environment.rb</em>中加入以下程式碼：</p>
+
+<pre class="mac_classic">config.<span class="FunctionName">plugin_paths</span> <span class="Keyword">=</span> [<span class="String"><span class="String">'</span>lib/plugins<span class="String">'</span></span>, <span class="String"><span class="String">'</span>vendor/plugins<span class="String">'</span></span>]
+</pre>
+
+<p>不過Rails 2.0在這個地方有個Bug，該Bug是只在<strong>vendor/plugins</strong>中尋找含有生成器(Generator)的外掛，所以上面設定的路徑下的外掛的生成器並不會生效。在Rails 2.1中已經修復此問題。</p>
+
+<h1> Prototype 和 script.aculo.us</h1>
+
+<p>Rails 2.1 使用 Prototype 1.6.0.1 版本和script.aculo.us 1.8.1 版本。</p>
+
+<h2> Prototype</h2>
+
+<h1> Ruby 1.9</h1>
+
+<h2> 詳細資訊 (Details)</h2>
+
+<p>Rails的修改還是集中在對Ruby 1.9的支援程度，對於新版Ruby中的細微改變都做了相對應的調整以求更好的整合，例如把<strong>File.exists?</strong>改為<strong>File.exist?</strong>。</p>
+
+<p>另外，在Ruby 1.9中去掉了<strong>Base64</strong>模組(base64.rb)，因此在Rails中所有使用這個模組的都得修改為<strong>ActiveSupport::Base64</strong>。</p>
+
+<h2> DateTime類別的新方法 (New methods for DateTime class)</h2>
+
+<p>為了保證對<strong>Time</strong>類別的兼容性(duck-typing)，對<strong>DateTime</strong>加入了三個新方法：<strong>#utc</strong>, <strong>#utc?</strong>, <strong>#utc_offset</strong>：</p>
+
+<pre class="mac_classic"><span class="Keyword">&gt;&gt;</span> date <span class="Keyword">=</span> <span class="LibraryObject">DateTime</span>.<span class="FunctionName">civil</span>(<span class="Number">2005</span>, <span class="Number">2</span>, <span class="Number">21</span>, <span class="Number">10</span>, <span class="Number">11</span>, <span class="Number">12</span>, <span class="Variable">Rational</span>(<span class="Keyword">-</span><span class="Number">6</span>, <span class="Number">24</span>))
+<span class="Comment"><span class="Comment">#</span>=&gt; Mon, 21 Feb 2005 10:11:12 -0600</span>
+
+<span class="Keyword">&gt;&gt;</span> date.<span class="FunctionName">utc</span>
+<span class="Comment"><span class="Comment">#</span>=&gt; Mon, 21 Feb 2005 16:11:12 +0000</span>
+
+<span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">DateTime</span>.<span class="FunctionName">civil</span>(<span class="Number">2005</span>, <span class="Number">2</span>, <span class="Number">21</span>, <span class="Number">10</span>, <span class="Number">11</span>, <span class="Number">12</span>, <span class="Variable">Rational</span>(<span class="Keyword">-</span><span class="Number">6</span>, <span class="Number">24</span>)).<span class="FunctionName">utc?</span>
+<span class="Comment"><span class="Comment">#</span>=&gt; false</span>
+
+<span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">DateTime</span>.<span class="FunctionName">civil</span>(<span class="Number">2005</span>, <span class="Number">2</span>, <span class="Number">21</span>, <span class="Number">10</span>, <span class="Number">11</span>, <span class="Number">12</span>, <span class="Number">0</span>).<span class="FunctionName">utc?</span>
+<span class="Comment"><span class="Comment">#</span>=&gt; true</span>
+
+<span class="Keyword">&gt;&gt;</span> <span class="LibraryObject">DateTime</span>.<span class="FunctionName">civil</span>(<span class="Number">2005</span>, <span class="Number">2</span>, <span class="Number">21</span>, <span class="Number">10</span>, <span class="Number">11</span>, <span class="Number">12</span>, <span class="Variable">Rational</span>(<span class="Keyword">-</span><span class="Number">6</span>, <span class="Number">24</span>)).<span class="FunctionName">utc_offset</span>
+<span class="Comment"><span class="Comment">#</span>=&gt; -21600</span>
+</pre>
+
+<h1> Debug</h1>
+
+<h2> 本地 Ruby-debug (Native Ruby-debug)</h2>
+
+<p>Rails 2.1重新允許在測試中使用<strong>ruby-debug</strong>選項。現在從你安裝gem開始，就可以直接使用<strong>debugger</strong>方法。</p>
+
+<h1> Bugs and Fixes</h1>
+
+<h2> 在PostgreSQL中新增欄位</h2>
+
+<p>在使用<strong>PostgreSQL</strong>有個bug，透過migration新增一個已經存在的表的欄位時會出錯，來看看範例：</p>
+
+<p>檔案： <em>db/migrate/002_add_cost.rb</em></p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">AddCost<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActiveRecord::Migration</span></span>
+  <span class="Keyword">def</span> <span class="FunctionName">self.up</span>
+    add_column <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>items</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>cost</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>decimal</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>precision</span> =&gt; <span class="Number">6</span>, 
+   <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>scale</span> =&gt; <span class="Number">2</span>
+  <span class="Keyword">end</span>
+
+  <span class="Keyword">def</span> <span class="FunctionName">self.down</span>
+    remove_column <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>items</span>, <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>cost</span>
+  <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+</pre>
+
+<p>看一下，我們建立一個欄位並且<strong>:precision => 6</strong>、<strong>:scale => 2</strong>，現在執行<strong>rake db:migration</strong>然後看看我們的表的結果：</p>
+
+<table border="1" cellspacing="0" cellpadding="5">
+    <tr>
+        <td><strong>Column</strong></td>
+        <td><strong>Type</strong></td>
+        <td><strong>Modifiers</strong></td>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>integer</td>
+        <td>not null</td>
+    </tr>
+    <tr>
+        <td>desc</td>
+        <td>character varying(255)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>price</td>
+        <td>numeric(5,2)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>cost</td>
+        <td>numeric</td>
+        <td></td>
+    </tr>
+</table>
+
+
+<p>看看我們剛建立的"cost"欄位。它是一個常見的數值，但是更該像是上面的欄位如"price"，正確應該是<strong>numeric(6, 2)</strong>。在Rails 2.1中這個問題就已經解決囉。</p>
+
+<h2>Mime Types</h2>
+
+<p>不允許定義被指派過的屬性以symbol型態給<strong>request.format</strong>的問題已經解決了，現在你可以以以下的方式來撰寫程式碼：</p>
+
+<pre class="mac_classic">request.<span class="FunctionName">format</span> <span class="Keyword">=</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>iphone</span>
+assert_equal <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>iphone</span>, request.<span class="FunctionName">format</span>
+</pre>
+
+<h2>change_column的Bug fixes</h2>
+
+<p>當<strong>change_column</strong>加上<strong>:null => true</strong>與<strong>:null => false</strong>會產生的問題都已經修正了。</p>
+
+<h1> Additional Information</h1>
+
+<h2> Cross-Site Scripting的防禦</h2>
+
+<p>在Rails 2.0的<em>application.rb</em>中應該曾留意過以下程式碼吧？</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">ApplicationController<span class="InheritedClassName"> <span class="InheritedClassName">&lt;</span> ActionController::Base</span></span>
+   helper <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>all</span>
+   protect_from_forgery
+<span class="Keyword">end</span>
+</pre>
+
+<p>請注意上面這段程式碼中對<strong>protect_from_forgery</strong>的呼叫。</p>
+
+<p>你聽說過跨站(XSS)嗎？最近一段時間XSS攻擊日益風行，就目前而言在大多數的網站中或多或少都存在著XSS的漏洞；而XSS漏洞會被一些懷有惡意的人利用，可以用來修改網站內容、釣魚，甚至通過JavaScript來控制其他用戶的瀏覽器等等。儘管攻擊方式不同，但是其主要的目的都是使用戶在不知情的狀態下做出一些邪惡到讓我都想不出來的事情。最新的攻擊手段就叫做"Cross-Site Request Forgery"。</p>
+
+<p>Cross-Site Request Forgery與前面所說的XSS原理差不多，但是更有危害性，隨著Ajax的流行，此類漏洞的利用空間與手法更加靈活！(補充：此文章簡體中文版翻譯者在之前曾寫了一篇介紹CSRF的文章，建議一讀：CSRF: 不要低估了我的危害和攻?能力)</p>
+
+<p>protect<em>from</em>forgery用來確保系統接收到的表單訊息都來自於系統本身，而不會是從第三方傳送過來的；實做的原理是在表單中與Ajax請求中添加一個基於Session的標示(token)，Controller收到表單的資訊時會檢查這個Token是否匹配以決定如何回應這個Post請求。</p>
+
+<p>不過這個方法並不保護以Get為主的請求，但是也沒關係，Get主要就是為了要求資料，而不會修改到資料庫中。</p>
+
+<p>如果你想更多的了解CSRF (Cross-Site Request Forgery)，請參考底下幾個網址：</p>
+
+<pre class="mac_classic"><span class="Keyword">*</span> http<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span><span class="Keyword">/</span>www.<span class="FunctionName">nomedojogo</span>.<span class="FunctionName">com</span><span class="Keyword">/</span><span class="Number">2008</span><span class="Keyword">/</span><span class="Number">01</span><span class="Keyword">/</span><span class="Number">14</span><span class="Keyword">/</span>como<span class="Keyword">-</span>um<span class="Keyword">-</span>garoto<span class="Keyword">-</span>chamado<span class="Keyword">-</span>samy<span class="Keyword">-</span>pode<span class="Keyword">-</span>derrubar<span class="Keyword">-</span>seu<span class="Keyword">-</span>site<span class="Keyword">/</span>isc.<span class="FunctionName">sans</span>.<span class="FunctionName">org</span><span class="Keyword">/</span>diary.<span class="FunctionName">html?storyid</span><span class="Keyword">=</span><span class="Number">1750</span>
+<span class="Keyword">*</span> http<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>/</span><span class="Keyword">/</span>www.<span class="FunctionName">nomedojogo</span>.<span class="FunctionName">com</span><span class="Keyword">/</span><span class="Number">2008</span><span class="Keyword">/</span><span class="Number">01</span><span class="Keyword">/</span><span class="Number">14</span><span class="Keyword">/</span>como<span class="Keyword">-</span>um<span class="Keyword">-</span>garoto<span class="Keyword">-</span>chamado<span class="Keyword">-</span>samy<span class="Keyword">-</span>pode<span class="Keyword">-</span>derrubar<span class="Keyword">-</span>seu<span class="Keyword">-</span>site<span class="Keyword">/</span>isc.<span class="FunctionName">sans</span>.<span class="FunctionName">org</span><span class="Keyword">/</span>diary.<span class="FunctionName">html?storyid</span><span class="Keyword">=</span><span class="Number">1750</span>
+<span class="Keyword">*</span> (再多一個：前面所介紹的《<span class="Variable">CSRF</span>: 不要低估了我的危害和攻<span class="Number">?�</span>��力》。)
+</pre>
+
+<p>請謹記，此方法並不能夠萬無一失，就像平常我們都喜歡說的那樣：他並不是銀彈！(It's not a silver bullet)</p>
+
+<h2> 使用method_missing時請小心</h2>
+
+<p>由於Ruby是動態語言，這樣就使得<strong>respond_to?</strong>非常重要，你是否經常檢查某個物件是否擁有某個方法？你是否經常使用<strong>is_a?</strong>來檢查某個物件是否是我們所需要的？</p>
+
+<p>然而，人們常常忘記這樣做，先來看個<strong>method_missing</strong>的例子吧：</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Dog</span>
+    <span class="Keyword">def</span> <span class="FunctionName">method_missing</span>(<span class="FunctionParameter">method<span class="FunctionParameter">,</span> <span class="Keyword">*</span>args<span class="FunctionParameter">,</span> <span class="Keyword">&amp;</span>block</span>)
+        <span class="Keyword">if</span> method.<span class="FunctionName">to_s</span> <span class="Keyword">=~</span> <span class="String"><span class="String">/</span></span><span class="String">^bark</span><span class="String"><span class="String">/</span></span>
+            puts <span class="String"><span class="String">&quot;</span>woofwoof!<span class="String">&quot;</span></span>
+        <span class="Keyword">else</span>
+            <span class="Keyword">super</span>
+        <span class="Keyword">end</span>
+    <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+
+rex <span class="Keyword">=</span> <span class="LibraryObject">Dog</span>.<span class="FunctionName">new</span>
+rex.<span class="FunctionName">bark</span> <span class="Comment"><span class="Comment">#</span>=&gt; woofwof!</span>
+rex.<span class="FunctionName">bark!</span> <span class="Comment"><span class="Comment">#</span>=&gt; woofwoof!</span>
+rex.<span class="FunctionName">bark_and_run</span> <span class="Comment"><span class="Comment">#</span>=&gt; woofwoof!</span>
+</pre>
+
+<p>我想你肯定知道<strong>method_missing</strong>！在上面的例子中我建立了一個<strong>Dog</strong>類別的實體，然後呼叫三個並不存在的方法：<strong>bark</strong>, <strong>bark!</strong>與<strong>bark_and_run</strong>，它就會去呼叫<strong>method_missing</strong>按照我用正規表達式規定的只要是bark開頭就輸出"woofwoof!"。</p>
+
+<p>看起來沒任何問題吧？那麼請繼續看看我用<strong>respond_to?</strong>來檢查：</p>
+
+<pre class="mac_classic">rex.<span class="FunctionName">respond_to?</span> <span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>bark</span> <span class="Comment"><span class="Comment">#</span>=&gt; false</span>
+rex.<span class="FunctionName">bark</span> <span class="Comment"><span class="Comment">#</span>=&gt; woofwoof!</span>
+</pre>
+
+<p>看到了嗎？它返回false，也就是說它認為該實體並沒有bark方法，怎辦？是時候來按照我們的規則來完善<strong>respond_to?</strong>了！</p>
+
+<pre class="mac_classic"><span class="Keyword">class</span> <span class="TypeName">Dog</span>
+<span class="Variable">METHOD_BARK</span> <span class="Keyword">=</span> <span class="String"><span class="String">/</span></span><span class="String">^bark</span><span class="String"><span class="String">/</span></span>
+    <span class="Keyword">def</span> <span class="FunctionName">respond_to?</span>(<span class="FunctionParameter">method</span>)
+        <span class="Keyword">return</span> <span class="BuiltInConstant">true</span> <span class="Keyword">if</span> method.<span class="FunctionName">to_s</span> <span class="Keyword">=~</span> <span class="Variable">METHOD_BARK</span>
+    <span class="Keyword">super</span>
+    <span class="Keyword">end</span>
+    <span class="Keyword">def</span> <span class="FunctionName">method_missing</span>(<span class="FunctionParameter">method<span class="FunctionParameter">,</span> <span class="Keyword">*</span>args<span class="FunctionParameter">,</span> <span class="Keyword">&amp;</span>block</span>)
+        <span class="Keyword">if</span> method.<span class="FunctionName">to_s</span> <span class="Keyword">=~</span> <span class="Variable">METHOD_BARK</span>
+            puts <span class="String"><span class="String">&quot;</span>woofwoof!<span class="String">&quot;</span></span>
+        <span class="Keyword">else</span>
+            <span class="Keyword">super</span>
+        <span class="Keyword">end</span>
+    <span class="Keyword">end</span>
+<span class="Keyword">end</span>
+rex <span class="Keyword">=</span> <span class="LibraryObject">Dog</span>.<span class="FunctionName">new</span>
+rex.<span class="FunctionName">respond_to?</span>(<span class="UserDefinedConstant"><span class="UserDefinedConstant">:</span>bark</span>) <span class="Comment"><span class="Comment">#</span>=&gt; true</span>
+rex.<span class="FunctionName">bark</span> <span class="Comment"><span class="Comment">#</span>=&gt; woofwoof!</span>
+</pre>
+
+<p>OK！搞定了！這樣的問題在Rails中普遍存在，你可以試試看用<strong>respond_to?</strong>來檢查<strong>find_by_xxx</strong>就很明白了。</p>
+
+<p>Ruby的擴展性能讓人稱奇，但是如果一不注意就有機會把自己搞得一頭霧水。</p>
+
+<p>當然你應該已經猜到我要說什麼了，在Rails 2.1中這個問題已經修復了，不信的話你一樣可以試試看用<strong>respond_to?</strong>來檢查<strong>find_by_xxx</strong></p>
+
+<h2> PostgreSQL</h2>
+
+<p>在Rails 2.0中，<strong>PostgreSQL</strong>的介面(Adapter)支援的版本從8.1到8.3，而在Rails 2.1中支援的版本範圍擴展到7.4到8.3。</p>
+
+	</div>
+
+	<div class="white_page"></div>
+	<div class="white_page"></div>
+	
+	<div class="backcover"></div>
+</body>
+</html>

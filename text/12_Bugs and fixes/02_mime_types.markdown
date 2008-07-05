@@ -1,6 +1,6 @@
 ##Mime Types
 
-¤£¤¹³\©w¸q³Q«ü¬£¹LªºÄİ©Ê¥Hsymbol«¬ºAµ¹**request.format**ªº°İÃD¤w¸g¸Ñ¨M¤F¡A²{¦b§A¥i¥H¥H¥H¤Uªº¤è¦¡¨Ó¼¶¼gµ{¦¡½X¡G
+ä¸å…è¨±å®šç¾©è¢«æŒ‡æ´¾éçš„å±¬æ€§ä»¥symbolå‹æ…‹çµ¦**request.format**çš„å•é¡Œå·²ç¶“è§£æ±ºäº†ï¼Œç¾åœ¨ä½ å¯ä»¥ä»¥ä»¥ä¸‹çš„æ–¹å¼ä¾†æ’°å¯«ç¨‹å¼ç¢¼ï¼š
 
 	request.format = :iphone
 	assert_equal :iphone, request.format

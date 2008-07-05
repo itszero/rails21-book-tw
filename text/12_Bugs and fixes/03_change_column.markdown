@@ -1,3 +1,3 @@
-##change\_columnªºBug fixes
+##change\_columnçš„Bug fixes
 
-·í**change\_column**¥[¤W**:null => true**»P**:null => false**·|²£¥Íªº°ÝÃD³£¤w¸g­×¥¿¤F¡C
+ç•¶**change\_column**åŠ ä¸Š**:null => true**èˆ‡**:null => false**æœƒç”¢ç”Ÿçš„å•é¡Œéƒ½å·²ç¶“ä¿®æ­£äº†ã€‚
