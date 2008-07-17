@@ -35,19 +35,19 @@
 
 類別方法**all**是另外一個類別方法**find(:all)**的別名，如：
 	
-	Topic.all is the same as Topic.find(:all)
+	Topic.all 等同於 Topic.find(:all)
 
 ### First
               
 類別方法**first**是另外一個類別方法**find(:first)**的別名，如：
 
-	Topic.first is the same as Topic.find(:first)
+	Topic.first 等同於 Topic.find(:first)
 
 ### Last
 
 類別方法**last**是另外一個類別方法**find(:last)**的別名，如：
 
-	Topic.last is the same as Topic.find(:last)
+	Topic.last 等同於 Topic.find(:last)
 
              
 ## 在**named\_scope**中使用**first**和**last**方法
